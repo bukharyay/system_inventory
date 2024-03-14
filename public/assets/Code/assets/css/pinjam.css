@@ -1,0 +1,193 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    text-decoration: none;
+    list-style: none;
+    scroll-behavior: smooth;
+}
+
+header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 5%;
+    background: #AEBFEA;
+    transition: all .50s ease;
+}
+
+.logo {
+    width: 250px;
+    height: 70px;
+    color: #ff7b00;
+    font-weight: 600;
+}
+
+.navlist {
+    display: flex;
+    margin-left: 80px;
+    margin-right: 100px;
+}
+
+.navlist a {
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 500;
+    color: black;
+    margin-top: 15px;
+    margin-left: 40px;
+    transition: all .50s ease;
+    text-decoration: none;
+}
+
+.navlist a:hover {
+    color: blueviolet;
+    text-shadow: 3px 3px 20px blueviolet, -2px 1px 30px blueviolet;
+    transform: translateY(-5px);
+}
+
+.logout_button {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+    background: #ff7b00;
+    border-radius: 10px;
+    padding: 10px;
+    transition: all .50s ease;
+}
+
+.logout_button:hover {
+    color: blueviolet;
+    text-shadow: 3px 3px 20px blueviolet, -2px 1px 30px blueviolet;
+    transform: scale(1.1);
+}
+
+.profile {
+    width: 100px;
+    height: 70px;
+    color: #ff7b00;
+    font-weight: 600;
+    border-radius: 10px;
+    border: 2px solid white;
+}
+
+.form-peminjaman {
+    max-width: 1000px;
+    margin: 150px auto 0;
+    /* Atur margin-top untuk memberikan ruang antara header dan form-verifikasi */
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+.form-peminjaman h1 {
+    text-align: center;
+}
+
+.btn {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: all .50s ease;
+    /* Adjust the margin-top value to create the desired space */
+}
+
+.btn:hover {
+    transform: scale(1.1);
+    background-color: #555;
+}
+
+.about {
+    margin: 150px auto 0;
+    /* Atur margin-top untuk memberikan ruang antara header dan form-verifikasi */
+    padding: 20px;
+}
+
+.about h1 {
+    text-align: center;
+    font-weight: 600;
+}
+
+.about p {
+    text-align: center;
+}
+
+.table {
+    margin: 100px auto 0;
+    /* Atur margin-top untuk memberikan ruang antara header dan form-verifikasi */
+    padding: 20px;
+}
+
+.table h1 {
+    text-align: center;
+}
+
+.table table {
+    width: 80%;
+    /* Menyesuaikan lebar tabel */
+    border-collapse: collapse;
+    /* Menggabungkan sekat antara sel */
+    margin: auto;
+    /* Menengahkan tabel */
+}
+
+.table th,
+td {
+    border: 1px solid black;
+    /* Menambah sekat pada sel */
+    padding: 8px;
+    /* Menambah ruang di dalam sel */
+    text-align: center;
+    /* Menengahkan teks di dalam sel */
+}
+
+.status {
+    background: green;
+    color: white;
+}
+
+.kondisi {
+    background: orange;
+    color: white;
+}
+
+.btn_rincian {
+    background-color: green;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: all .50s ease;
+    border-radius: 10px;
+    /* Adjust the margin-top value to create the desired space */
+}
+
+.btn_rincian:hover {
+    transform: scale(1.1);
+    background-color: green;
+}
+
+.btn_pinjam {
+    background-color: blue;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: all .50s ease;
+    border-radius: 10px;
+}
+
+.btn_pinjam:hover {
+    transform: scale(1.1);
+    background-color: blue;
+}
