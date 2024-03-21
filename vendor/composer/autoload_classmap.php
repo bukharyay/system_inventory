@@ -16,6 +16,8 @@ return array(
     'App\\Http\\Controllers\\AuthController' => $baseDir . '/app/Http/Controllers/AuthController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\DataBarangAPI' => $baseDir . '/app/Http/Controllers/DataBarangAPI.php',
+    'App\\Http\\Controllers\\DataPeminjam' => $baseDir . '/app/Http/Controllers/DataPeminjam.php',
+    'App\\Http\\Controllers\\DataPeminjamAPI' => $baseDir . '/app/Http/Controllers/DataPeminjamAPI.php',
     'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
     'App\\Http\\Controllers\\LoginController' => $baseDir . '/app/Http/Controllers/LoginController.php',
     'App\\Http\\Controllers\\PeminjamController' => $baseDir . '/app/Http/Controllers/PeminjamController.php',
