@@ -14,15 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('peminjaman', function (Blueprint $table) {
-            $table->id();
-            $table->integer('id_user');
-            $table->string('kode_alat');
+            $table->bigInteger('id')->autoIncrement();
+            $table->foreignId('users_id')->constrained('users', 'id');
+            $table->foreignId('kode_alat_id')->constrained('data_alat', 'id');
             $table->date('tanggal_peminjaman');
             $table->date('tanggal_kembali');
             $table->string('status');
             $table->string('kondisi');
-
-            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

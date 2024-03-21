@@ -1,57 +1,72 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
+    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>LOGIN</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  </head>
-  <body>
-    <section class="vh-100 gradient-custom">
-        <div class="container py-5 h-100">
-          <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-              <div class="card bg-dark text-white" style="border-radius: 1rem;">
-                <div class="card-body p-5 text-center">
-      
-                  <div class="mb-md-5 mt-md-4 pb-5">
-      
-                    <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
-                    <p class="text-white-50 mb-5">Please enter your login and password!</p>
-      
-                    <div class="form-outline form-white mb-4">
-                      <input type="email" id="typeEmailX" class="form-control form-control-lg" />
-                      <label class="form-label" for="typeEmailX">Email</label>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap " rel="stylesheet ">
+    <link rel="stylesheet" href="/assets/Code/assets/css/login.css">
+    <title>Hello, world!</title>
+</head>
+
+<body>
+
+    <section class="login d-flex">
+        <div class="login-left  w-50 h-100">
+            <div class="row justify-content-center align-items-center  h-100">
+                <div class="col-6">
+                    <div class="header text-center">
+                        <img src="/assets/Code/assets/img/logo.png" alt="">
+
                     </div>
-      
-                    <div class="form-outline form-white mb-4">
-                      <input type="password" id="typePasswordX" class="form-control form-control-lg" />
-                      <label class="form-label" for="typePasswordX">Password</label>
+                    <div class="login-container">
+                        <div class="text text-center">
+                            <h1>LOGIN</h1>
+                            <p>Selamat Datang di Sistem Inventaris dan Peminjaman Alat Politeknik Negeri Semarang</p>
+                        </div>
+                        <form action="{{ route('actionlogin') }}" method="post">
+                        <div class="login-form">
+                            <label for="username" class="form-label">UserID</label>
+                            <input type="text" class="form-control" id="username" placeholder="Masukkan Username">
+
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" placeholder="Masukkan Password">
+                            <a href="verifikasi.html">
+                                <button class="login-button">LOGIN</button>
+                            </a>
+
+                        </div>
+                      </form>
                     </div>
-      
-                    <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>
-      
-                    <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
-      
-                    <div class="d-flex justify-content-center text-center mt-4 pt-1">
-                      <a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
-                      <a href="#!" class="text-white"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
-                      <a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
-                    </div>
-      
-                  </div>
-      
-                  <div>
-                    <p class="mb-0">Don't have an account? <a href="#!" class="text-white-50 fw-bold">Sign Up</a>
-                    </p>
-                  </div>
-      
+
                 </div>
-              </div>
             </div>
-          </div>
+
         </div>
-      </section>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  </body>
+
+        <div class="login-right  w-50 h-100">
+            <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="/assets/Code/assets/img/gedung.jpeg" class="d-block w-100" alt="...">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+</body>
+
 </html>
