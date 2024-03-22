@@ -23,7 +23,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($data as $item)
+            @foreach ($formattedData as $item)
                 <tr>
                     <td>{{ $item['id'] }}</td>
                     <td>{{ $item['id_user'] }}</td>

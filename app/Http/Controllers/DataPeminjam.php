@@ -14,27 +14,27 @@ class DataPeminjam extends Controller
      */
     public function index()
     {
-        // $apiUrl = 'http://127.0.0.1:8000/api/peminjaman';
+        $apiUrl = 'http://127.0.0.1:8000/api/peminjaman';
     
-        // $ch = curl_init();
-        // curl_setopt($ch, CURLOPT_URL, $apiUrl);
-        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        // $apiData = curl_exec($ch);
-        // curl_close($ch);
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $apiUrl);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $apiData = curl_exec($ch);
+        curl_close($ch);
     
         $data = Peminjaman::all();
         
-        // $formattedData = collect($data)->map(function ($item) {
-        //     return [
-        //         'id' => $item->id,
-        //         'user_id' => $item->id_user,
-        //         'tool_code' => $item->kode_alat,
-        //         'borrow_date' => $item->tanggal_peminjaman,
-        //         'return_date' => $item->tanggal_kembali,
-        //         'status' => $item->status,
-        //         'condition' => $item->kondisi
-        //     ];
-        // });
+        $formattedData = collect($data)->map(function ($item) {
+            return [
+                'id' => $item->id,
+                'user_id' => $item->id_user,
+                'tool_code' => $item->kode_alat,
+                'borrow_date' => $item->tanggal_peminjaman,
+                'return_date' => $item->tanggal_kembali,
+                'status' => $item->status,
+                'condition' => $item->kondisi
+            ];
+        });
       
     
         return view('peminjam.index',compact( 'data'));
