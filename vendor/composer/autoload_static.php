@@ -566,6 +566,8 @@ class ComposerStaticInitfe33f98a750b8c5a51b30c78bd3fab21
         'App\\Http\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/AuthController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\DataBarangAPI' => __DIR__ . '/../..' . '/app/Http/Controllers/DataBarangAPI.php',
+        'App\\Http\\Controllers\\DataPeminjam' => __DIR__ . '/../..' . '/app/Http/Controllers/DataPeminjam.php',
+        'App\\Http\\Controllers\\DataPeminjamAPI' => __DIR__ . '/../..' . '/app/Http/Controllers/DataPeminjamAPI.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/LoginController.php',
         'App\\Http\\Controllers\\PeminjamController' => __DIR__ . '/../..' . '/app/Http/Controllers/PeminjamController.php',
