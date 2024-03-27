@@ -11,10 +11,10 @@ class Peminjaman extends Model
 
     protected $table = 'peminjaman';
 
-    protected $fillable = ['id_user','kode_alat','tanggal_peminjam','tanggal_kembali','status','kondisi'];
+    protected $fillable = ['users_id','kode_alat_id','tanggal_peminjaman','tanggal_kembali','status','kondisi'];
 
     public function peminjaman(){
-        return $this->belongsTo("App\Models\User", "id_user");
+        return $this->belongsTo("App\Models\User", "id");
     }
 
     public function data_alat(){

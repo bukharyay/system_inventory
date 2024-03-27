@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DataPeminjam;
+use App\Http\Controllers\DataPeminjamController;
 use App\Http\Controllers\PeminjamController;
 use App\Http\Controllers\LoginController;
 
@@ -30,5 +31,7 @@ Route::get('/peminjam', 'App\Http\Controllers\PeminjamController@create');
 Route::post('peminjam.store', 'App\Http\Controllers\PeminjamController@store')->name('peminjam.store');
 
 Route::get('/data-peminjam', [DataPeminjam::class, 'index']);
+
+Route::get('DataPeminjam', [DataPeminjamController::class, 'index']);
 
 
