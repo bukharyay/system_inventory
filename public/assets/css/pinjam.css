@@ -1,0 +1,454 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    text-decoration: none;
+    list-style: none;
+    scroll-behavior: smooth;
+}
+
+header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 5%;
+    background: #001f54;
+    transition: all .50s ease;
+}
+
+.logo {
+    width: 250px;
+    height: 70px;
+    color: #ff7b00;
+    font-weight: 600;
+}
+
+.navlist {
+    display: flex;
+    margin-left: 80px;
+    margin-right: 100px;
+}
+
+.navlist a {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 700;
+    color: white;
+    margin-top: 15px;
+    margin-left: 40px;
+    transition: all .50s ease;
+    text-decoration: none;
+}
+
+.navlist a:hover {
+    color: grey;
+    text-shadow: 3px 3px 20px grey, -2px 1px 30px grey;
+    transform: translateY(-5px);
+}
+
+.logout_button {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+    background: #ff7b00;
+    border-radius: 10px;
+    padding: 10px;
+    transition: all .50s ease;
+}
+
+.logout_button:hover {
+    color: blueviolet;
+    text-shadow: 3px 3px 20px blueviolet, -2px 1px 30px blueviolet;
+    transform: scale(1.1);
+}
+
+.profile {
+    width: 100px;
+    height: 70px;
+    color: #ff7b00;
+    font-weight: 600;
+    border-radius: 10px;
+    border: 2px solid white;
+}
+
+.form-peminjaman {
+    margin: 100px auto 0;
+    /* Atur margin-top untuk memberikan ruang antara header dan form-verifikasi */
+    padding: 20px;
+    max-width: 80%;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid black;
+}
+
+.form-peminjaman h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.form-label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    transform: scale(1.1);
+}
+
+.about {
+    margin: 150px auto 0;
+    /* Atur margin-top untuk memberikan ruang antara header dan form-verifikasi */
+    padding: 20px;
+}
+
+.about h1 {
+    text-align: center;
+    font-weight: 600;
+}
+
+.about p {
+    text-align: center;
+}
+
+.table {
+    margin: 100px auto 0;
+    /* Atur margin-top untuk memberikan ruang antara header dan form-verifikasi */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    max-width: 90%;
+}
+
+.table h1 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #333333;
+}
+
+
+/* Style untuk tabel */
+
+.table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th {
+    background-color: #001f54;
+    color: #ffffff;
+    padding: 15px;
+    text-align: left;
+    border-bottom: 2px solid #e6e6e6;
+    border-right: 1px solid #e6e6e6;
+}
+
+
+/* Style untuk sel data */
+
+.table td {
+    border-bottom: 1px solid #e6e6e6;
+    border-right: 1px solid #e6e6e6;
+    padding: 15px;
+    font-weight: 500;
+}
+
+
+/* Style untuk gambar */
+
+.table img {
+    max-width: 80px;
+    display: block;
+    margin: auto;
+}
+
+
+/* Style untuk tombol */
+
+.table .btn_rincian,
+.table .btn_pinjam {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+
+/* Style untuk hover tombol */
+
+.table .btn_rincian:hover,
+.table .btn_pinjam:hover {
+    background-color: #45a049;
+}
+
+
+/* Style untuk search bar dan filter */
+
+.search-filter {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.search-filter input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.search-filter select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.status {
+    background: green;
+    color: white;
+}
+
+.kondisi {
+    background: orange;
+    color: white;
+}
+
+.btn_rincian {
+    background-color: green;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: all .50s ease;
+    border-radius: 10px;
+    /* Adjust the margin-top value to create the desired space */
+}
+
+.btn_rincian:hover {
+    transform: scale(1.1);
+    background-color: green;
+}
+
+.btn_pinjambarang {
+    background-color: blue;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: all .50s ease;
+    border-radius: 10px;
+    /* Adjust the margin-top value to create the desired space */
+}
+
+.btn_pinjambarang:hover {
+    transform: scale(1.1);
+    background-color: blue;
+}
+
+.profile-container {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-container {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-container {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.profile {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow effect */
+    /* Add padding for content spacing */
+    list-style: none;
+    /* Remove default list styling */
+    margin: 0;
+    /* Remove default margin */
+    text-align: center;
+    /* Center text within dropdown */
+    opacity: 0;
+    visibility: hidden;
+    width: 10px;
+    /* Adjust width further */
+    padding: 3px;
+    /* Adjust width to desired size */
+    left: 50%;
+    /* Center the box horizontally */
+    transform: translateX(-50%);
+}
+
+.dropdown-menu a {
+    font-size: 12px;
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+    /* Add hover effect (optional) */
+    transition: background-color 0.2s ease-in-out;
+}
+
+.dropdown-menu a:hover {
+    transform: scale(1.1);
+}
+
+.profile-container:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* Style untuk nav container */
+
+#navContainer {
+    position: relative;
+}
+
+
+/* Sembunyikan dropdown secara default */
+
+.dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    text-align: left;
+    /* Atur text-align ke kiri */
+}
+
+
+/* Tampilkan dropdown saat class 'show' ditambahkan */
+
+.dropdown.show {
+    display: block;
+}
+
+.dropdown a {
+    display: block;
+    margin-left: 0px;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+    text-align: left;
+    /* Atur text-align ke kiri */
+}
+
+.dropdown a:hover {
+    background-color: #f1f1f1;
+}
+
+
+/* File: pinjam.css */
+
+
+/* Gaya untuk modal */
+
+.modal-content {
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+}
+
+.modal-title {
+    color: #000000;
+}
+
+.modal-body {
+    color: #000000;
+}
+
+.modal-footer {
+    border-top: none;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+}
+
+.btn-primary {
+    background-color: #0d6efd;
+}
+
+
+/* Style for the image card */
+
+.card {
+    border: 1px solid #ddd;
+    /* Optional: Add a border to the card */
+    border-radius: 8px;
+    /* Optional: Add border radius to the card */
+}
+
+.card-img-top {
+    border-top-left-radius: 8px;
+    /* Optional: Add border radius only to the top left corner of the image */
+    border-top-right-radius: 8px;
+    /* Optional: Add border radius only to the top right corner of the image */
+}
+
+.card-title {
+    font-size: 1.2rem;
+    /* Optional: Adjust font size for the card title */
+    font-weight: bold;
+    /* Optional: Add bold font weight to the card title */
+}
+
+.card-text {
+    font-size: 1rem;
+    /* Optional: Adjust font size for the card text */
+}

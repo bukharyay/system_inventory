@@ -35,3 +35,6 @@ Route::get('/data-peminjam', [DataPeminjam::class, 'index']);
 Route::get('DataPeminjam', [DataPeminjamController::class, 'index']);
 
 
+Route::get("/", function(){
+return view("adminpage.alat");
+});
