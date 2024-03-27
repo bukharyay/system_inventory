@@ -34,6 +34,10 @@ Route::get('/data-peminjam', [DataPeminjam::class, 'index']);
 
 Route::get('DataPeminjam', [DataPeminjamController::class, 'index']);
 
+Route::get('tambahalat', 'App\Http\Controllers\TambahAlatController@create');
+
+Route::post('tambahalat.store', 'App\Http\Controllers\TambahAlatController@store')->name('tambahalat.store');
+
 
 Route::get("/", function(){
 return view("adminpage.alat");

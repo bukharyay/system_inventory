@@ -22,7 +22,7 @@ class PeminjamController extends Controller
     $data_peminjam->kondisi = $request->kondisi;
     $data_peminjam->save();
 
-    return redirect('peminjam');
+    return redirect('peminjaman');
 }
 
 
@@ -38,7 +38,7 @@ public function update(Request $request, $id_user)
     $data_peminjam->kondisi = $request->kondisi;
     $data_peminjam->update();
 
-    return redirect('data_peminjam');
+    return redirect('peminjaman');
 }
 
 }

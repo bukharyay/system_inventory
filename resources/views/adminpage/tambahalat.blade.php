@@ -13,11 +13,13 @@
     <link rel="stylesheet" href="../assets/css/pinjam.css">
     <link rel="stylesheet" href="../assets/css/verifikasi.css">
     <!-- Custom fonts for this template-->
-    <link href="admin_css/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="../assets/admin_css/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="admin_css/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../assets/admin_css/css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
 
@@ -106,14 +108,18 @@
 
                         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                         <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-search fa-fw"></i>
                             </a>
                             <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                aria-labelledby="searchDropdown">
                                 <form class="form-inline mr-auto w-100 navbar-search">
                                     <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                                        <input type="text" class="form-control bg-light border-0 small"
+                                            placeholder="Search for..." aria-label="Search"
+                                            aria-describedby="basic-addon2">
                                         <div class="input-group-append">
                                             <button class="btn btn-primary" type="button">
                                                 <i class="fas fa-search fa-sm"></i>
@@ -132,17 +138,21 @@
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin</span>
-                                <img class="img-profile rounded-circle" src="../assets/img/dewasa.jpg" alt="" width="50" height="50">
+                                <img class="img-profile rounded-circle" src="../assets/img/dewasa.jpg" alt=""
+                                    width="50" height="50">
 
                             </a>
                             <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
 
                                 <div class="dropdown-divider"></div>
 
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="#" data-toggle="modal"
+                                    data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Logout
                                 </a>
                             </div>
@@ -155,11 +165,16 @@
                 <!-- Form section -->
                 <section class="form-verifikasi">
                     <h1>Masukkan Barang Pinjaman anda</h1>
-                    <label for="namabarang" class="form-label">Nama Barang</label>
-                    <input type="text" class="form-control" id="nim" placeholder="Masukan Nama Barang anda">
-                    <label for="jumlah" class="form-label">Jumlah</label>
-                    <input type="text" class="form-control" id="nim" placeholder="Masukan Jumlah Barang anda">
-                    <button class="btn btn-primary" type="submit">Tambah</button>
+                    <form method="POST" action="{{ route('tambahalat.store') }}"">
+                        @csrf
+                        <label for="namabarang" class="form-label">Nama Alat</label>
+                        <input name="nama_alat" type="text" class="form-control" id="nim"
+                            placeholder="Masukan Nama Alat">
+                        <label for="jumlah" class="form-label">Jenis Alat id</label>
+                        <input name="jenis_alat_id" type="text" class="form-control" id="nim"
+                            placeholder="Masukan id jenis alat">
+                        <input type="submit" value="simpan">
+                    </form>
                 </section>
                 <hr>
 
@@ -185,14 +200,15 @@
         </a>
 
         <!-- Logout Modal-->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
+                            <span aria-hidden="true">×</span>
+                        </button>
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
@@ -203,17 +219,17 @@
         </div>
 
         <!-- Bootstrap core JavaScript-->
-        <script src="admin_css/vendor/jquery/jquery.min.js"></script>
-        <script src="admin_css/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="../assets/admin_css/vendor/jquery/jquery.min.js"></script>
+        <script src="../assets/admin_css/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
         <!-- Core plugin JavaScript-->
-        <script src="admin_css/vendor/jquery-easing/jquery.easing.min.js"></script>
+        <script src="../assets/admin_css/vendor/jquery-easing/jquery.easing.min.js"></script>
 
         <!-- Custom scripts for all pages-->
-        <script src="admin_css/js/sb-admin-2.min.js"></script>
+        <script src="../assets/admin_css/js/sb-admin-2.min.js"></script>
 
         <!-- Page level plugins -->
-        <script src="admin_css/vendor/chart.js/Chart.min.js"></script>
+        <script src="../assets/admin_css/vendor/chart.js/Chart.min.js"></script>
 
 
 </body>

@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('data_alat', function (Blueprint $table) {
-            $table->bigInteger('id');
+            $table->bigInteger('id')->autoIncrement();
             $table->string('nama_alat');
             $table->string('kode_alat');
             $table->timestamps();
