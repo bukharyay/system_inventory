@@ -28,7 +28,7 @@
                             <h1>LOGIN</h1>
                             <p>Selamat Datang di Sistem Inventaris dan Peminjaman Alat Politeknik Negeri Semarang</p>
                         </div>
-                        <form action="{{ route('actionlogin') }}" method="post">
+                        <form action="{{ route('login') }}" method="post">
                         <div class="login-form">
                             <label for="username" class="form-label">UserID</label>
                             <input type="text" class="form-control" id="username" placeholder="Masukkan Username">

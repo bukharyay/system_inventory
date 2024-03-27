@@ -7,6 +7,10 @@ use App\Http\Controllers\DataPeminjam;
 use App\Http\Controllers\DataPeminjamController;
 use App\Http\Controllers\PeminjamController;
 use App\Http\Controllers\LoginController;
+#use App\Http\Controllers\VerifikasiController;
+
+#get nampilke halaman
+#post ambil data
 
  
 /*
@@ -20,8 +24,11 @@ use App\Http\Controllers\LoginController;
 |
 */
 
-Route::get('/', [LoginController::class, 'login'])->name('login');
-Route::post('actionlogin', [LoginController::class, 'actionlogin'])->name('actionlogin');
+#Route::get('/', [LoginController::class, 'login'])->name('login');
+#Route::post('actionlogin', [LoginController::class, 'actionlogin'])->name('actionlogin');
+// =========AUTH LOGIN
+Route::get('login', [AuthController::class, 'showLoginPage'])->name('login.index');
+Route::post('login', [AuthController::class, 'login'])->name('login');
 
 Route::get('home', [HomeController::class, 'index'])->name('home')->middleware('auth');
 Route::get('actionlogout', [LoginController::class, 'actionlogout'])->name('actionlogout')->middleware('auth');
@@ -37,6 +44,8 @@ Route::get('DataPeminjam', [DataPeminjamController::class, 'index']);
 Route::get('tambahalat', 'App\Http\Controllers\TambahAlatController@create');
 
 Route::post('tambahalat.store', 'App\Http\Controllers\TambahAlatController@store')->name('tambahalat.store');
+
+#Route::get('verifikasi',[VerifikasiController::class,'index']) -> name ('verifikasi') ;
 
 
 Route::get("/", function(){
