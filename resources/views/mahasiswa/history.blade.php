@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
     <link rel="stylesheet" href="../assets/css/pinjam.css">
     <link rel=" preconnect " href="https://fonts.googleapis.com ">
@@ -54,30 +55,47 @@
         <table>
             <thead>
                 <tr>
-                    <th>No</th>
+                    <th>NIM</th>
                     <th>Nama</th>
-                    <th>Nama Alat</th>
+                    <th>Nama DOSEN</th>
+                    <th>Mata Kuliah</th>
                     <th>Tanggal Pinjam</th>
-                    <th>Tanggal Kembali</th>
-                    <th>Status</th>
+                    <th>Waktu Peminjaman</th>
+                    <th>Waktu Kembali</th>
+                    <th>Aksi</th>
 
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>JOKO</td>
-                    <td>Kabel</td>
-                    <td>1 Januari 2024</td>
-                    <td>2 Januari 2024</td>
-                    <td class="status">Sudah Kembali</td>
-                </tr>
-                <!-- Tambahkan baris lainnya jika diperlukan -->
+                @foreach ($pinjams as $pinjam)
+                    <tr>
+                        <td>{{ $pinjam->nim }}</td>
+                        <td>{{ $pinjam->nama_peminjam }}</td>
+                        <td>{{ $pinjam->dosen }}</td>
+                        <td>{{ $pinjam->ruang }}</td>
+                        <td>{{ $pinjam->mata_kuliah }}</td>
+                        <td>{{ $pinjam->tanggal_peminjaman }}</td>
+                        <td>{{ $pinjam->waktu_peminjaman }}</td>
+                        <td>{{ $pinjam->waktu_pengembalian }}</td>
+                        <td>
+                            <a href="#">
+                                <button class="btn_hapus">Hapus</button>
+                            </a>
+                        </td>
+                    </tr>
+                @endforeach
+
+
+
+
             </tbody>
+
         </table>
     </section>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
     <script src="../assets/js/profile.js"></script>
 
 </body>
