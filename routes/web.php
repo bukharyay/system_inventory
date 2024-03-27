@@ -7,6 +7,9 @@ use App\Http\Controllers\DataPeminjam;
 use App\Http\Controllers\DataPeminjamController;
 use App\Http\Controllers\PeminjamController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\pinjamController;
+
+
 
  
 /*
@@ -38,7 +41,14 @@ Route::get('tambahalat', 'App\Http\Controllers\TambahAlatController@create');
 
 Route::post('tambahalat.store', 'App\Http\Controllers\TambahAlatController@store')->name('tambahalat.store');
 
-
+// Definisikan rute untuk menangani permintaan POST dari form
+Route::post('/history', [pinjamController::class, 'index'])->name('history');
+Route::get('/pinjam', [pinjamController::class, 'create'])->name('pinjam');
+Route::post('/simpan', [pinjamController::class, 'store'])->name('simpan');
 Route::get("/", function(){
-return view("adminpage.alat");
+return view("mahasiswa.index");
 });
+Route::get("/history", function(){
+    return view("mahasiswa.history");
+    });
+    
