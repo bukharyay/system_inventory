@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DataPeminjam;
 use App\Http\Controllers\DataPeminjamController;
 use App\Http\Controllers\PeminjamController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 #<<<<<<< HEAD
 #use App\Http\Controllers\VerifikasiController;
@@ -41,6 +42,9 @@ Route::get('home', [HomeController::class, 'index'])->name('home')->middleware('
 Route::get('actionlogout', [LoginController::class, 'actionlogout'])->name('actionlogout')->middleware('auth');
 
 Route::get('/peminjam', 'App\Http\Controllers\PeminjamController@create');
+
+
+Route::get('/dashboard-admin', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::post('peminjam.store', 'App\Http\Controllers\PeminjamController@store')->name('peminjam.store');
 
