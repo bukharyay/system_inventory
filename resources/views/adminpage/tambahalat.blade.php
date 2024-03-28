@@ -10,7 +10,6 @@
     <meta name="author" content="">
 
     <title>Tambah Alat</title>
-    <link rel="stylesheet" href="../assets/css/pinjam.css">
     <link rel="stylesheet" href="../assets/css/verifikasi.css">
     <!-- Custom fonts for this template-->
     <link href="../assets/admin_css/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -25,211 +24,77 @@
 
 <body id="page-top">
 
-    <!-- Page Wrapper -->
-    <div id="wrapper">
+    <header>
+        @include('layouts.navbar')
 
-        <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center">
-                <div class="sidebar-brand-icon rotate-n-15">
+    </header>
+    <!-- Form section -->
+    <section class="form-verifikasi">
+        <h1>Masukkan Barang Pinjaman anda</h1>
+        <form method="POST" action="{{ route('tambahalat.store') }}"">
+            @csrf
+            <label for="namabarang" class="form-label">Nama Alat</label>
+            <input name="nama_alat" type="text" class="form-control" id="nim" placeholder="Masukan Nama Alat">
+            <label for="jumlah" class="form-label">Jenis Alat id</label>
+            <input name="jenis_alat_id" type="text" class="form-control" id="nim"
+                placeholder="Masukan id jenis alat">
+            <input type="submit" value="simpan">
+        </form>
+    </section>
+    <hr>
 
-                </div>
-                <div class="sidebar-brand-text mx-3">HALAMAN ADMIN</div>
-            </a>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
+    <!-- End of Footer -->
 
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item ">
-                <a class="nav-link" href="dasboard.html">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Layanan Admin
+    </div>
+    <!-- End of Content Wrapper -->
+    <!-- Footer -->
+    <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+                <span>Copyright &copy; Your Website 2023</span>
             </div>
-            <li class="nav-item">
-                <a class="nav-link" href="daftarpeminjam.html">
-                    <i class="fas fa-fw fa-user"></i>
-                    <span>Daftar Peminjam</span></a>
-            </li>
+        </div>
+    </footer>
+    </div>
+    <!-- End of Page Wrapper -->
 
-            <li class="nav-item">
-                <a class="nav-link" href="alat.html">
-                    <i class="fas fa-fw fa-clipboard"></i>
-                    <span>Daftar Alat</span></a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="tambahalat.html">
-                    <i class="fas fa-fw fa-clipboard"></i>
-                    <span>Tambah Alat</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="pengembalian.html">
-                    <i class="fas fa-fw fa-clipboard"></i>
-                    <span>Halaman Pengembalian</span></a>
-            </li>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
 
-            <li class="nav-item">
-                <a class="nav-link" href="laporan.html">
-                    <i class="fas fa-fw fa-file"></i>
-
-                    <span>Laporan</span></a>
-            </li>
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-        </ul>
-        <!-- End of Sidebar -->
-
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-
-            <!-- Main Content -->
-            <div id="content">
-
-                <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
                     </button>
-                    <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
-
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search"
-                                            aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
-
-                        <!-- Nav Item - Alerts -->
-
-                        <!-- Nav Item - Messages -->
-
-                        <div class="topbar-divider d-none d-sm-block"></div>
-
-                        <!-- Nav Item - User Information -->
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin</span>
-                                <img class="img-profile rounded-circle" src="../assets/img/dewasa.jpg" alt=""
-                                    width="50" height="50">
-
-                            </a>
-                            <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
-
-                                <div class="dropdown-divider"></div>
-
-                                <a class="dropdown-item" href="#" data-toggle="modal"
-                                    data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Logout
-                                </a>
-                            </div>
-                        </li>
-
-                    </ul>
-
-                </nav>
-                <!-- End of Topbar -->
-                <!-- Form section -->
-                <section class="form-verifikasi">
-                    <h1>Masukkan Barang Pinjaman anda</h1>
-                    <form method="POST" action="{{ route('tambahalat.store') }}"">
-                        @csrf
-                        <label for="namabarang" class="form-label">Nama Alat</label>
-                        <input name="nama_alat" type="text" class="form-control" id="nim"
-                            placeholder="Masukan Nama Alat">
-                        <label for="jumlah" class="form-label">Jenis Alat id</label>
-                        <input name="jenis_alat_id" type="text" class="form-control" id="nim"
-                            placeholder="Masukan id jenis alat">
-                        <input type="submit" value="simpan">
-                    </form>
-                </section>
-                <hr>
-
-
-                <!-- End of Footer -->
-
-            </div>
-            <!-- End of Content Wrapper -->
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2023</span>
-                    </div>
                 </div>
-            </footer>
-        </div>
-        <!-- End of Page Wrapper -->
-
-        <!-- Scroll to Top Button-->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
-
-        <!-- Logout Modal-->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="logout.php">Logout</a>
-                    </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="logout.php">Logout</a>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Bootstrap core JavaScript-->
-        <script src="../assets/admin_css/vendor/jquery/jquery.min.js"></script>
-        <script src="../assets/admin_css/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="../assets/admin_css/vendor/jquery/jquery.min.js"></script>
+    <script src="../assets/admin_css/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        <!-- Core plugin JavaScript-->
-        <script src="../assets/admin_css/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="../assets/admin_css/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-        <!-- Custom scripts for all pages-->
-        <script src="../assets/admin_css/js/sb-admin-2.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="../assets/admin_css/js/sb-admin-2.min.js"></script>
 
-        <!-- Page level plugins -->
-        <script src="../assets/admin_css/vendor/chart.js/Chart.min.js"></script>
+    <!-- Page level plugins -->
+    <script src="../assets/admin_css/vendor/chart.js/Chart.min.js"></script>
 
 
 </body>

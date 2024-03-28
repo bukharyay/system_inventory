@@ -7,6 +7,7 @@ use App\Http\Controllers\DataPeminjam;
 use App\Http\Controllers\DataPeminjamController;
 use App\Http\Controllers\PeminjamController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DataBarangController;
 use App\Http\Controllers\LoginController;
 #<<<<<<< HEAD
 #use App\Http\Controllers\VerifikasiController;
@@ -43,6 +44,7 @@ Route::get('actionlogout', [LoginController::class, 'actionlogout'])->name('acti
 
 Route::get('/peminjam', 'App\Http\Controllers\PeminjamController@create');
 
+Route::get('/data-alat', [DataBarangController::class, 'index']);
 
 Route::get('/dashboard-admin', [DashboardController::class, 'index'])->name('dashboard');
 

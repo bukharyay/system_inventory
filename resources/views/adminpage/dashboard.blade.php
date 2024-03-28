@@ -18,82 +18,19 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="../assets/admin_css/css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
 
-<body id="page-top">
+<body>
+    <header>
+        @include('layouts.navbar')
 
-    <!-- Page Wrapper -->
+    </header>
+
+
+    {{-- <!-- Page Wrapper -->
     <div id="wrapper">
 
-        <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center">
-                <div class="sidebar-brand-icon rotate-n-15">
-
-                </div>
-                <div class="sidebar-brand-text mx-3">Halaman Admin</div>
-            </a>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="dasboard.html">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Layanan Admin
-            </div>
-            <li class="nav-item">
-                <a class="nav-link" href="http://127.0.0.1:8001/DataPeminjam">
-                    <i class="fas fa-fw fa-user"></i>
-                    <span>Daftar Peminjam</span></a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="http://127.0.0.1:8001/data_alat">
-                    <i class="fas fa-fw fa-clipboard"></i>
-                    <span>Daftar Alat</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="http://127.0.0.1:8001/tambahalat">
-                    <i class="fas fa-fw fa-clipboard"></i>
-                    <span>Tambah Alat</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="pengembalian.html">
-                    <i class="fas fa-fw fa-clipboard"></i>
-
-                    <span>Halaman Pengembalian</span></a>
-            </li>
-
-
-            <li class="nav-item">
-                <a class="nav-link" href="laporan.html">
-                    <i class="fas fa-fw fa-file"></i>
-
-                    <span>Laporan</span></a>
-            </li>
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-
-
-
-        </ul>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -103,73 +40,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
-                    </button>
-
-
-
-                    <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
-
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search"
-                                            aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
-
-                        <!-- Nav Item - Alerts -->
-
-                        <!-- Nav Item - Messages -->
-
-                        <div class="topbar-divider d-none d-sm-block"></div>
-
-                        <!-- Nav Item - User Information -->
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin</span>
-                                <img class="img-profile rounded-circle" src="../assets/img/dewasa.jpg" alt=""
-                                    width="50" height="50">
-
-                            </a>
-                            <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
-
-                                <div class="dropdown-divider"></div>
-
-                                <a class="dropdown-item" href="#" data-toggle="modal"
-                                    data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Logout
-                                </a>
-                            </div>
-                        </li>
-
-                    </ul>
-
-                </nav>
                 <!-- End of Topbar -->
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -312,20 +183,20 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
-        <!-- Bootstrap core JavaScript-->
-        <script src="admin_css/vendor/jquery/jquery.min.js"></script>
-        <script src="admin_css/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="admin_css/vendor/jquery/jquery.min.js"></script>
+    <script src="admin_css/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        <!-- Core plugin JavaScript-->
-        <script src="admin_css/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="admin_css/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-        <!-- Custom scripts for all pages-->
-        <script src="admin_css/js/sb-admin-2.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="admin_css/js/sb-admin-2.min.js"></script>
 
-        <!-- Page level plugins -->
-        <script src="admin_css/vendor/chart.js/Chart.min.js"></script>
+    <!-- Page level plugins -->
+    <script src="admin_css/vendor/chart.js/Chart.min.js"></script>
 
 
 </body>
