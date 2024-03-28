@@ -44,7 +44,7 @@ Route::get('actionlogout', [LoginController::class, 'actionlogout'])->name('acti
 Route::get('/peminjam', 'App\Http\Controllers\PeminjamController@create');
 
 
-Route::get('/dashboard-admin', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/dashboard-admin', [DashboardController::class, 'index'])->name('dasboard');
 
 Route::post('peminjam.store', 'App\Http\Controllers\PeminjamController@store')->name('peminjam.store');
 
@@ -56,7 +56,7 @@ Route::get('tambahalat', 'App\Http\Controllers\TambahAlatController@create');
 
 //MASUK KE ADMIN
 Route::get('adminpage/dashboard', function(){
-    return view("adminpage/dasboard");
+    return view("adminpage/dashboard");
     });
 
 Route::post('tambahalat.store', 'App\Http\Controllers\TambahAlatController@store')->name('tambahalat.store');
