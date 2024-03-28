@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DataBarangAPI;
+use App\Http\Controllers\DataBarangController;
 use App\Http\Controllers\DataPeminjam;
 use App\Http\Controllers\DataPeminjamController;
 use App\Http\Controllers\PeminjamController;
@@ -52,6 +54,8 @@ Route::get('tambahalat', 'App\Http\Controllers\TambahAlatController@create');
 Route::post('tambahalat.store', 'App\Http\Controllers\TambahAlatController@store')->name('tambahalat.store');
 
 #Route::get('verifikasi',[VerifikasiController::class,'index']) -> name ('verifikasi') ;
+
+Route::get('/data_alat', [DataBarangController::class, 'index'])->name('index');
 
 
 // Definisikan rute untuk menangani permintaan POST dari form

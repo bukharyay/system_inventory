@@ -1,30 +1,27 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\data_alat;
+
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
-class DataBarangAPI extends Controller
+class DataBarangController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     * @param  \Illuminate\Http\Request
      * @return \Illuminate\Http\Response
-     */
+     */ 
     public function index()
     {
-        $data = data_alat::all();
-        if ($data->isEmpty()) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Data alat tidak ditemukan'
-            ], 404);
-        }
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Data alat berhasil diambil',
-            'data' => $data
-        ], 200);
+        $client = new Client();
+        $url = "http://127.0.0.1:8000/api/data_alat";
+
+        $response = $client->request('GET',$url);
+        $content = $response->getBody()->getContents();
+        $contentArray = json_decode($content, true);
+        $data = $contentArray['data'];
+        return view('adminpage.alat', ['data'=>$data]);
     }
 
     /**

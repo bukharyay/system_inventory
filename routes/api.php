@@ -38,4 +38,6 @@ Route::delete('/peminjaman/delete/{id}', [DataPeminjamAPI::class, 'delete']);
 
 Route::get('pinjam', [pinjamAPI::class, 'index']);
 
+Route::get('data_alat', [DataBarangAPI::class, 'index']);
+
 
