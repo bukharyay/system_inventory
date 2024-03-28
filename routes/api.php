@@ -21,6 +21,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DataBarangAPI;
 use App\Http\Controllers\DataPeminjamAPI;
+use App\Http\Controllers\pinjamAPI;
 use App\Http\Controllers\YourControllerName;
 
 // ...
@@ -34,5 +35,9 @@ Route::post('/peminjaman/create', [DataPeminjamAPI::class, 'create']);
 Route::put('/peminjaman/update/{id}', [DataPeminjamAPI::class, 'update']);
 
 Route::delete('/peminjaman/delete/{id}', [DataPeminjamAPI::class, 'delete']);
+
+Route::get('pinjam', [pinjamAPI::class, 'index']);
+
+Route::get('data_alat', [DataBarangAPI::class, 'index']);
 
 

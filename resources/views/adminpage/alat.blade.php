@@ -191,26 +191,21 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Gambar Barang</th>
-                                            <th>Nama Barang</th>
-                                            <th>STOK</th>
-                                            <th>Rincian</th>
-                                            <th>Pinjam</th>
+                                            <th>Nama Alat</th>
+                                            <th>Jenis Alat id</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td><img src="../assets/img/alat.png" alt=""></td>
-                                            <td>Kabel</td>
-                                            <td>50 buah</td>
-                                            <td><a href=""><button class="btn_rincian">Rincian</button></a>
-                                            </td>
-                                            <td><a href="pinjam.html"><button class="btn_pinjam">Pinjam</button></a>
-                                            </td>
-
-                                        </tr>
-                                        <!-- Tambahkan baris lainnya jika diperlukan -->
+                                        @php
+                                            $nomor = 1;
+                                        @endphp
+                                        @foreach ($data as $item)
+                                            <tr>
+                                                <td>{{ $nomor++ }}</td>
+                                                <td>{{ $item['nama_alat'] }}</td>
+                                                <td>{{ $item['jenis_alat_id'] }}</td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
 

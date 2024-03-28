@@ -67,16 +67,13 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($pinjams as $pinjam)
+                @foreach ($data as $item)
                     <tr>
-                        <td>{{ $pinjam->nim }}</td>
-                        <td>{{ $pinjam->nama_peminjam }}</td>
-                        <td>{{ $pinjam->dosen }}</td>
-                        <td>{{ $pinjam->ruang }}</td>
-                        <td>{{ $pinjam->mata_kuliah }}</td>
-                        <td>{{ $pinjam->tanggal_peminjaman }}</td>
-                        <td>{{ $pinjam->waktu_peminjaman }}</td>
-                        <td>{{ $pinjam->waktu_pengembalian }}</td>
+                        <td>{{ $item['nim'] }}</td>
+                        <td>{{ $item['nama_peminjam'] }}</td>
+                        <td>{{ $item['dosen'] }}</td>
+                        <td>{{ $item['ruang'] }}</td>
+                        <td>{{ $item['mata_kuliah'] }}</td>
                         <td>
                             <a href="#">
                                 <button class="btn_hapus">Hapus</button>
@@ -84,10 +81,6 @@
                         </td>
                     </tr>
                 @endforeach
-
-
-
-
             </tbody>
 
         </table>

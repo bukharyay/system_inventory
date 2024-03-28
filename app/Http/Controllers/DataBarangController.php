@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use GuzzleHttp\Client;
-use App\Models\pinjam;
+use Illuminate\Http\Request;
 
-class pinjamController extends Controller
+class DataBarangController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,20 +15,15 @@ class pinjamController extends Controller
     public function index()
     {
         $client = new Client();
-        $url = "http://127.0.0.1:8000/api/pinjam";
+        $url = "http://127.0.0.1:8000/api/data_alat";
 
         $response = $client->request('GET',$url);
         $content = $response->getBody()->getContents();
         $contentArray = json_decode($content, true);
         $data = $contentArray['data'];
-        return view('mahasiswa.history', ['data'=>$data]);
+        return view('adminpage.alat', ['data'=>$data]);
     }
 
-    // public function history(){
-    //     $data = pinjam::all();
-    //     return view ('mahasiswa.history', ['data' => $data]);
-    // }
-    
     /**
      * Show the form for creating a new resource.
      *
@@ -38,7 +31,7 @@ class pinjamController extends Controller
      */
     public function create()
     {
-        return view('mahasiswa.pinjam');
+        //
     }
 
     /**
@@ -49,21 +42,7 @@ class pinjamController extends Controller
      */
     public function store(Request $request)
     {
-    //    dd($request->all());
-    pinjam::create([
-        'nim' => $request->nim,
-        'nama_peminjam' => $request->nama_peminjam,
-        'dosen' => $request->dosen,
-        'ruang' => $request->ruang,
-        'mata_kuliah' => $request->mata_kuliah,
-        'tanggal_peminjaman' => $request->tanggal_peminjaman,
-        'waktu_peminjaman' => $request->waktu_peminjaman,
-        'waktu_pengembalian' => $request->waktu_pengembalian,
-    ]);
-    $data = pinjam::all();
-    return view ('mahasiswa.history', ['data' => $data]);
-    //return redirect()->intended('http://heera.it');
-    
+        //
     }
 
     /**

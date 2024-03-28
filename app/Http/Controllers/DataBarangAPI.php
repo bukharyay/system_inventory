@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\data_alat;
 use Illuminate\Http\Request;
 
 class DataBarangAPI extends Controller
@@ -13,7 +13,18 @@ class DataBarangAPI extends Controller
      */
     public function index()
     {
-        //
+        $data = data_alat::all();
+        if ($data->isEmpty()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Data alat tidak ditemukan'
+            ], 404);
+        }
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Data alat berhasil diambil',
+            'data' => $data
+        ], 200);
     }
 
     /**
