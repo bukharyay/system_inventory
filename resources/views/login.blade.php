@@ -9,7 +9,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap " rel="stylesheet ">
-    <link rel="stylesheet" href="/assets/Code/assets/css/login.css">
+    <link rel="stylesheet" href="assets/css/login.css">
     <title>Hello, world!</title>
 </head>
 
@@ -20,7 +20,7 @@
             <div class="row justify-content-center align-items-center  h-100">
                 <div class="col-6">
                     <div class="header text-center">
-                        <img src="/assets/Code/assets/img/logo.png" alt="">
+                        <img src="../assets/img/logo.png" alt="">
 
                     </div>
                     <div class="login-container">
@@ -28,13 +28,14 @@
                             <h1>LOGIN</h1>
                             <p>Selamat Datang di Sistem Inventaris dan Peminjaman Alat Politeknik Negeri Semarang</p>
                         </div>
-                        <form action="{{ route('login') }}" method="post">
-                        <div class="login-form">
-                            <label for="username" class="form-label">UserID</label>
-                            <input type="text" class="form-control" id="username" placeholder="Masukkan Username">
+                        <form action="{{ route('actionlogin') }}" method="post">
+                            @csrf
+                        <div class="login-form"> 
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" name="username" class="form-control" id="username" placeholder="Masukkan Username">
 
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" placeholder="Masukkan Password">
+                            <input type="password" name="password" class="form-control" id="password" placeholder="Masukkan Password">
                             <a href="verifikasi.html">
                                 <button class="login-button">LOGIN</button>
                             </a>
@@ -52,7 +53,7 @@
             <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="/assets/Code/assets/img/gedung.jpeg" class="d-block w-100" alt="...">
+                        <img src="../assets/img/gedung.jpeg" class="d-block w-100" alt="...">
                     </div>
 
                 </div>

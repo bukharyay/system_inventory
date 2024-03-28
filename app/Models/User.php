@@ -4,21 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-namespace App\Models;
-
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-
-class User extends Model
+class User extends Authenticatable
 {
     use HasFactory;
 
     protected $table = 'users';
+    protected $primarykey = 'id';
     protected $fillable = [
-        'UserID',
+        'id',
+        'username',
         'password',
-        'jabatan',
+        'role',
     ];
 
     public function peminjaman(){
