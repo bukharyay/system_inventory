@@ -43,7 +43,7 @@
         </div>
     </header>
     <!-- Form section -->
-    <form action="{{ route('simpan') }}" method="POST" class="form-peminjaman">
+    <form action="{{ route('store') }}" method="POST" class="form-peminjaman">
         @csrf
         <h1>Masukkan Data Peminjaman</h1>
 

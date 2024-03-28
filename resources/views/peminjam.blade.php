@@ -39,7 +39,8 @@
             <input type="text" class="form-control" id="kode_peminjam" placeholder="Masukan kode peminjam"
                 name="id_user">
             <label for="nama" class="form-label">kode_alat</label>
-            <input type="text" class="form-control" id="kode_alat" placeholder="Masukan kode alat" name="kode_alat">
+            <input type="text" class="form-control" id="kode_alat_id" placeholder="Masukan kode alat"
+                name="kode_alat_id">
             <label for="tanggalpinjam" class="form-label">TANGGAL PEMINJAM</label>
             <input type="date" class="form-control" id="tanggal_peminjaman"
                 placeholder="Masukan TANGGAL PEMINJAM anda" name="tanggal_peminjaman">

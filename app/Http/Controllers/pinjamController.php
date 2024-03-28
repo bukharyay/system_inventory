@@ -4,19 +4,33 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use GuzzleHttp\Client;
 use App\Models\pinjam;
 
 class pinjamController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     * @param  \Illuminate\Http\Request
      * @return \Illuminate\Http\Response
-     */ public function index()
+     */ 
+    public function index()
     {
-        $pinjams = pinjam::all(); // Mengambil semua data dari tabel pinjam
-        return view('mahasiswa.history', compact('pinjams')); // Passing data ke view
+        $client = new Client();
+        $url = "http://127.0.0.1:8000/api/pinjam";
+
+        $response = $client->request('GET',$url);
+        $content = $response->getBody()->getContents();
+        $contentArray = json_decode($content, true);
+        $data = $contentArray['data'];
+        return view('mahasiswa.history', ['data'=>$data]);
     }
+
+    // public function history(){
+    //     $data = pinjam::all();
+    //     return view ('mahasiswa.history', ['data' => $data]);
+    // }
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -46,7 +60,10 @@ class pinjamController extends Controller
         'waktu_peminjaman' => $request->waktu_peminjaman,
         'waktu_pengembalian' => $request->waktu_pengembalian,
     ]);
-    return redirect()->route('history');
+    $data = pinjam::all();
+    return view ('mahasiswa.history', ['data' => $data]);
+    //return redirect()->intended('http://heera.it');
+    
     }
 
     /**
