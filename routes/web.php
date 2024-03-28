@@ -46,7 +46,7 @@ Route::get('/peminjam', 'App\Http\Controllers\PeminjamController@create');
 
 Route::get('/data-alat', [DataBarangController::class, 'index']);
 
-Route::get('/dashboard-admin', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/dashboard-admin', [DashboardController::class, 'index'])->name('dasboard');
 
 Route::post('peminjam.store', 'App\Http\Controllers\PeminjamController@store')->name('peminjam.store');
 
