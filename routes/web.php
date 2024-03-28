@@ -56,7 +56,7 @@ Route::get('tambahalat', 'App\Http\Controllers\TambahAlatController@create');
 
 //MASUK KE ADMIN
 Route::get('adminpage/dashboard', function(){
-    return view("adminpage/dasboard");
+    return view("adminpage/dashboard");
     });
 
 Route::post('tambahalat.store', 'App\Http\Controllers\TambahAlatController@store')->name('tambahalat.store');
