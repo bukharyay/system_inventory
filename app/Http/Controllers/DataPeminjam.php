@@ -26,8 +26,10 @@ class DataPeminjam extends Controller
 
         $formattedData = collect($dataFromApi)->map(function ($item) {
             return [
-                'id' => $item->id,
-                'users_id' => $item->users_id,
+                'id_user' => $item->id_user,
+                'username' => $item->username,
+                'nama_alat' => $item->nama_alat,
+                'nim' => $item->nim,
                 'kode_alat_id' => $item->kode_alat_id,
                 'tanggal_peminjaman' => $item->tanggal_peminjaman,
                 'tanggal_kembali' => $item->tanggal_kembali,

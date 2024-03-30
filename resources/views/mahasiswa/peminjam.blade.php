@@ -19,7 +19,7 @@
 
 <body>
     <header>
-        <img class="logo" src="assets/Code/assets/img/logo.png" alt="">
+        <img class="logo" src="../assets/img/logo.png" alt="">
         <ul class="navlist">
             <li><a href="#">HOME</a></li>
             <li><a href="#">DAFTAR INVENYORY</a></li>
@@ -27,7 +27,7 @@
             <li><a href="#">ABOUT US</a></li>
         </ul>
         <a href="login.html">
-            <img class="profile" src="assets/Code/assets/img/orang.jpg" alt="">
+            <img class="profile" src="../assets/img/orang.jpg" alt="">
         </a>
     </header>
     <!-- Form section -->
@@ -41,6 +41,9 @@
             <label for="nama" class="form-label">kode_alat</label>
             <input type="text" class="form-control" id="kode_alat_id" placeholder="Masukan kode alat"
                 name="kode_alat_id">
+            <label for="nama" class="form-label">Nama peminjam : </label>
+            <input type="text" class="form-control" id="nama_peminjam" placeholder="Masukan kode alat"
+                name="nama_peminjam">
             <label for="tanggalpinjam" class="form-label">TANGGAL PEMINJAM</label>
             <input type="date" class="form-control" id="tanggal_peminjaman"
                 placeholder="Masukan TANGGAL PEMINJAM anda" name="tanggal_peminjaman">

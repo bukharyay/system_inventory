@@ -37,7 +37,8 @@
             <thead>
                 <tr>
                     <th class="col-md-1">NIM</th>
-                    <th class="col-md-4">Kode Alat Id</th>
+                    <th class="col-md-3">Nama Peminjam</th>
+                    <th class="col-md-2">Nama Alat</th>
                     <th class="col-md-3">Tanggal Peminjaman</th>
                     <th class="col-md-2">Tanggal Kembali</th>
                     <th class="col-md-2">Status</th>
@@ -47,8 +48,9 @@
             <tbody>
                 @foreach ($data as $item)
                     <tr>
-                        <td>{{ $item['id_user'] }}</td>
-                        <td>{{ $item['kode_alat_id'] }}</td>
+                        <td>{{ $item['nim'] }}</td>
+                        <td>{{ $item['username'] }}</td>
+                        <td>{{ $item['nama_alat'] }}</td>
                         <td>{{ $item['tanggal_peminjaman'] }}</td>
                         <td>{{ $item['tanggal_kembali'] }}</td>
                         <td>{{ $item['status'] }}</td>

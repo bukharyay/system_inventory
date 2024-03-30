@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\data_alat;
+
 use Illuminate\Http\Request;
 
-class DataBarangAPI extends Controller
+class DashboardMhsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,27 +13,7 @@ class DataBarangAPI extends Controller
      */
     public function index()
     {
-        $data = data_alat::join('jenis_alat', 'data_alat.jenis_alat_id', '=', 'jenis_alat.id')
-        ->select('data_alat.*', 'jenis_alat.nama_jenis_alat')
-        ->get();
-    
-    if ($data->isEmpty()) {
-        return response()->json([
-            'status' => 'error',
-            'message' => 'Data alat tidak ditemukan'
-        ], 404);
-    }
-    
-    return response()->json([
-        'status' => 'success',
-        'message' => 'Data alat berhasil diambil',
-        'data' => $data
-    ], 200);
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Data alat berhasil diambil',
-            'data' => $data
-        ], 200);
+        return view('mahasiswa.dashboard');
     }
 
     /**

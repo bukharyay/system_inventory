@@ -34,7 +34,13 @@
 
 <body>
     <header>
-        @include('layouts.navbar')
+        @auth
+            @if (Auth::user()->role == 'user')
+                @include('layouts.navbar')
+            @elseif (Auth::user()->role == 'mahasiswa')
+                @include('layouts.navbarmhs')
+            @endif
+        @endauth
     </header>
     <!-- Begin Page Content -->
 
@@ -52,8 +58,9 @@
             <thead>
                 <tr>
                     <th class="col-md-1">No</th>
+                    <th class="col-md-1">ID Alat</th>
                     <th class="col-md-4">Nama Alat</th>
-                    <th class="col-md-3">Jenis Alat ID</th>
+                    <th class="col-md-3">Jenis Alat</th>
                 </tr>
             </thead>
             <tbody>
@@ -63,8 +70,9 @@
                 @foreach ($data as $item)
                     <tr>
                         <td>{{ $nomor++ }}</td>
+                        <td>{{ $item['id'] }}</td>
                         <td>{{ $item['nama_alat'] }}</td>
-                        <td>{{ $item['jenis_alat_id'] }}</td>
+                        <td>{{ $item['nama_jenis_alat'] }}</td>
                     </tr>
                 @endforeach
             </tbody>

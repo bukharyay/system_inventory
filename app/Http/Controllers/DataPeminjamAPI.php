@@ -15,13 +15,18 @@ class DataPeminjamAPI extends Controller
      */
     public function index()
     {
-        $data = Peminjaman::all();
+        $data = Peminjaman::join('users', 'peminjaman.id_user', '=', 'users.id')
+        ->join('data_alat', 'peminjaman.kode_alat_id', '=', 'data_alat.id')
+        ->select('peminjaman.*', 'users.username', 'users.nim', 'data_alat.nama_alat')
+        ->get();
+    
         if ($data->isEmpty()) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'Data Peminjaman tidak ditemukan'
             ], 404);
         }
+    
         return response()->json([
             'status' => 'success',
             'message' => 'Data Peminjaman berhasil diambil',
@@ -56,7 +61,7 @@ class DataPeminjamAPI extends Controller
     {
         // Validasi input
         $validator = Validator::make($request->all(), [
-            'users_id' => 'required',
+            'id_user' => 'required',
             'kode_alat_id' => 'required',
             'tanggal_peminjaman' => '',
             'tanggal_kembali' => '',
@@ -75,7 +80,7 @@ class DataPeminjamAPI extends Controller
     
         // Buat objek Peminjaman baru
         $peminjaman = new Peminjaman();
-        $peminjaman->users_id = $request->users_id;
+        $peminjaman->id_user = $request->id_user;
         $peminjaman->kode_alat_id = $request->kode_alat_id;
         $peminjaman->tanggal_peminjaman = $request->tanggal_peminjaman;
         $peminjaman->tanggal_kembali = $request->tanggal_kembali;
@@ -143,7 +148,7 @@ public function update(Request $request, $id)
 {
     // Validasi input
     $validator = Validator::make($request->all(), [
-        'users_id' => 'required',
+        'id_user' => 'required',
         'kode_alat_id' => 'required',
         'tanggal_peminjaman' => '',
         'tanggal_kembali' => '',
@@ -172,7 +177,7 @@ public function update(Request $request, $id)
     }
 
     // Update data Peminjaman dengan nilai input yang baru
-    $peminjaman->users_id = $request->users_id;
+    $peminjaman->id_user = $request->id_user;
     $peminjaman->kode_alat_id = $request->kode_alat_id;
     $peminjaman->tanggal_peminjaman = $request->tanggal_peminjaman;
     $peminjaman->tanggal_kembali = $request->tanggal_kembali;

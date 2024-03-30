@@ -1,3 +1,4 @@
+<img class="logo" src="../assets/img/logo.png" alt="">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
@@ -6,31 +7,36 @@
 <link rel="preconnect " href="https://fonts.gstatic.com " crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap " rel="stylesheet ">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-<img class="logo" src="../assets/img/logo.png" alt="">
 <link rel="stylesheet" href="../assets/css/pinjam.css">
 <ul class="navlist">
 
     <li class="nav-item">
-        <a class="nav-link" href="http://127.0.0.1:8001/dashboard-admin">
+        <a class="nav-link" href="{{ route('dashboard-mahasiswa') }}">
             <i class="fas fa-fw fa-home"></i>
             <span>Home</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="http://127.0.0.1:8001/DataPeminjam">
-            <i class="fas fa-fw fa-user"></i>
-            <span>Daftar Peminjam</span></a>
+        <a class="nav-link" href="{{ route('data-alat') }}">
+            <i class="fas fa-fw fa-cogs"></i>
+            <span>List Barang</span></a>
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="http://127.0.0.1:8001/data-alat">
+        <a class="nav-link" href="{{ route('pinjam') }}">
+            <i class="fas fa-fw fa-plus"></i>
+            <span>Pinjam Barang</span></a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('history-mahasiswa') }}">
             <i class="fas fa-fw fa-clipboard"></i>
-            <span>Daftar Alat</span>
+            <span>History</span>
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="http://127.0.0.1:8001/tambahalat">
-            <i class="fas fa-fw fa-plus"></i>
-            <span>Tambah Alat</span></a>
+        <a class="nav-link" href="">
+            <i class="fas fa-fw fa-address-book"></i>
+            <span>About Us</span></a>
     </li>
 </ul>
 <div class="profile-container" id="profileContainer">

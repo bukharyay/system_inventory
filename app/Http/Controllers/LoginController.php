@@ -13,8 +13,19 @@ class LoginController extends Controller
     public function login()
     {
         if (Auth::check()) {
-            return redirect('home');
-        }else{
+            // Cek peran pengguna yang sedang login
+            $role = Auth::user()->role;
+    
+            // Redirect ke dashboard sesuai dengan peran
+            if ($role == 'admin') {
+                return redirect('dashboard-admin');
+            } elseif ($role == 'mahasiswa') {
+                return redirect('dashboard-mahasiswa');
+            } else {
+                // Redirect ke halaman yang sesuai jika peran tidak dikenali
+                return redirect('home');
+            }
+        } else {
             return view('login');
         }
     }
@@ -22,12 +33,12 @@ class LoginController extends Controller
     public function action_login(Request $request)
     {
         $request->validate([
-            'username'  => 'required',
+            'nim'  => 'required',
             'password'  => 'required',
         ]);
         
         $data = [
-            'username'  => $request->username,
+            'nim'  => $request->nim,
             'password'  => $request->password
         ];
 
@@ -42,7 +53,7 @@ class LoginController extends Controller
             if ($user->role === 'staff') {
                 return redirect('adminpage/dashboard');
             } elseif ($user->role === 'mahasiswa') {
-                return redirect('mahasiswa/index');
+                return redirect('dashboard-mahasiswa');
             }
         } else {
             return redirect()->route('login')->with('error', 'Username atau Password salah!');
@@ -60,13 +71,13 @@ class LoginController extends Controller
         public function register(Request $request)
         {
             $request->validate([
-                'username' => 'required|unique:users',
+                'nim' => 'required|unique:users',
                 'password' => 'required|confirmed',
             ]);
     
             $user = new User;
             $user->id = 1;
-            $user->username = $request->username;
+            $user->nim = $request->nim;
             $user->password = Hash::make($request->password);
             $user->role = 'mahasiswa';
             $user->save();

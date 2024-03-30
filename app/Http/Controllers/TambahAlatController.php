@@ -18,7 +18,7 @@ class TambahAlatController extends Controller
     $data_alat->jenis_alat_id = $request->jenis_alat_id;
     $data_alat->save();
 
-    return redirect('peminjam');
+    return redirect('data-alat');
 }
 
 

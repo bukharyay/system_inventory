@@ -20,27 +20,7 @@
 
 <body>
     <header>
-        <img class="logo" src="../assets/img/logo.png" alt="">
-        <ul class="navlist">
-            <li><a href="index.html">HOME</a></li>
-            <li><a href="barang.html">DAFTAR INVENTORY</a></li>
-            <div class="nav-container" id="navContainer">
-                <li><a href="#" id="peminjaman">PEMINJAMAN</a></li>
-                <div class="dropdown" id="dropdown">
-                    <a href="pinjam.html"><i class="fas fa-user"></i> Identitas</a>
-                    <a href="peminjaman.html"><i class="fas fa-box"></i> Peminjaman</a>
-                </div>
-            </div>
-            <li><a href="history.html">HISTORY</a></li>
-
-            <li><a href="about.html">ABOUT US</a></li>
-        </ul>
-        <div class="profile-container" id="profileContainer">
-            <img class="profile" src="../assets/img/orang.jpg" alt="" id="profileImage">
-            <div class="dropdown-menu" id="dropdownMenu">
-                <a href="login.html">Logout</a>
-            </div>
-        </div>
+        @include('layouts.navbarmhs')
     </header>
     <section class="table">
         <h1>HISTORY PEMINJAMAN</h1>
@@ -58,10 +38,10 @@
                     <th>NIM</th>
                     <th>Nama</th>
                     <th>Nama DOSEN</th>
+                    <th>Ruangan</th>
                     <th>Mata Kuliah</th>
                     <th>Tanggal Pinjam</th>
                     <th>Waktu Peminjaman</th>
-                    <th>Waktu Kembali</th>
                     <th>Aksi</th>
 
                 </tr>
@@ -74,6 +54,8 @@
                         <td>{{ $item['dosen'] }}</td>
                         <td>{{ $item['ruang'] }}</td>
                         <td>{{ $item['mata_kuliah'] }}</td>
+                        <td>{{ $item['tanggal_peminjaman'] }}</td>
+                        <td>{{ $item['waktu_peminjaman'] }}</td>
                         <td>
                             <a href="#">
                                 <button class="btn_hapus">Hapus</button>

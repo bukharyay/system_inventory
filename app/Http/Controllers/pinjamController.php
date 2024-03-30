@@ -49,21 +49,18 @@ class pinjamController extends Controller
      */
     public function store(Request $request)
     {
-    //    dd($request->all());
-    pinjam::create([
-        'nim' => $request->nim,
-        'nama_peminjam' => $request->nama_peminjam,
-        'dosen' => $request->dosen,
-        'ruang' => $request->ruang,
-        'mata_kuliah' => $request->mata_kuliah,
-        'tanggal_peminjaman' => $request->tanggal_peminjaman,
-        'waktu_peminjaman' => $request->waktu_peminjaman,
-        'waktu_pengembalian' => $request->waktu_pengembalian,
-    ]);
-    $data = pinjam::all();
-    return view ('mahasiswa.history', ['data' => $data]);
-    //return redirect()->intended('http://heera.it');
+        pinjam::create([
+            'nim' => $request->nim,
+            'nama_peminjam' => $request->nama_peminjam,
+            'dosen' => $request->dosen,
+            'ruang' => $request->ruang,
+            'mata_kuliah' => $request->mata_kuliah,
+            'tanggal_peminjaman' => $request->tanggal_peminjaman,
+            'waktu_peminjaman' => $request->waktu_peminjaman,
+        ]);
     
+        // Redirect ke halaman history mahasiswa
+        return redirect()->route('history-mahasiswa');
     }
 
     /**
