@@ -2,35 +2,49 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use GuzzleHttp\Client;
-use App\Models\pinjam;
+use App\Models\User;
 
-class pinjamController extends Controller
+class UserAPI extends Controller
 {
     /**
      * Display a listing of the resource.
-     * @param  \Illuminate\Http\Request
+     *
      * @return \Illuminate\Http\Response
-     */ 
+     */
     public function index()
     {
-        $client = new Client();
-        $url = "http://127.0.0.1:8000/api/pinjam";
-
-        $response = $client->request('GET',$url);
-        $content = $response->getBody()->getContents();
-        $contentArray = json_decode($content, true);
-        $data = $contentArray['data'];
-        return view('mahasiswa.history', ['data'=>$data]);
+        $data = User::all();
+        if ($data->isEmpty()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Data user tidak ditemukan'
+            ], 404);
+        }
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Data user berhasil diambil',
+            'data' => $data
+        ], 200);
     }
 
-    // public function history(){
-    //     $data = pinjam::all();
-    //     return view ('mahasiswa.history', ['data' => $data]);
-    // }
+    /**
+     * Get user data by ID.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getUserByNim($nim)
+    {
+        $user = User::where('nim', $nim)->first();
     
+        if (!$user) {
+            return response()->json(['message' => 'User not found'], 404);
+        }
+    
+        return response()->json(['user' => $user], 200);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -38,7 +52,7 @@ class pinjamController extends Controller
      */
     public function create()
     {
-        return view('mahasiswa.pinjam');
+        //
     }
 
     /**
@@ -49,19 +63,7 @@ class pinjamController extends Controller
      */
     public function store(Request $request)
     {
-        pinjam::create([
-            'nim' => $request->nim,
-            'id_alat' => $request->id_alat,
-            'nama_peminjam' => $request->nama_peminjam,
-            'dosen' => $request->dosen,
-            'ruang' => $request->ruang,
-            'mata_kuliah' => $request->mata_kuliah,
-            'tanggal_peminjaman' => $request->tanggal_peminjaman,
-            'waktu_peminjaman' => $request->waktu_peminjaman,
-        ]);
-    
-        // Redirect ke halaman history mahasiswa
-        return redirect()->route('history-mahasiswa');
+        //
     }
 
     /**

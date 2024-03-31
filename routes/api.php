@@ -22,13 +22,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DataBarangAPI;
 use App\Http\Controllers\DataPeminjamAPI;
 use App\Http\Controllers\pinjamAPI;
-use App\Http\Controllers\YourControllerName;
+use App\Http\Controllers\UserAPI;
 
 // ...
 
 Route::get('peminjaman', [DataPeminjamAPI::class, 'index']);
 
-Route::get('peminjaman/getData={id}', [DataPeminjamAPI::class, 'getDatabyId']);
+Route::get('peminjaman/getData={nim}', [DataPeminjamAPI::class, 'getDatabyId']);
 
 Route::post('/peminjaman/create', [DataPeminjamAPI::class, 'create']);
 
@@ -39,5 +39,9 @@ Route::delete('/peminjaman/delete/{id}', [DataPeminjamAPI::class, 'delete']);
 Route::get('pinjam', [pinjamAPI::class, 'index']);
 
 Route::get('data_alat', [DataBarangAPI::class, 'index']);
+
+Route::get('info-login-nim/getData={id}', [UserAPI::class, 'getUserByNim']);
+
+Route::get('info-login', [UserAPI::class, 'index']);
 
 

@@ -15,6 +15,7 @@ class pinjam extends Model
     protected $fillable = [
         'nim',
         'nama_peminjam',
+        'id_alat',
         'dosen',
         'ruang',
         'mata_kuliah',

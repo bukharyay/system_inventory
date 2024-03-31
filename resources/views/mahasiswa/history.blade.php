@@ -32,6 +32,13 @@
                 <option value="tidak-tersedia">Tidak Tersedia</option>
             </select>
         </div>
+        <li>
+            @if (session('nim'))
+                <p>{{ session('nim') }}</p>
+            @else
+                <p>NIM not found</p>
+            @endif
+        </li>
         <table>
             <thead>
                 <tr>
