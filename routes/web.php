@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DataPeminjam;
 use App\Http\Controllers\AuthController;
@@ -93,4 +94,5 @@ Route::get("/history", function(){
 
 // mahasiswa
 Route::get('/dashboard-mahasiswa', [DashboardMhsController::class, 'index'])->name('dashboard-mahasiswa');
+Route::get('/about-mahasiswa', [AboutController::class, 'index'])->name('about-mahasiswa');
     

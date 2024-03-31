@@ -35,7 +35,7 @@
 <body>
     <header>
         @auth
-            @if (Auth::user()->role == 'user')
+            @if (Auth::user()->role == 'staff')
                 @include('layouts.navbar')
             @elseif (Auth::user()->role == 'mahasiswa')
                 @include('layouts.navbarmhs')
@@ -61,6 +61,7 @@
                     <th class="col-md-1">ID Alat</th>
                     <th class="col-md-4">Nama Alat</th>
                     <th class="col-md-3">Jenis Alat</th>
+                    <th class="col-md-2">Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -73,6 +74,21 @@
                         <td>{{ $item['id'] }}</td>
                         <td>{{ $item['nama_alat'] }}</td>
                         <td>{{ $item['nama_jenis_alat'] }}</td>
+                        @auth
+                            @if (Auth::user()->role == 'mahasiswa')
+                                <td>
+                                    <a href="#">
+                                        <button class="btn_hapus">Pinjam</button></button>
+                                    </a>
+                                </td>
+                            @elseif (Auth::user()->role == 'staff')
+                                <td>
+                                    <a href="#">
+                                        <button class="btn_hapus">Hapus</button></button>
+                                    </a>
+                                </td>
+                            @endif
+                        @endauth
                     </tr>
                 @endforeach
             </tbody>

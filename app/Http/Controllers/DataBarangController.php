@@ -21,7 +21,7 @@ class DataBarangController extends Controller
         $content = $response->getBody()->getContents();
         $contentArray = json_decode($content, true);
         $data = $contentArray['data'];
-        return view('adminpage.alat', ['data'=>$data]);
+        return view('all.alat', ['data'=>$data]);
     }
 
     /**

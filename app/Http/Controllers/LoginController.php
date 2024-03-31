@@ -41,14 +41,17 @@ class LoginController extends Controller
             'nim'  => $request->nim,
             'password'  => $request->password
         ];
-
+    
         if(Auth::attempt($data)){
-
+    
             $user = Auth::user();
-
+    
+            // Simpan NIM ke dalam session
+            $request->session()->put('nim', $user->nim);
+    
             //ngasih level user ke session
             $request->session()->put('role', $user->role);
-
+    
             //redirect role jika bukan admin
             if ($user->role === 'staff') {
                 return redirect('adminpage/dashboard');
@@ -58,8 +61,8 @@ class LoginController extends Controller
         } else {
             return redirect()->route('login')->with('error', 'Username atau Password salah!');
         }
-
-        }
+    }
+    
         
         
 

@@ -48,20 +48,22 @@
             </thead>
             <tbody>
                 @foreach ($data as $item)
-                    <tr>
-                        <td>{{ $item['nim'] }}</td>
-                        <td>{{ $item['nama_peminjam'] }}</td>
-                        <td>{{ $item['dosen'] }}</td>
-                        <td>{{ $item['ruang'] }}</td>
-                        <td>{{ $item['mata_kuliah'] }}</td>
-                        <td>{{ $item['tanggal_peminjaman'] }}</td>
-                        <td>{{ $item['waktu_peminjaman'] }}</td>
-                        <td>
-                            <a href="#">
-                                <button class="btn_hapus">Hapus</button>
-                            </a>
-                        </td>
-                    </tr>
+                    @if ($item['nim'] == intval(session('nim')))
+                        <tr>
+                            <td>{{ $item['nim'] }}</td>
+                            <td>{{ $item['nama_peminjam'] }}</td>
+                            <td>{{ $item['dosen'] }}</td>
+                            <td>{{ $item['ruang'] }}</td>
+                            <td>{{ $item['mata_kuliah'] }}</td>
+                            <td>{{ $item['tanggal_peminjaman'] }}</td>
+                            <td>{{ $item['waktu_peminjaman'] }}</td>
+                            <td>
+                                <a href="#">
+                                    <button class="btn_hapus">Hapus</button>
+                                </a>
+                            </td>
+                        </tr>
+                    @endif
                 @endforeach
             </tbody>
 

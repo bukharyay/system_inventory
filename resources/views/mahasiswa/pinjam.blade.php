@@ -28,7 +28,8 @@
         <h1>Masukkan Data Peminjaman</h1>
 
         <label for="nim" class="form-label">NIM</label>
-        <input type="text" class="form-control" name="nim" id="nim" placeholder="Masukkan NIM anda">
+        <input type="text" class="form-control" value="{{ session('nim') }}" name="nim" id="nim"
+            placeholder="Masukkan NIM anda">
 
         <label for="nama_peminjam" class="form-label">NAMA</label>
         <input type="text" class="form-control" name="nama_peminjam" id="nama_peminjam"

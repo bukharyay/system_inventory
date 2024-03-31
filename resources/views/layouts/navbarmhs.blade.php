@@ -34,7 +34,7 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="">
+        <a class="nav-link" href="{{ route('about-mahasiswa') }}">
             <i class="fas fa-fw fa-address-book"></i>
             <span>About Us</span></a>
     </li>
@@ -42,6 +42,13 @@
 <div class="profile-container" id="profileContainer">
     <img class="profile" src="../assets/img/orang.jpg" alt="" id="profileImage">
     <div class="dropdown-menu" id="dropdownMenu">
+        <li>
+            @if (session('nim'))
+                <p>{{ session('nim') }}</p>
+            @else
+                <p>NIM not found</p>
+            @endif
+        </li>
         <li><a>Level: {{ Auth::user()->role }}</a></li>
         <li role="separator" class="divider"></li>
         <li><a href="{{ route('logout') }}"><i class="fa fa-power-off"></i> Log Out</a></li>
