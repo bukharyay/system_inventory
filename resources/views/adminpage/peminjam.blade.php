@@ -15,6 +15,12 @@
     <link rel="preconnect " href="https://fonts.gstatic.com " crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap " rel="stylesheet ">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    {{-- data tables --}}
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="../assets/admin_lte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    {{--  --}}
     <title>PEMINJAMAN MAHASISWA</title>
 </head>
 
@@ -25,30 +31,37 @@
     </header>
     <section class="table">
         <h1>Data Peminjaman</h1>
-        <table class="table table-striped">
+        <table class="table table-striped" id="data-table">
             <thead>
                 <tr>
+                    <th class="col-md-1">No</th>
+                    <th class="col-md-1">Nama Alat</th>
+                    <th class="col-md-1">ID Alat</th>
                     <th class="col-md-1">NIM</th>
-                    <th class="col-md-3">Nama Peminjam</th>
-                    <th class="col-md-2">Nama Alat</th>
-                    <th class="col-md-3">Tanggal Peminjaman</th>
-                    <th class="col-md-2">Tanggal Kembali</th>
-                    <th class="col-md-2">Status</th>
-                    <th class="col-md-2">kondisi</th>
+                    <th class="col-md-2">Nama Peminjam</th>
+                    <th class="col-md-2">Dosen</th>
+                    <th class="col-md-1">Ruang</th>
+                    <th class="col-md-2">Mata Kuliah</th>
+                    <th class="col-md-2">Tanggal Pinjam</th>
+                    <th class="col-md-2">Waktu Pinjam</th>
                 </tr>
             </thead>
             <tbody>
+                @php
+                    $nomor = 1;
+                @endphp
                 @foreach ($data as $item)
                     <tr>
-                        <td>{{ $item['nim'] }}</td>
-                        <td>{{ $item['username'] }}</td>
+                        <td>{{ $nomor++ }}</td>
                         <td>{{ $item['nama_alat'] }}</td>
+                        <td>{{ $item['id_alat'] }}</td>
+                        <td>{{ $item['nim'] }}</td>
+                        <td>{{ $item['nama_peminjam'] }}</td>
+                        <td>{{ $item['dosen'] }}</td>
+                        <td>{{ $item['ruang'] }}</td>
+                        <td>{{ $item['mata_kuliah'] }}</td>
                         <td>{{ $item['tanggal_peminjaman'] }}</td>
-                        <td>{{ $item['tanggal_kembali'] }}</td>
-                        <td>{{ $item['status'] }}</td>
-                        <td>{{ $item['kondisi'] }}</td>
-
-
+                        <td>{{ $item['waktu_peminjaman'] }}</td>
                     </tr>
                 @endforeach
 
@@ -60,6 +73,12 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
     <script src="../assets/js/profile.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#data-table').DataTable();
+        });
+    </script>
+
 
 </body>
 

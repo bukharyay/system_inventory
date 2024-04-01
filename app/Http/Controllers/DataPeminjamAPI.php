@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Peminjaman;
+use App\Models\pinjam;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -15,10 +16,9 @@ class DataPeminjamAPI extends Controller
      */
     public function index()
     {
-        $data = Peminjaman::join('users', 'peminjaman.id_user', '=', 'users.id')
-        ->join('data_alat', 'peminjaman.kode_alat_id', '=', 'data_alat.id')
-        ->select('peminjaman.*', 'users.username', 'users.nim', 'data_alat.nama_alat')
-        ->get();
+        $data = pinjam::join('data_alat', 'pinjams.id_alat', '=', 'data_alat.id')
+                        ->select('pinjams.*','data_alat.nama_alat')
+                        ->get();
     
         if ($data->isEmpty()) {
             return response()->json([
