@@ -15,6 +15,13 @@
     <link rel="preconnect " href="https://fonts.gstatic.com " crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap " rel="stylesheet ">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- DataTables -->
+    <link rel="stylesheet" href="../assets/admin_lte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <title>PEMINJAMAN MAHASISWA</title>
 </head>
 
@@ -24,26 +31,18 @@
     </header>
     <section class="table">
         <h1>HISTORY PEMINJAMAN</h1>
-        <div class="search-filter">
-            <input type="text" id="searchInput" placeholder="Cari barang...">
-            <select id="filterSelect">
-                <option value="semua">Semua</option>
-                <option value="tersedia">Tersedia</option>
-                <option value="tidak-tersedia">Tidak Tersedia</option>
-            </select>
-        </div>
         <li>
             @if (session('nim'))
-                <p>{{ session('nim') }}</p>
+                <p style="font-weight: bold;" id="nama_peminjam_placeholder">Loading...</p>
             @else
                 <p>NIM not found</p>
             @endif
         </li>
-        <table>
+        <table class="table table-striped" id="data-table">
             <thead>
                 <tr>
-                    <th>NIM</th>
-                    <th>Nama</th>
+                    <th class="md-col-4">Id Alat</th>
+                    <th>Nama Alat</th>
                     <th>Nama DOSEN</th>
                     <th>Ruangan</th>
                     <th>Mata Kuliah</th>
@@ -57,8 +56,8 @@
                 @foreach ($data as $item)
                     @if ($item['nim'] == intval(session('nim')))
                         <tr>
-                            <td>{{ $item['nim'] }}</td>
-                            <td>{{ $item['nama_peminjam'] }}</td>
+                            <td>{{ $item['id_alat'] }}</td>
+                            <td>{{ $item['nama_alat'] }}</td>
                             <td>{{ $item['dosen'] }}</td>
                             <td>{{ $item['ruang'] }}</td>
                             <td>{{ $item['mata_kuliah'] }}</td>
@@ -76,12 +75,42 @@
 
         </table>
     </section>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
     <script src="../assets/js/profile.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#data-table').DataTable();
+        });
+    </script>
+    {{-- mendapat data username by nim --}}
+    <script>
+        $(document).ready(function() {
+            // Mendapatkan nim dari session (Anda harus memastikan session 'nim' tersedia)
+            var nim = "{{ session('nim') }}";
 
+            // Buat permintaan AJAX ke endpoint dengan nim
+            $.ajax({
+                url: 'http://127.0.0.1:8000/api/info-login-nim/getData=' + nim,
+                type: 'GET',
+                success: function(response) {
+                    // Jika permintaan berhasil, atur nilai input "nama_peminjam" dengan username dari respons
+                    var username = response.user.username; // Mengambil username dari respons
+                    $('#nama_peminjam_placeholder').text(
+                        "- " + username + " (" + nim + ")"
+                    ); // Mengatur teks elemen h1 dengan username yang diambil dan nim dalam kurung
+                    // Print respons ke konsol
+                    console.log(response);
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                    // Tangani kesalahan jika ada
+                }
+            });
+        });
+    </script>
+    {{-- end --}}
 </body>
 
 </html>

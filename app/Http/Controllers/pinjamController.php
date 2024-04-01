@@ -51,6 +51,7 @@ class pinjamController extends Controller
     {
         pinjam::create([
             'nim' => $request->nim,
+            'nama_alat' => $request->nim,
             'id_alat' => $request->id_alat,
             'nama_peminjam' => $request->nama_peminjam,
             'dosen' => $request->dosen,

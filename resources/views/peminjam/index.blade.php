@@ -25,14 +25,6 @@
     </header>
     <section class="table">
         <h1>Data Peminjaman</h1>
-        <div class="search-filter">
-            <input type="text" id="searchInput" placeholder="Cari barang...">
-            <select id="filterSelect">
-                <option value="semua">Semua</option>
-                <option value="tersedia">Tersedia</option>
-                <option value="tidak-tersedia">Tidak Tersedia</option>
-            </select>
-        </div>
         <table class="table table-striped">
             <thead>
                 <tr>

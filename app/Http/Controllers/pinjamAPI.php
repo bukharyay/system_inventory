@@ -15,13 +15,17 @@ class pinjamAPI extends Controller
      */
     public function index()
     {
-        $data = pinjam::all();
+        $data = pinjam::join('data_alat', 'pinjams.id_alat', '=', 'data_alat.id')
+                        ->select('pinjams.*','data_alat.nama_alat')
+                        ->get();
+    
         if ($data->isEmpty()) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'Data pinjam tidak ditemukan'
             ], 404);
         }
+    
         return response()->json([
             'status' => 'success',
             'message' => 'Data pinjam berhasil diambil',

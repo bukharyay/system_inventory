@@ -26,10 +26,7 @@
     <link rel="stylesheet" href="../assets/admin_lte/plugins/fontawesome-free/css/all.min.css">
     <!-- DataTables -->
     <link rel="stylesheet" href="../assets/admin_lte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="../assets/admin_lte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-    <link rel="stylesheet" href="../assets/admin_lte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-
-
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 </head>
 
 <body>
@@ -43,18 +40,9 @@
         @endauth
     </header>
     <!-- Begin Page Content -->
-
     <section class="table">
         <h1>DAFTAR ALAT</h1>
-        <div class="search-filter">
-            <input type="text" id="searchInput" placeholder="Cari barang...">
-            <select id="filterSelect">
-                <option value="semua">Semua</option>
-                <option value="tersedia">Tersedia</option>
-                <option value="tidak-tersedia">Tidak Tersedia</option>
-            </select>
-        </div>
-        <table class="table table-striped">
+        <table class="table table-striped" id="data-table">
             <thead>
                 <tr>
                     <th class="col-md-1">No</th>
@@ -161,16 +149,6 @@
     </div>
     {{-- end modal --}}
 
-    <!-- Footer -->
-    <footer class="sticky-footer bg-white">
-        <div class="container my-auto">
-            <div class="copyright text-center my-auto">
-                <span>Copyright &copy; Your Website 2023</span>
-            </div>
-        </div>
-    </footer>
-    <!-- End of Footer -->
-
     </div>
     <!-- End of Content Wrapper -->
 
@@ -178,6 +156,11 @@
     <!-- Let's assume you have included jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+    <script>
+        $(document).ready(function() {
+            $('#data-table').DataTable();
+        });
+    </script>
 
     <script>
         $(document).ready(function() {
@@ -220,13 +203,8 @@
         // Mengatur nilai default pada input waktu
         waktuPeminjamanInput.value = waktuDefault;
     </script>
-
-
-
-
     {{-- end js menangkap id --}}
 
-    </div>
     <!-- End of Page Wrapper -->
 
     <!-- Scroll to Top Button-->
@@ -296,39 +274,17 @@
 
     <script src="../assets/admin_lte/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="../assets/admin_lte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="../assets/admin_lte/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="../assets/admin_lte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
     <script src="../assets/admin_lte/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
     <script src="../assets/admin_lte/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
     <script src="../assets/admin_lte/plugins/jszip/jszip.min.js"></script>
     <script src="../assets/admin_lte/plugins/pdfmake/pdfmake.min.js"></script>
     <script src="../assets/admin_lte/plugins/pdfmake/vfs_fonts.js"></script>
-    <script src="../assets/admin_lte/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-    <script src="../assets/admin_lte/plugins/datatables-buttons/js/buttons.print.min.js"></script>
-    <script src="../assets/admin_lte/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
     <!-- AdminLTE App -->
     <script src="../assets/admin_lte/dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../assets/admin_lte/dist/js/demo.js"></script>
     <!-- Page specific script -->
-    <script>
-        $(function() {
-            $("#example1").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
-            });
-        });
-    </script>
 </body>
 
 </html>
