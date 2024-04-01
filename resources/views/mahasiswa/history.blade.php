@@ -64,10 +64,14 @@
                             <td>{{ $item['tanggal_peminjaman'] }}</td>
                             <td>{{ $item['waktu_peminjaman'] }}</td>
                             <td>
-                                <a href="#">
-                                    <button class="btn_hapus">Hapus</button>
-                                </a>
+                                <form action="{{ route('pinjam.delete', ['id' => $item['id']]) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit">Delete</button>
+                                </form>
                             </td>
+
+
                         </tr>
                     @endif
                 @endforeach
@@ -111,6 +115,45 @@
         });
     </script>
     {{-- end --}}
+
+    {{--  --}}
+
+    <script>
+        $(document).ready(function() {
+            $('.btn_hapus').click(function() {
+                var itemId = $(this).data('itemid');
+                // Set nilai dari input dengan id "id_alat" dengan nilai itemId
+                $('#id_alat').val(itemId);
+                // Lakukan apa pun yang perlu Anda lakukan dengan itemId di sini
+                console.log("ID Alat yang Dipinjam: " + itemId);
+                // Misalnya, Anda dapat membuat permintaan AJAX untuk mengirimkan ID alat ke server untuk memproses permintaan peminjaman
+            });
+        });
+    </script>
+
+    <script>
+        function deletePinjam(id) {
+            if (confirm('Are you sure you want to delete this pinjam?')) {
+                fetch('/pinjam/delete/' + id, {
+                        method: 'DELETE',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        // Handle the response data
+                        console.log(data);
+                    })
+                    .catch(error => {
+                        // Handle the error
+                        console.error(error);
+                    });
+            }
+        }
+    </script>
+
+    {{--  --}}
 </body>
 
 </html>

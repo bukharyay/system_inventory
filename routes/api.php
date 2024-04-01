@@ -44,4 +44,8 @@ Route::get('info-login-nim/getData={id}', [UserAPI::class, 'getUserByNim']);
 
 Route::get('info-login', [UserAPI::class, 'index']);
 
+Route::get('pinjam/{id}', [pinjamAPI::class, 'getDatabyId']);
+
+Route::delete('/pinjam/delete/{id}', [pinjamAPI::class, 'delete']);
+
 

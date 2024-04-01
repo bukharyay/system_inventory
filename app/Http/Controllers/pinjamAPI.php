@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\pinjam;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class pinjamAPI extends Controller
@@ -120,9 +121,15 @@ class pinjamAPI extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function deletebyid($id)
     {
-        //
+        $user = pinjam::where('id', $id)->first();
+    
+        if (!$user) {
+            return response()->json(['message' => 'User not found'], 404);
+        }
+    
+        return response()->json(['user' => $user], 200);
     }
 
     /**
@@ -205,29 +212,24 @@ public function update(Request $request, $id)
      * @return \Illuminate\Http\Response
      */
     public function delete($id)
-{
-    // Temukan data pinjam berdasarkan ID
-    $pinjam = pinjam::find($id);
-
-    // Jika data pinjam tidak ditemukan, kirimkan respons error
-    if (!$pinjam) {
-        return response()->json([
-            'status' => 'error',
-            'message' => 'Data pinjam tidak ditemukan'
-        ], 404);
-    }
-
-    // Hapus data pinjam
-    if ($pinjam->delete()) {
+    {
+        // Temukan data pinjam berdasarkan ID
+        $pinjam = pinjam::find($id);
+    
+        // Jika data pinjam tidak ditemukan, kirimkan respons error
+        if (!$pinjam) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Data pinjam tidak ditemukan'
+            ], 404);
+        }
+    
+        // Hapus data pinjam
+        $pinjam->delete();
+    
         return response()->json([
             'status' => 'success',
             'message' => 'Data pinjam berhasil dihapus'
         ], 200);
-    } else {
-        return response()->json([
-            'status' => 'error',
-            'message' => 'Gagal menghapus data pinjam'
-        ], 500);
     }
-}
 }

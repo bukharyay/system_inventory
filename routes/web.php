@@ -22,7 +22,6 @@ use App\Http\Controllers\DataPeminjamController;
 
 #>>>>>>> 5e259d86d50200bd7611cd9ad94070a133dc52a2
 
- 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -51,8 +50,6 @@ Route::get('/data-alat', [DataBarangController::class, 'index'])->name('data-ala
 Route::get('/dashboard-admin', [DashboardController::class, 'index'])->name('dasboard');
 
 Route::post('peminjam.store', 'App\Http\Controllers\PeminjamController@store')->name('peminjam.store');
-
-Route::get('/data-peminjam', [DataPeminjam::class, 'index']);
 
 Route::get('DataPeminjam', [DataPeminjamController::class, 'index']);
 
@@ -95,5 +92,6 @@ Route::get("/history", function(){
 // mahasiswa
 Route::get('/dashboard-mahasiswa', [DashboardMhsController::class, 'index'])->name('dashboard-mahasiswa');
 Route::get('/about-mahasiswa', [AboutController::class, 'index'])->name('about-mahasiswa');
+Route::delete('/pinjam/delete/{id}', [pinjamController::class, 'delete'])->name('pinjam.delete');
 
     

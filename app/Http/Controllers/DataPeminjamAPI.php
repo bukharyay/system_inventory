@@ -206,29 +206,29 @@ public function update(Request $request, $id)
      * @return \Illuminate\Http\Response
      */
     public function delete($id)
-{
-    // Temukan data Peminjaman berdasarkan ID
-    $peminjaman = Peminjaman::find($id);
+    {
+        // Temukan data Peminjaman berdasarkan ID
+        $peminjaman = Peminjaman::find($id);
 
-    // Jika data Peminjaman tidak ditemukan, kirimkan respons error
-    if (!$peminjaman) {
-        return response()->json([
-            'status' => 'error',
-            'message' => 'Data Peminjaman tidak ditemukan'
-        ], 404);
-    }
+        // Jika data Peminjaman tidak ditemukan, kirimkan respons error
+        if (!$peminjaman) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Data Peminjaman tidak ditemukan'
+            ], 404);
+        }
 
-    // Hapus data Peminjaman
-    if ($peminjaman->delete()) {
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Data Peminjaman berhasil dihapus'
-        ], 200);
-    } else {
-        return response()->json([
-            'status' => 'error',
-            'message' => 'Gagal menghapus data Peminjaman'
-        ], 500);
+        // Hapus data Peminjaman
+        if ($peminjaman->delete()) {
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Data Peminjaman berhasil dihapus'
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Gagal menghapus data Peminjaman'
+            ], 500);
+        }
     }
-}
 }

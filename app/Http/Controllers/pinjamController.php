@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use GuzzleHttp\Client;
 use App\Models\pinjam;
+use GuzzleHttp\Client;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
 
 class pinjamController extends Controller
 {
@@ -71,11 +72,26 @@ class pinjamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function delete($id)
     {
-        //
-    }
+        $client = new Client();
+        $url = "http://127.0.0.1:8000/api/pinjam/delete/{$id}";
 
+        try {
+            $response = $client->request('DELETE', $url);
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode == 204) {
+                return redirect()->route('history-mahasiswa')->with('success', 'Data berhasil dihapus.');
+            } else {
+                return redirect()->route('history-mahasiswa')->with('error', 'Gagal menghapus data.');
+            }
+        } catch (\Exception $e) {
+            // Penanganan kesalahan saat menghubungi API
+            Log::error('Error deleting data: ' . $e->getMessage()); // Logging pesan kesalahan
+            return redirect()->route('history-mahasiswa')->with('error', 'Terjadi kesalahan saat menghubungi API.');
+        }
+    }
     /**
      * Show the form for editing the specified resource.
      *

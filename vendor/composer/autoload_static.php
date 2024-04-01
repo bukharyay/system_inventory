@@ -555,6 +555,16 @@ class ComposerStaticInitfe33f98a750b8c5a51b30c78bd3fab21
         ),
     );
 
+    public static $prefixesPsr0 = array (
+        'R' => 
+        array (
+            'Rap2hpoutre\\LaravelLogViewer\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/rap2hpoutre/laravel-log-viewer/src',
+            ),
+        ),
+    );
+
     public static $classMap = array (
         'App\\Actions\\Fortify\\CreateNewUser' => __DIR__ . '/../..' . '/app/Actions/Fortify/CreateNewUser.php',
         'App\\Actions\\Fortify\\PasswordValidationRules' => __DIR__ . '/../..' . '/app/Actions/Fortify/PasswordValidationRules.php',
@@ -563,16 +573,21 @@ class ComposerStaticInitfe33f98a750b8c5a51b30c78bd3fab21
         'App\\Actions\\Fortify\\UpdateUserProfileInformation' => __DIR__ . '/../..' . '/app/Actions/Fortify/UpdateUserProfileInformation.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Http\\Controllers\\AboutController' => __DIR__ . '/../..' . '/app/Http/Controllers/AboutController.php',
         'App\\Http\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/AuthController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\DashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/DashboardController.php',
+        'App\\Http\\Controllers\\DashboardMhsController' => __DIR__ . '/../..' . '/app/Http/Controllers/DashboardMhsController.php',
         'App\\Http\\Controllers\\DataBarangAPI' => __DIR__ . '/../..' . '/app/Http/Controllers/DataBarangAPI.php',
-        'App\\Http\\Controllers\\DataPeminjam' => __DIR__ . '/../..' . '/app/Http/Controllers/DataPeminjam.php',
+        'App\\Http\\Controllers\\DataBarangController' => __DIR__ . '/../..' . '/app/Http/Controllers/DataBarangController.php',
         'App\\Http\\Controllers\\DataPeminjamAPI' => __DIR__ . '/../..' . '/app/Http/Controllers/DataPeminjamAPI.php',
         'App\\Http\\Controllers\\DataPeminjamController' => __DIR__ . '/../..' . '/app/Http/Controllers/DataPeminjamController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/LoginController.php',
         'App\\Http\\Controllers\\PeminjamController' => __DIR__ . '/../..' . '/app/Http/Controllers/PeminjamController.php',
         'App\\Http\\Controllers\\TambahAlatController' => __DIR__ . '/../..' . '/app/Http/Controllers/TambahAlatController.php',
+        'App\\Http\\Controllers\\UserAPI' => __DIR__ . '/../..' . '/app/Http/Controllers/UserAPI.php',
+        'App\\Http\\Controllers\\pinjamAPI' => __DIR__ . '/../..' . '/app/Http/Controllers/pinjamAPI.php',
         'App\\Http\\Controllers\\pinjamController' => __DIR__ . '/../..' . '/app/Http/Controllers/pinjamController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
@@ -4703,6 +4718,12 @@ class ComposerStaticInitfe33f98a750b8c5a51b30c78bd3fab21
         'Ramsey\\Uuid\\UuidInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/UuidInterface.php',
         'Ramsey\\Uuid\\Validator\\GenericValidator' => __DIR__ . '/..' . '/ramsey/uuid/src/Validator/GenericValidator.php',
         'Ramsey\\Uuid\\Validator\\ValidatorInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/Validator/ValidatorInterface.php',
+        'Rap2hpoutre\\LaravelLogViewer\\BaseController' => __DIR__ . '/..' . '/rap2hpoutre/laravel-log-viewer/src/controllers/LogViewerController.php',
+        'Rap2hpoutre\\LaravelLogViewer\\LaravelLogViewer' => __DIR__ . '/..' . '/rap2hpoutre/laravel-log-viewer/src/Rap2hpoutre/LaravelLogViewer/LaravelLogViewer.php',
+        'Rap2hpoutre\\LaravelLogViewer\\LaravelLogViewerServiceProvider' => __DIR__ . '/..' . '/rap2hpoutre/laravel-log-viewer/src/Rap2hpoutre/LaravelLogViewer/LaravelLogViewerServiceProvider.php',
+        'Rap2hpoutre\\LaravelLogViewer\\Level' => __DIR__ . '/..' . '/rap2hpoutre/laravel-log-viewer/src/Rap2hpoutre/LaravelLogViewer/Level.php',
+        'Rap2hpoutre\\LaravelLogViewer\\LogViewerController' => __DIR__ . '/..' . '/rap2hpoutre/laravel-log-viewer/src/controllers/LogViewerController.php',
+        'Rap2hpoutre\\LaravelLogViewer\\Pattern' => __DIR__ . '/..' . '/rap2hpoutre/laravel-log-viewer/src/Rap2hpoutre/LaravelLogViewer/Pattern.php',
         'ReturnTypeWillChange' => __DIR__ . '/..' . '/symfony/polyfill-php81/Resources/stubs/ReturnTypeWillChange.php',
         'SebastianBergmann\\CliParser\\AmbiguousOptionException' => __DIR__ . '/..' . '/sebastian/cli-parser/src/exceptions/AmbiguousOptionException.php',
         'SebastianBergmann\\CliParser\\Exception' => __DIR__ . '/..' . '/sebastian/cli-parser/src/exceptions/Exception.php',
@@ -6026,6 +6047,7 @@ class ComposerStaticInitfe33f98a750b8c5a51b30c78bd3fab21
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitfe33f98a750b8c5a51b30c78bd3fab21::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitfe33f98a750b8c5a51b30c78bd3fab21::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitfe33f98a750b8c5a51b30c78bd3fab21::$prefixesPsr0;
             $loader->classMap = ComposerStaticInitfe33f98a750b8c5a51b30c78bd3fab21::$classMap;
 
         }, null, ClassLoader::class);
