@@ -64,7 +64,7 @@ class pinjamController extends Controller
         ]);
     
         // Redirect ke halaman history mahasiswa
-        return redirect()->route('history-mahasiswa');
+        return redirect()->route('list-pinjam');
     }
 
     /**

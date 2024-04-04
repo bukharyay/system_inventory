@@ -44,8 +44,6 @@
                     <th class="col-md-2">Tanggal Pinjam</th>
                     <th class="col-md-1">Waktu Pinjam</th>
                     <th class="col-md-1">Keterangan</th>
-                    <th class="col-md-1">Aksi</th>
-                    <th class="col-md-1">Selesai</th>
                 </tr>
             </thead>
             <tbody>
@@ -68,37 +66,6 @@
                                 style="background-color: {{ $item['keterangan'] === 'Diajukan' ? 'yellow' : ($item['keterangan'] === 'Dipinjamkan' ? 'lightgreen' : ($item['keterangan'] === 'Selesai' ? 'red' : '')) }}">
                                 {{ $item['keterangan'] }}
                             </td>
-                            <td>
-                                <form action="{{ route('pinjam.update', ['id' => $item['id']]) }}" method="POST">
-                                    @csrf
-                                    @method('PUT')
-                                    <!-- Isi formulir dengan input yang sesuai untuk melakukan pembaruan data -->
-                                    <!-- Contoh: -->
-                                    <input hidden type="text" name="keterangan" value="Dipinjamkan">
-                                    <!-- Tambahkan input lainnya sesuai dengan kebutuhan -->
-
-                                    <button type="submit"
-                                        style="text-decoration: none; border: none; background: none;">
-                                        <i class="fa fa-check-square" aria-hidden="true"></i>
-                                    </button>
-                                </form>
-                            </td>
-                            <td>
-                                <form action="{{ route('pinjam.update', ['id' => $item['id']]) }}" method="POST">
-                                    @csrf
-                                    @method('PUT')
-                                    <!-- Isi formulir dengan input yang sesuai untuk melakukan pembaruan data -->
-                                    <!-- Contoh: -->
-                                    <input hidden type="text" name="keterangan" value="Selesai">
-                                    <!-- Tambahkan input lainnya sesuai dengan kebutuhan -->
-
-                                    <button type="submit"
-                                        style="text-decoration: none; border: none; background: none;">
-                                        <i class="fa fa-check-square" aria-hidden="true"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
                     @endif
                 @endforeach
 
