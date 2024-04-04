@@ -168,7 +168,7 @@
 
     <script>
         $(document).ready(function() {
-            $('.btn_hapus').click(function() {
+            $(document).on('click', '.btn_hapus', function() {
                 var itemId = $(this).data('itemid');
                 // Set nilai dari input dengan id "id_alat" dengan nilai itemId
                 $('#id_alat').val(itemId);
