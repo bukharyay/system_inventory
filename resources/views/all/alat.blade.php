@@ -135,6 +135,10 @@
                         <label for="waktu_peminjaman" class="form-label">WAKTU PEMINJAM</label>
                         <input type="time" class="form-control" name="waktu_peminjaman" readonly id="waktupinjam"
                             placeholder="Masukkan WAKTU PEMINJAM anda">
+
+                        <input hidden type="text" class="form-control" name="keterangan" value="Diajukan"
+                            placeholder="Masukkan WAKTU PEMINJAM anda">
+
                         <button class="btn btn-primary" type="submit">Pinjam Alat</button>
 
                     </form>

@@ -22,8 +22,8 @@ class pinjamController extends Controller
 
         $response = $client->request('GET',$url);
         $content = $response->getBody()->getContents();
-        $contentArray = json_decode($content, true);
-        $data = $contentArray['data'];
+        $data = json_decode($content, true);
+        // dd($data);
         return view('mahasiswa.history', ['data'=>$data]);
     }
 
@@ -60,6 +60,7 @@ class pinjamController extends Controller
             'mata_kuliah' => $request->mata_kuliah,
             'tanggal_peminjaman' => $request->tanggal_peminjaman,
             'waktu_peminjaman' => $request->waktu_peminjaman,
+            'keterangan' => $request->keterangan,
         ]);
     
         // Redirect ke halaman history mahasiswa
@@ -110,9 +111,21 @@ class pinjamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updateKonfirmasi(Request $request, $id)
     {
-        //
+        $pinjam = pinjam::find($id);
+        
+        if ($pinjam) {
+            $pinjam->keterangan = $request->keterangan;
+            
+            $pinjam->save();
+            
+            // Redirect ke halaman history mahasiswa
+            return redirect()->route('history-mahasiswa');
+        }
+        
+        // Jika data tidak ditemukan, kembalikan respon atau lakukan penanganan kesalahan lainnya
+        return response()->json(['message' => 'Data not found'], 404);
     }
 
     /**

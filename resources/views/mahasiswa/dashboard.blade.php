@@ -34,7 +34,7 @@
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Selamat Datang Mahasiswa</h5>
                     <p>Di Sistem Inventaris dan Peminjaman Alat</p>
-                    <a href="{{ route('pinjam') }}"><button class="btn_pinjam">PINJAM</button></a>
+                    <a href="{{ route('data-alat') }}"><button class="btn_pinjam">PINJAM</button></a>
                 </div>
             </div>
 

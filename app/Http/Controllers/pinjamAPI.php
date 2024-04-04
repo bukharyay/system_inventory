@@ -24,14 +24,14 @@ class pinjamAPI extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => 'Data pinjam tidak ditemukan'
-            ], 404);
+            ]);
         }
     
         return response()->json([
             'status' => 'success',
             'message' => 'Data pinjam berhasil diambil',
             'data' => $data
-        ], 200);
+        ]);
     }
 
     public function getDatabyId($id)

@@ -22,6 +22,12 @@
     </li>
 
     <li class="nav-item">
+        <a class="nav-link" href="http://127.0.0.1:8001/HistoryPeminjam">
+            <i class="fas fa-fw fa-user"></i>
+            <span>History Peminjam</span></a>
+    </li>
+
+    <li class="nav-item">
         <a class="nav-link" href="http://127.0.0.1:8001/data-alat">
             <i class="fas fa-fw fa-clipboard"></i>
             <span>Daftar Alat</span>

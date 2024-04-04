@@ -32,7 +32,7 @@
             <div class="carousel-item active">
                 <img src="../assets/img/background.jpeg" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block">
-                    <h5>Selamat Datang DOSEN</h5>
+                    <h5>Selamat Datang ADMIN</h5>
                     <p>Di Sistem Inventaris dan Peminjaman Alat</p>
                     <a href="{{ route('pinjam') }}"><button class="btn_pinjam">PINJAM</button></a>
                 </div>

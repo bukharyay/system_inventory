@@ -62,7 +62,7 @@
                         $counter = 1;
                     @endphp
                     @foreach ($data['data'] as $item)
-                        @if (isset($item['nim']) && $item['nim'] == intval(session('nim')) && $item['keterangan'] === 'Selesai')
+                        @if (isset($item['nim']) && $item['nim'] == intval(session('nim')) && $item['keterangan'] !== 'Selesai')
                             <tr>
                                 <td>{{ $counter }}</td>
                                 <td>{{ $item['nama_alat'] }}</td>

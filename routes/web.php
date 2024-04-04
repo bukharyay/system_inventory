@@ -18,7 +18,8 @@ use App\Http\Controllers\DataBarangController;
 #=======
 use App\Http\Controllers\DashboardMhsController;
 use App\Http\Controllers\DataPeminjamController;
-
+use App\Http\Controllers\HistoryPeminjamController;
+use App\Http\Controllers\ListPinjamController;
 
 #>>>>>>> 5e259d86d50200bd7611cd9ad94070a133dc52a2
 
@@ -51,7 +52,11 @@ Route::get('/dashboard-admin', [DashboardController::class, 'index'])->name('das
 
 Route::post('peminjam.store', 'App\Http\Controllers\PeminjamController@store')->name('peminjam.store');
 
-Route::get('DataPeminjam', [DataPeminjamController::class, 'index']);
+Route::get('DataPeminjam', [DataPeminjamController::class, 'index'])->name('DataPeminjam');
+
+Route::get('HistoryPeminjam', [HistoryPeminjamController::class, 'index'])->name('HistoryPeminjam');
+
+Route::get('ListPinjam', [ListPinjamController::class, 'index'])->name('list-pinjam');
 
 Route::get('tambahalat', 'App\Http\Controllers\TambahAlatController@create');
 
@@ -93,5 +98,7 @@ Route::get("/history", function(){
 Route::get('/dashboard-mahasiswa', [DashboardMhsController::class, 'index'])->name('dashboard-mahasiswa');
 Route::get('/about-mahasiswa', [AboutController::class, 'index'])->name('about-mahasiswa');
 Route::delete('/pinjam/delete/{id}', [pinjamController::class, 'delete'])->name('pinjam.delete');
+
+Route::put('/pinjam/{id}', [DataPeminjamController::class, 'updateKonfirmasi'])->name('pinjam.update');
 
     

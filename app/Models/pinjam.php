@@ -22,7 +22,8 @@ class pinjam extends Model
         'mata_kuliah',
         'tanggal_peminjaman',
         'waktu_peminjaman',
-        'waktu_pengembalian'
+        'waktu_pengembalian',
+        'keterangan',
     ];
 
 }

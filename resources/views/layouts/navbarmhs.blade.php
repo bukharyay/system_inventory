@@ -22,6 +22,13 @@
     </li>
 
     <li class="nav-item">
+        <a class="nav-link" href="{{ route('list-pinjam') }}">
+            <i class="fas fa-fw fa-clipboard"></i>
+            <span>List Pinjam</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
         <a class="nav-link" href="{{ route('history-mahasiswa') }}">
             <i class="fas fa-fw fa-clipboard"></i>
             <span>History</span>

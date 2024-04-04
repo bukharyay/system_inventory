@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../assets/admin_lte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     {{--  --}}
-    <title>PEMINJAMAN MAHASISWA</title>
+    <title>HISTORY MAHASISWA</title>
 </head>
 
 <body>
@@ -30,7 +30,7 @@
 
     </header>
     <section class="table">
-        <h1>Data Peminjaman</h1>
+        <h1>History Peminjaman</h1>
         <table class="table table-striped" id="data-table">
             <thead>
                 <tr>
@@ -53,7 +53,7 @@
                     $nomor = 1;
                 @endphp
                 @foreach ($data as $item)
-                    @if ($item['keterangan'] !== 'Selesai')
+                    @if ($item['keterangan'] === 'Selesai')
                         <tr>
                             <td>{{ $nomor++ }}</td>
                             <td>{{ $item['nama_alat'] }}</td>
