@@ -10,6 +10,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
+    <!-- CSS Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- JavaScript Bootstrap -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     <link rel="stylesheet" href="../assets/css/pinjam.css">
     <link rel=" preconnect " href="https://fonts.googleapis.com ">
     <link rel="preconnect " href="https://fonts.gstatic.com " crossorigin>
@@ -74,7 +80,8 @@
                                     {{ $item['keterangan'] }}
                                 </td>
                                 <td>
-                                    <form action="{{ route('pinjam.update', ['id' => $item['id']]) }}" method="POST">
+                                    <form id="updateForm{{ $item['id'] }}"
+                                        action="{{ route('pinjam.update', ['id' => $item['id']]) }}" method="POST">
                                         @csrf
                                         @method('PUT')
                                         <!-- Isi formulir dengan input yang sesuai untuk melakukan pembaruan data -->
@@ -82,14 +89,16 @@
                                         <input hidden type="text" name="keterangan" value="Dipinjamkan">
                                         <!-- Tambahkan input lainnya sesuai dengan kebutuhan -->
 
-                                        <button type="submit"
-                                            style="text-decoration: none; border: none; background: none;">
+                                        <button type="button"
+                                            style="text-decoration: none; border: none; background: none;"
+                                            onclick="showConfirmationModal({{ $item['id'] }})">
                                             <i class="fa fa-check-square" aria-hidden="true"></i>
                                         </button>
                                     </form>
                                 </td>
                                 <td>
-                                    <form action="{{ route('simpan_delete', ['id' => $item['id']]) }}" method="POST">
+                                    <form action="{{ route('simpan_delete', ['id' => $item['id']]) }}" method="POST"
+                                        onsubmit="return confirmDelete2()">
                                         @csrf
                                         <!-- Isi formulir dengan input yang sesuai untuk melakukan pembaruan data -->
                                         <!-- Contoh: -->
@@ -109,8 +118,7 @@
                                         <!-- Tambahkan input lainnya sesuai dengan kebutuhan -->
 
                                         <button type="submit"
-                                            style="text-decoration: none; border: none; background: none;"
-                                            onclick="confirmDelete()">
+                                            style="text-decoration: none; border: none; background: none;">
                                             <i class="fa fa-check-square" aria-hidden="true"></i>
                                         </button>
                                     </form>
@@ -122,12 +130,41 @@
 
             </tbody>
         </table>
+
     </section>
 
+
+    <!-- Modal Konfirmasi Pembaruan -->
+    <!-- Modal Konfirmasi Pembaruan -->
+    <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog"
+        aria-labelledby="confirmationModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmationModalLabel">Konfirmasi Pembaruan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                        onclick="hideConfirmationModal()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Apakah Anda yakin ingin memperbarui data ini?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="hideConfirmationModal()">Batal</button>
+                    <button type="button" class="btn btn-primary" onclick="updateItem()">Perbarui</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        function confirmDelete() {
-            if (confirm('Apakah Anda yakin ingin menyelesaikan data?')) {
+        function confirmDelete2() {
+            if (confirm('Apakah Anda yakin ingin menyimpan dan menghapus data?')) {
                 deleteData();
+
+            } else {
+                return false;
             }
         }
 
@@ -172,6 +209,27 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
+
+    <script>
+        var updateItemId;
+
+        function showConfirmationModal(itemId) {
+            updateItemId = itemId;
+            $('#confirmationModal').modal('show');
+        }
+
+        function hideConfirmationModal() {
+            $('#confirmationModal').modal('hide');
+        }
+
+        function updateItem() {
+            if (updateItemId) {
+                var updateForm = document.getElementById('updateForm' + updateItemId);
+                updateForm.submit();
+            }
+        }
+    </script>
+
     <script src="../assets/js/profile.js"></script>
     <script>
         $(document).ready(function() {

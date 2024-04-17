@@ -72,10 +72,12 @@
                                 </td>
                             @elseif (Auth::user()->role == 'staff')
                                 <td>
-                                    <form action="{{ route('data-alat.delete', ['id' => $item['id']]) }}" method="POST">
+                                    <form id="deleteForm{{ $item['id'] }}"
+                                        action="{{ route('data-alat.delete', ['id' => $item['id']]) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit">Delete</button>
+                                        <button type="button"
+                                            onclick="showConfirmationModal({{ $item['id'] }})">Delete</button>
                                     </form>
                                 </td>
                             @endif
@@ -86,6 +88,30 @@
         </table>
     </section>
     <!-- End of Main Content -->
+
+    <!-- Modal Konfirmasi Hapus -->
+    <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog"
+        aria-labelledby="confirmationModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmationModalLabel">Konfirmasi Hapus</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                        onclick="hideConfirmationModal()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Apakah Anda yakin ingin menghapus data ini?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        onclick="hideConfirmationModal()">Batal</button>
+                    <button type="button" class="btn btn-danger" onclick="deleteItem()">Hapus</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     {{-- modal --}}
     <div class="modal fade" id="pinjamModal" tabindex="-1" role="dialog" aria-labelledby="pinjamModalLabel"
@@ -161,6 +187,26 @@
     {{-- JS menangkap id --}}
     <!-- Let's assume you have included jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+        var deleteItemId;
+
+        function showConfirmationModal(itemId) {
+            deleteItemId = itemId;
+            $('#confirmationModal').modal('show');
+        }
+
+        function hideConfirmationModal() {
+            $('#confirmationModal').modal('hide');
+        }
+
+        function deleteItem() {
+            if (deleteItemId) {
+                var deleteForm = document.getElementById('deleteForm' + deleteItemId);
+                deleteForm.submit();
+            }
+        }
+    </script>
 
     <script>
         $(document).ready(function() {
