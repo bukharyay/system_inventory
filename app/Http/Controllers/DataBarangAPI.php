@@ -101,4 +101,32 @@ class DataBarangAPI extends Controller
     {
         //
     }
+
+        /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function delete($id)
+    {
+        // Temukan data data_alat berdasarkan ID
+        $data_alat = data_alat::find($id);
+    
+        // Jika data data_alat tidak ditemukan, kirimkan respons error
+        if (!$data_alat) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Data data_alat tidak ditemukan'
+            ], 404);
+        }
+    
+        // Hapus data data_alat
+        $data_alat->delete();
+    
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Data data_alat berhasil dihapus'
+        ], 200);
+    }
 }

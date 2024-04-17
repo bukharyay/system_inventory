@@ -24,7 +24,7 @@ class DataPeminjamAPI extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => 'Data Peminjaman tidak ditemukan'
-            ], 404);
+            ]);
         }
     
         return response()->json([

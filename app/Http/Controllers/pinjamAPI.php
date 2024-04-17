@@ -121,16 +121,16 @@ class pinjamAPI extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function deletebyid($id)
-    {
-        $user = pinjam::where('id', $id)->first();
+    // public function deletebyid($id)
+    // {
+    //     $user = pinjam::where('id', $id)->first();
     
-        if (!$user) {
-            return response()->json(['message' => 'User not found'], 404);
-        }
+    //     if (!$user) {
+    //         return response()->json(['message' => 'User not found'], 404);
+    //     }
     
-        return response()->json(['user' => $user], 200);
-    }
+    //     return response()->json(['user' => $user], 200);
+    // }
 
     /**
      * Show the form for editing the specified resource.

@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\pinjam;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use App\Models\HistoryDelete;
 use Illuminate\Support\Facades\Log;
-use App\Http\Controllers\Controller;
 
-class pinjamController extends Controller
+class HistoryDeleteController extends Controller
 {
     /**
      * Display a listing of the resource.
-     * @param  \Illuminate\Http\Request
+     *
      * @return \Illuminate\Http\Response
-     */ 
+     */
     public function index()
     {
         $client = new Client();
@@ -22,16 +21,11 @@ class pinjamController extends Controller
 
         $response = $client->request('GET',$url);
         $content = $response->getBody()->getContents();
-        $data = json_decode($content, true);
-        // dd($data);
-        return view('mahasiswa.history', ['data'=>$data]);
+        $contentArray = json_decode($content, true);
+        $data = $contentArray['data'];
+        return view('adminpage.historyPeminjam', ['data'=>$data]);
     }
 
-    // public function history(){
-    //     $data = pinjam::all();
-    //     return view ('mahasiswa.history', ['data' => $data]);
-    // }
-    
     /**
      * Show the form for creating a new resource.
      *
@@ -39,7 +33,7 @@ class pinjamController extends Controller
      */
     public function create()
     {
-        return view('mahasiswa.pinjam');
+        //
     }
 
     /**
@@ -50,9 +44,9 @@ class pinjamController extends Controller
      */
     public function store(Request $request)
     {
-        pinjam::create([
+        HistoryDelete::create([
             'nim' => $request->nim,
-            'nama_alat' => $request->nim,
+            'nama_alat' => $request->nama_alat,
             'id_alat' => $request->id_alat,
             'nama_peminjam' => $request->nama_peminjam,
             'dosen' => $request->dosen,
@@ -62,21 +56,20 @@ class pinjamController extends Controller
             'waktu_peminjaman' => $request->waktu_peminjaman,
             'keterangan' => $request->keterangan,
         ]);
-    
         // Redirect ke halaman history mahasiswa
-        return redirect()->route('list-pinjam');
+        return redirect()->route('HistoryPeminjam');
     }
 
-    /**
+        /**
      * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete($id)
+    public function deleteHistory($id)
     {
         $client = new Client();
-        $url = "http://127.0.0.1:8000/api/pinjam/delete/{$id}";
+        $url = "http://127.0.0.1:8000/api/historyDelete/{$id}";
 
         try {
             $response = $client->request('DELETE', $url);
@@ -93,6 +86,18 @@ class pinjamController extends Controller
             return redirect()->route('history-mahasiswa')->with('error', 'Terjadi kesalahan saat menghubungi API.');
         }
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -111,21 +116,9 @@ class pinjamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateKonfirmasi(Request $request, $id)
+    public function update(Request $request, $id)
     {
-        $pinjam = pinjam::find($id);
-        
-        if ($pinjam) {
-            $pinjam->keterangan = $request->keterangan;
-            
-            $pinjam->save();
-            
-            // Redirect ke halaman history mahasiswa
-            return redirect()->route('history-mahasiswa');
-        }
-        
-        // Jika data tidak ditemukan, kembalikan respon atau lakukan penanganan kesalahan lainnya
-        return response()->json(['message' => 'Data not found'], 404);
+        //
     }
 
     /**

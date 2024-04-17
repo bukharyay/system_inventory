@@ -72,9 +72,11 @@
                                 </td>
                             @elseif (Auth::user()->role == 'staff')
                                 <td>
-                                    <a href="#">
-                                        <button class="btn_hapus">Hapus</button></button>
-                                    </a>
+                                    <form action="{{ route('data-alat.delete', ['id' => $item['id']]) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit">Delete</button>
+                                    </form>
                                 </td>
                             @endif
                         @endauth
@@ -207,7 +209,19 @@
         // Mengatur nilai default pada input waktu
         waktuPeminjamanInput.value = waktuDefault;
     </script>
-    {{-- end js menangkap id --}}
+
+    <script>
+        $(document).ready(function() {
+            $('.btn_hapus').click(function() {
+                var itemId = $(this).data('itemid');
+                // Set nilai dari input dengan id "id_alat" dengan nilai itemId
+                $('#id_alat').val(itemId);
+                // Lakukan apa pun yang perlu Anda lakukan dengan itemId di sini
+                console.log("ID Alat yang Dipinjam: " + itemId);
+                // Misalnya, Anda dapat membuat permintaan AJAX untuk mengirimkan ID alat ke server untuk memproses permintaan peminjaman
+            });
+        });
+    </script>
 
     <!-- End of Page Wrapper -->
 

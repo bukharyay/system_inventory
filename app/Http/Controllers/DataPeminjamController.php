@@ -15,8 +15,8 @@ class DataPeminjamController extends Controller
 
         $response = $client->request('GET',$url);
         $content = $response->getBody()->getContents();
-        $contentArray = json_decode($content, true);
-        $data = $contentArray['data'];
+        $data = json_decode($content, true);
+        // dd($data);
         return view('adminpage.peminjam', ['data'=>$data]);
     }
 
