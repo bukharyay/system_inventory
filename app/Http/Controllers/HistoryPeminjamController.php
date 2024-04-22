@@ -15,12 +15,12 @@ class HistoryPeminjamController extends Controller
     public function index()
     {
         // $client = new Client();
-        // $url = "http://127.0.0.1:8000/api/historydelete";
+        // $url = "http://127.0.0.1:8000/api/pinjam";
 
         // $response = $client->request('GET',$url);
         // $content = $response->getBody()->getContents();
-        // $contentArray = json_decode($content, true);
-        // $data = $contentArray['data'];
+        // $data = json_decode($content, true);
+        // // dd($data);
         // return view('adminpage.historyPeminjam', ['data'=>$data]);
     }
 

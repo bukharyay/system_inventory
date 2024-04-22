@@ -49,6 +49,8 @@
                     <th class="col-md-1">ID Alat</th>
                     <th class="col-md-4">Nama Alat</th>
                     <th class="col-md-3">Jenis Alat</th>
+                    <th class="col-md-1">Stok</th>
+                    <th class="col-md-2">Keterangan</th>
                     <th class="col-md-2">Aksi</th>
                 </tr>
             </thead>
@@ -57,61 +59,75 @@
                     $nomor = 1;
                 @endphp
                 @foreach ($data as $item)
-                    <tr>
-                        <td>{{ $nomor++ }}</td>
-                        <td>{{ $item['id'] }}</td>
-                        <td>{{ $item['nama_alat'] }}</td>
-                        <td>{{ $item['nama_jenis_alat'] }}</td>
-                        @auth
-                            @if (Auth::user()->role == 'mahasiswa')
-                                <td>
-                                    <a href="#">
-                                        <button class="btn_hapus" data-toggle="modal" data-target="#pinjamModal"
-                                            data-itemid="{{ $item['id'] }}">Pinjam</button>
-                                    </a>
-                                </td>
-                            @elseif (Auth::user()->role == 'staff')
-                                <td>
-                                    <form id="deleteForm{{ $item['id'] }}"
-                                        action="{{ route('data-alat.delete', ['id' => $item['id']]) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="button"
-                                            onclick="showConfirmationModal({{ $item['id'] }})">Delete</button>
-                                    </form>
-                                </td>
-                            @endif
-                        @endauth
-                    </tr>
+                    @if (Auth::user()->role === 'staff' || (Auth::user()->role === 'mahasiswa' && $item['keterangan'] === 'Tersedia'))
+                        <tr>
+                            <td>{{ $nomor++ }}</td>
+                            <td>{{ $item['id'] }}</td>
+                            <td>{{ $item['nama_alat'] }}</td>
+                            <td>{{ $item['nama_jenis_alat'] }}</td>
+                            <td class="stok">{{ $item['stok'] }}</td>
+                            <td>{{ $item['keterangan'] }}</td>
+                            @auth
+                                @if (Auth::user()->role == 'mahasiswa')
+                                    <td>
+                                        <a href="#">
+                                            <button class="btn_hapus" data-toggle="modal" data-target="#pinjamModal"
+                                                data-itemid="{{ $item['id'] }}">Pinjam</button>
+                                        </a>
+                                    </td>
+                                @elseif (Auth::user()->role == 'staff')
+                                    <td>
+                                        <form id="updateFormUpdate{{ $item['id'] }}"
+                                            action="{{ route('data-alat-update', ['id' => $item['id']]) }}" method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                            <!-- Isi formulir dengan input yang sesuai untuk melakukan pembaruan data -->
+                                            <!-- Contoh: -->
+                                            <input hidden type="text" name="keterangan" value="Tidak tersedia">
+                                            <!-- Tambahkan input lainnya sesuai dengan kebutuhan -->
+
+                                            <button type="button"
+                                                style="text-decoration: none; border: none; background: none;"
+                                                onclick="showConfirmationModalUpdate({{ $item['id'] }})">
+                                                <i class="fa fa-ban" aria-hidden="true"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                @endif
+                            @endauth
+                        </tr>
+                    @endif
                 @endforeach
             </tbody>
+
+
         </table>
     </section>
     <!-- End of Main Content -->
 
-    <!-- Modal Konfirmasi Hapus -->
-    <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog"
+    <div class="modal fade" id="confirmationModalUpdate" tabindex="-1" role="dialog"
         aria-labelledby="confirmationModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="confirmationModalLabel">Konfirmasi Hapus</h5>
+                    <h5 class="modal-title" id="confirmationModalLabel">Konfirmasi Pembaruan</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"
-                        onclick="hideConfirmationModal()">
+                        onclick="hideConfirmationModalUpdate()">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Apakah Anda yakin ingin menghapus data ini?</p>
+                    <p>Apakah Anda yakin ingin memperbarui data ini ?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                        onclick="hideConfirmationModal()">Batal</button>
-                    <button type="button" class="btn btn-danger" onclick="deleteItem()">Hapus</button>
+                    <button type="button" class="btn btn-secondary"
+                        onclick="hideConfirmationModalUpdate()">Batal</button>
+                    <button type="button" class="btn btn-primary" onclick="updateItemUpdate()">Perbarui</button>
                 </div>
             </div>
         </div>
     </div>
+
 
     {{-- modal --}}
     <div class="modal fade" id="pinjamModal" tabindex="-1" role="dialog" aria-labelledby="pinjamModalLabel"
@@ -132,8 +148,8 @@
                         <h1>Masukkan Data Peminjaman</h1>
 
                         <label for="nim" class="form-label">NIM</label>
-                        <input type="text" class="form-control" readonly value="{{ session('nim') }}" name="nim"
-                            id="nim" placeholder="Masukkan NIM anda">
+                        <input type="text" class="form-control" readonly value="{{ session('nim') }}"
+                            name="nim" id="nim" placeholder="Masukkan NIM anda">
 
                         <label for="nama_peminjam" class="form-label">NAMA</label>
                         <input type="text" class="form-control" readonly name="nama_peminjam" id="nama_peminjam"
@@ -188,22 +204,63 @@
     <!-- Let's assume you have included jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+    {{-- <script>
+        // Get the table element
+        var table = document.getElementById("data-table");
+
+        // Get all the stock cells
+        var stockCells = table.getElementsByClassName("stok");
+
+        // Loop through each stock cell
+        for (var i = 0; i < stockCells.length; i++) {
+            var stockCell = stockCells[i];
+
+            // Check if the stock is "Out of Stock"
+            if (stockCell.innerHTML === "Out of Stock") {
+                // Disable the corresponding table row
+                var row = stockCell.parentNode;
+                row.classList.add("disabled");
+            }
+        }
+    </script> --}}
+
     <script>
-        var deleteItemId;
+        document.addEventListener("DOMContentLoaded", function() {
+            // Ambil semua baris dari tabel dengan menggunakan selector CSS
+            var rows = document.querySelectorAll("#data-table tbody tr");
 
-        function showConfirmationModal(itemId) {
-            deleteItemId = itemId;
-            $('#confirmationModal').modal('show');
+            // Loop melalui setiap baris
+            rows.forEach(function(row) {
+                // Ambil nilai stok dari kolom yang sesuai
+                var stok = parseInt(row.querySelector(".stok").innerText);
+
+                // Jika stok kurang dari 1, nonaktifkan baris
+                if (stok < 1) {
+                    row.style.opacity = "0.5"; // Atur opasitas baris menjadi 50% untuk memudarkannya
+                    row.style.pointerEvents = "none"; // Menonaktifkan event click pada baris
+                }
+            });
+        });
+    </script>
+
+
+
+    <script>
+        var updateItemId;
+
+        function showConfirmationModalUpdate(itemId) {
+            updateItemId = itemId;
+            $('#confirmationModalUpdate').modal('show');
         }
 
-        function hideConfirmationModal() {
-            $('#confirmationModal').modal('hide');
+        function hideConfirmationModalUpdate() {
+            $('#confirmationModalUpdate').modal('hide');
         }
 
-        function deleteItem() {
-            if (deleteItemId) {
-                var deleteForm = document.getElementById('deleteForm' + deleteItemId);
-                deleteForm.submit();
+        function updateItemUpdate() {
+            if (updateItemId) {
+                var updateFormUpdate = document.getElementById('updateFormUpdate' + updateItemId);
+                updateFormUpdate.submit();
             }
         }
     </script>
@@ -345,9 +402,7 @@
     <script src="../assets/admin_lte/plugins/pdfmake/vfs_fonts.js"></script>
 
     <!-- AdminLTE App -->
-    <script src="../assets/admin_lte/dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
-    <script src="../assets/admin_lte/dist/js/demo.js"></script>
     <!-- Page specific script -->
 </body>
 

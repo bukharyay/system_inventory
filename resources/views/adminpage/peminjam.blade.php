@@ -97,28 +97,18 @@
                                     </form>
                                 </td>
                                 <td>
-                                    <form action="{{ route('simpan_delete', ['id' => $item['id']]) }}" method="POST"
-                                        onsubmit="return confirmDelete2()">
+                                    <form id="updateFormSelesai{{ $item['id'] }}"
+                                        action="{{ route('pinjam.update', ['id' => $item['id']]) }}" method="POST">
                                         @csrf
+                                        @method('PUT')
                                         <!-- Isi formulir dengan input yang sesuai untuk melakukan pembaruan data -->
                                         <!-- Contoh: -->
-                                        <input hidden type="text" name="nim" value="{{ $item['nim'] }}">
-                                        <input hidden type="text" name="nama_alat" value="{{ $item['nama_alat'] }}">
-                                        <input hidden type="text" name="nama_peminjam"
-                                            value="{{ $item['nama_peminjam'] }}">
-                                        <input hidden type="text" name="dosen" value="{{ $item['dosen'] }}">
-                                        <input hidden type="text" name="ruang" value="{{ $item['ruang'] }}">
-                                        <input hidden type="text" name="mata_kuliah"
-                                            value="{{ $item['mata_kuliah'] }}">
-                                        <input hidden type="text" name="tanggal_peminjaman"
-                                            value="{{ $item['tanggal_peminjaman'] }}">
-                                        <input hidden type="text" name="waktu_peminjaman"
-                                            value="{{ $item['waktu_peminjaman'] }}">
                                         <input hidden type="text" name="keterangan" value="Selesai">
                                         <!-- Tambahkan input lainnya sesuai dengan kebutuhan -->
 
-                                        <button type="submit"
-                                            style="text-decoration: none; border: none; background: none;">
+                                        <button type="button"
+                                            style="text-decoration: none; border: none; background: none;"
+                                            onclick="showConfirmationModalSelesai({{ $item['id'] }})">
                                             <i class="fa fa-check-square" aria-hidden="true"></i>
                                         </button>
                                     </form>
@@ -132,9 +122,6 @@
         </table>
 
     </section>
-
-
-    <!-- Modal Konfirmasi Pembaruan -->
     <!-- Modal Konfirmasi Pembaruan -->
     <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog"
         aria-labelledby="confirmationModalLabel" aria-hidden="true">
@@ -158,7 +145,30 @@
         </div>
     </div>
 
-    <script>
+    <div class="modal fade" id="confirmationModalSelesai" tabindex="-1" role="dialog"
+        aria-labelledby="confirmationModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmationModalLabel">Konfirmasi Penyelesaian</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                        onclick="hideConfirmationModalSelesai()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Apakah Anda yakin ingin menyelesaikan data ini?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary"
+                        onclick="hideConfirmationModalSelesai()">Batal</button>
+                    <button type="button" class="btn btn-primary" onclick="updateItemSelesai()">Selesai</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- <script>
         function confirmDelete2() {
             if (confirm('Apakah Anda yakin ingin menyimpan dan menghapus data?')) {
                 deleteData();
@@ -203,7 +213,7 @@
                 console.error(error.message);
             }
         }
-    </script>
+    </script> --}}
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
@@ -218,14 +228,30 @@
             $('#confirmationModal').modal('show');
         }
 
+        function showConfirmationModalSelesai(itemId) {
+            updateItemId = itemId;
+            $('#confirmationModalSelesai').modal('show');
+        }
+
         function hideConfirmationModal() {
             $('#confirmationModal').modal('hide');
+        }
+
+        function hideConfirmationModalSelesai() {
+            $('#confirmationModalSelesai').modal('hide');
         }
 
         function updateItem() {
             if (updateItemId) {
                 var updateForm = document.getElementById('updateForm' + updateItemId);
                 updateForm.submit();
+            }
+        }
+
+        function updateItemSelesai() {
+            if (updateItemId) {
+                var updateFormSelesai = document.getElementById('updateFormSelesai' + updateItemId);
+                updateFormSelesai.submit();
             }
         }
     </script>

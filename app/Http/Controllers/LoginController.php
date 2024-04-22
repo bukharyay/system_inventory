@@ -18,9 +18,9 @@ class LoginController extends Controller
     
             // Redirect ke dashboard sesuai dengan peran
             if ($role == 'admin') {
-                return redirect('dashboard-admin');
+                return redirect('DataPeminjam');
             } elseif ($role == 'mahasiswa') {
-                return redirect('dashboard-mahasiswa');
+                return redirect('data-alat');
             } else {
                 // Redirect ke halaman yang sesuai jika peran tidak dikenali
                 return redirect('home');
@@ -54,9 +54,9 @@ class LoginController extends Controller
     
             //redirect role jika bukan admin
             if ($user->role === 'staff') {
-                return redirect('adminpage/dashboard');
+                return redirect('DataPeminjam');
             } elseif ($user->role === 'mahasiswa') {
-                return redirect('dashboard-mahasiswa');
+                return redirect('data-alat');
             }
         } else {
             return redirect()->route('login')->with('error', 'Username atau Password salah!');

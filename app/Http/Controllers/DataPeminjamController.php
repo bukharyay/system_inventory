@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\data_alat;
 use App\Models\pinjam;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
@@ -34,15 +35,22 @@ class DataPeminjamController extends Controller
         $pinjam = pinjam::find($id);
         
         if ($pinjam) {
-            $pinjam->keterangan = $request->keterangan;
+            try {
+                $dataAlat = data_alat::findOrFail($pinjam->id_alat);
+                
+                $dataAlat->stok -= 1;
+                $dataAlat->save();
+            } catch (\Exception $e) {
+                // Menampilkan pesan kesalahan di console
+                dd($e->getMessage());
+            }
             
+            $pinjam->keterangan = $request->keterangan;
             $pinjam->save();
             
-            // Redirect ke halaman history mahasiswa
             return redirect()->route('DataPeminjam');
         }
         
-        // Jika data tidak ditemukan, kembalikan respon atau lakukan penanganan kesalahan lainnya
         return response()->json(['message' => 'Data not found'], 404);
     }
 }

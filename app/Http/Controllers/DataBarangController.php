@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\data_alat;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -115,5 +116,29 @@ class DataBarangController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+        /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateKonfirmasi(Request $request, $id)
+    {
+        $data_alat = data_alat::find($id);
+        
+        if ($data_alat) {
+            $data_alat->keterangan = $request->keterangan;
+            
+            $data_alat->save();
+            
+            // Redirect ke halaman history mahasiswa
+            return redirect()->route('data-alat');
+        }
+        
+        // Jika data tidak ditemukan, kembalikan respon atau lakukan penanganan kesalahan lainnya
+        return response()->json(['message' => 'Data not found'], 404);
     }
 }

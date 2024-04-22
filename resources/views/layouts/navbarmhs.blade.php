@@ -1,4 +1,4 @@
-<img class="logo" src="../assets/img/logo.png" alt="">
+<img class="logo" src="../assets/img/logoNew.png" alt="">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
@@ -41,7 +41,7 @@
     </li>
 </ul>
 <div class="profile-container" id="profileContainer">
-    <img class="profile" src="../assets/img/orang.jpg" alt="" id="profileImage">
+    <img class="profile" src="../assets/img/option.png" alt="" id="profileImage">
     <div class="dropdown-menu" id="dropdownMenu">
         <li>
             @if (session('nim'))

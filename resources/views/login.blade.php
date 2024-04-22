@@ -27,12 +27,11 @@
                     <div class="login-container">
                         <div class="text text-center">
                             <h1>LOGIN</h1>
-                            <p>Selamat Datang di Sistem Inventaris dan Peminjaman Alat Politeknik Negeri Semarang</p>
                         </div>
                         <form action="{{ route('actionlogin') }}" method="post">
                             @csrf
                             <div class="login-form">
-                                <label for="username" class="form-label">Nim</label>
+                                <label for="username" class="form-label">NIM</label>
                                 <input type="text" name="nim" class="form-control" id="username"
                                     placeholder="Masukkan Username">
 

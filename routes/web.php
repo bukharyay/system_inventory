@@ -109,6 +109,8 @@ Route::delete('/pinjam/delete/{id}', [pinjamController::class, 'delete'])->name(
 
 Route::put('/pinjam/{id}', [DataPeminjamController::class, 'updateKonfirmasi'])->name('pinjam.update');
 
+Route::put('/data-alat/{id}', [DataBarangController::class, 'updateKonfirmasi'])->name('data-alat-update');
+
 Route::delete('/data-alat/delete/{id}', [DataBarangController::class, 'delete'])->name('data-alat.delete');
 
 

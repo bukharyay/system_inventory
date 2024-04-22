@@ -6,7 +6,7 @@
 <link rel="preconnect " href="https://fonts.gstatic.com " crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap " rel="stylesheet ">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-<img class="logo" src="../assets/img/logo.png" alt="">
+<img class="logo" src="../assets/img/logoNew.png" alt="">
 <link rel="stylesheet" href="../assets/css/pinjam.css">
 <ul class="navlist">
 
@@ -40,7 +40,7 @@
     </li>
 </ul>
 <div class="profile-container" id="profileContainer">
-    <img class="profile" src="../assets/img/orang.jpg" alt="" id="profileImage">
+    <img class="profile" src="../assets/img/option.png" alt="" id="profileImage">
     <div class="dropdown-menu" id="dropdownMenu">
         <li><a>Level: {{ Auth::user()->role }}</a></li>
         <li role="separator" class="divider"></li>

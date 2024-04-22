@@ -53,12 +53,10 @@ header {
 }
 
 .profile {
-    width: 100px;
-    height: 70px;
+    width: 60px;
+    height: 20px;
     color: #ff7b00;
     font-weight: 600;
-    border-radius: 10px;
-    border: 2px solid white;
 }
 
 .carousel-item {
@@ -130,13 +128,6 @@ header {
     position: relative;
     display: flex;
     align-items: center;
-}
-
-.profile {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    cursor: pointer;
 }
 
 .dropdown-menu {
