@@ -33,11 +33,14 @@
         <h1>Masukkan Barang Pinjaman anda</h1>
         <form method="POST" action="{{ route('tambahalat.store') }}"">
             @csrf
-            <label for="namabarang" class="form-label">Nama Alat</label>
+            <label for="nama_alat" class="form-label">Nama Alat</label>
             <input name="nama_alat" type="text" class="form-control" id="nim" placeholder="Masukan Nama Alat">
-            <label for="jumlah" class="form-label">Jenis Alat id</label>
+            <label for="jenis_alat_id" class="form-label">Jenis Alat id</label>
             <input name="jenis_alat_id" type="text" class="form-control" id="nim"
                 placeholder="Masukan id jenis alat">
+            <label for="stok" class="form-label">Stok</label>
+            <input name="stok" type="text" class="form-control" id="stok" placeholder="Masukan jumlah stok">
+            <input type="text" name="keterangan" value="Tersedia" hidden id="">
             <input type="submit" value="simpan">
         </form>
     </section>
@@ -52,7 +55,7 @@
     <footer class="sticky-footer bg-white">
         <div class="container my-auto">
             <div class="copyright text-center my-auto">
-                <span>Copyright &copy; Your Website 2023</span>
+                <span>Copyright &copy; SITARI 2024</span>
             </div>
         </div>
     </footer>
@@ -63,7 +66,7 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
-
+    {{-- 
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -81,7 +84,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <!-- Bootstrap core JavaScript-->
     <script src="../assets/admin_css/vendor/jquery/jquery.min.js"></script>

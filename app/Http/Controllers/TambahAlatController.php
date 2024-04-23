@@ -16,9 +16,11 @@ class TambahAlatController extends Controller
     $data_alat = new data_alat;
     $data_alat->nama_alat = $request->nama_alat;
     $data_alat->jenis_alat_id = $request->jenis_alat_id;
+    $data_alat->stok = $request->stok;
+    $data_alat->keterangan = $request->keterangan;
     $data_alat->save();
 
-    return redirect('all.data-alat');
+    return redirect('data-alat');
 }
 
 

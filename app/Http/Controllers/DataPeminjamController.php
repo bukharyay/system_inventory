@@ -35,16 +35,30 @@ class DataPeminjamController extends Controller
         $pinjam = pinjam::find($id);
         
         if ($pinjam) {
-            try {
-                $dataAlat = data_alat::findOrFail($pinjam->id_alat);
-                
-                $dataAlat->stok -= 1;
-                $dataAlat->save();
-            } catch (\Exception $e) {
-                // Menampilkan pesan kesalahan di console
-                dd($e->getMessage());
-            }
-            
+
+            if($request->keterangan === "Selesai"){
+                try {
+                    $dataAlat = data_alat::findOrFail($pinjam->id_alat);
+                    
+                    $dataAlat->stok += 1;
+    
+                    $dataAlat->save();
+                } catch (\Exception $e) {
+                    // Menampilkan pesan kesalahan di console
+                    dd($e->getMessage());
+                }
+            }else{ // jika keterangan Dipinjamkan
+                try {
+                    $dataAlat = data_alat::findOrFail($pinjam->id_alat);
+                    
+                    $dataAlat->stok -= 1;
+    
+                    $dataAlat->save();
+                } catch (\Exception $e) {
+                    // Menampilkan pesan kesalahan di console
+                    dd($e->getMessage());
+                }
+            }           
             $pinjam->keterangan = $request->keterangan;
             $pinjam->save();
             
