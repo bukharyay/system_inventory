@@ -63,30 +63,27 @@ class LoginController extends Controller
         }
     }
     
-        
-        
-
-        public function showRegistrationPage()
-        {
-            return view('register');
-        }
+        // public function showRegistrationPage()
+        // {
+        //     return view('register');
+        // }
     
-        public function register(Request $request)
-        {
-            $request->validate([
-                'nim' => 'required|unique:users',
-                'password' => 'required|confirmed',
-            ]);
+        // public function register(Request $request)
+        // {
+        //     $request->validate([
+        //         'nim' => 'required|unique:users',
+        //         'password' => 'required|confirmed',
+        //     ]);
     
-            $user = new User;
-            $user->id = 1;
-            $user->nim = $request->nim;
-            $user->password = Hash::make($request->password);
-            $user->role = 'mahasiswa';
-            $user->save();
+        //     $user = new User;
+        //     $user->id = 1;
+        //     $user->nim = $request->nim;
+        //     $user->password = Hash::make($request->password);
+        //     $user->role = 'mahasiswa';
+        //     $user->save();
     
-            return redirect()->route('login')->with('success', 'Registration successful. You can now login.');
-        }
+        //     return redirect()->route('login')->with('success', 'Registration successful. You can now login.');
+        // }
 
     public function logout()
     {

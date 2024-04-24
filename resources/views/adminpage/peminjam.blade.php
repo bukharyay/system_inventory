@@ -89,7 +89,7 @@
                                         <input hidden type="text" name="keterangan" value="Dipinjamkan">
                                         <!-- Tambahkan input lainnya sesuai dengan kebutuhan -->
 
-                                        <button type="button"
+                                        <button id="submitButton{{ $item['id'] }}" type="button"
                                             style="text-decoration: none; border: none; background: none;"
                                             onclick="showConfirmationModal({{ $item['id'] }})">
                                             <i class="fa fa-check-square" aria-hidden="true"></i>
@@ -214,6 +214,16 @@
             }
         }
     </script> --}}
+
+    <script>
+        // Ambil nilai keterangan
+        var keterangan = "{{ $item['keterangan'] }}";
+
+        // Periksa apakah keterangan adalah "Dipinjamkan", jika ya, maka nonaktifkan tombol submit
+        if (keterangan === "Dipinjamkan") {
+            document.getElementById('submitButton{{ $item['id'] }}').disabled = true;
+        }
+    </script>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

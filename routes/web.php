@@ -53,200 +53,29 @@ Route::get('/data-alat', function () {
 })->name('data-alat');
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
-
 // END OF ALL
 
 // ADMIN
-Route::get('tambahalat', function () {
-
-    if (!Auth::check()){
-        return redirect('login');
-
-    }elseif(Auth::user()->role !== 'staff') {
-        return redirect('data-alat');
-    }
-
-    return app()->call('App\Http\Controllers\TambahAlatController@create');
+Route::middleware(['auth', 'cekrole:staff'])->group(function () {
+    Route::get('tambahalat', 'App\Http\Controllers\TambahAlatController@create');
+    Route::get('DataPeminjam', 'App\Http\Controllers\DataPeminjamController@index')->name('DataPeminjam');
+    Route::get('HistoryPeminjam', 'App\Http\Controllers\HistoryDeleteController@index')->name('HistoryPeminjam');
+    Route::get('/dashboard-admin', 'App\Http\Controllers\DashboardController@index')->name('dashboard');
+    Route::post('tambahalat.store', 'App\Http\Controllers\TambahAlatController@store')->name('tambahalat.store');
+    Route::put('/pinjam/{id}', 'App\Http\Controllers\DataPeminjamController@updateKonfirmasi')->name('pinjam.update');
+    Route::put('/data-alat/{id}', 'App\Http\Controllers\DataBarangController@updateKonfirmasi')->name('data-alat-update');
+    Route::delete('/data-alat/delete/{id}', 'App\Http\Controllers\DataBarangController@delete')->name('data-alat.delete');
 });
-
-Route::get('DataPeminjam', function () {
-    
-    if (!Auth::check()){
-        return redirect('login');
-
-    }elseif(Auth::user()->role !== 'staff') {
-        return redirect('data-alat');
-    }
-
-    return app()->call('App\Http\Controllers\DataPeminjamController@index');
-})->name('DataPeminjam');
-
-Route::get('HistoryPeminjam', function () {
-    
-    if (!Auth::check()){
-        return redirect('login');
-
-    }elseif(Auth::user()->role !== 'staff') {
-        return redirect('data-alat');
-    }
-
-    return app()->call('App\Http\Controllers\HistoryDeleteController@index');
-})->name('HistoryPeminjam');
-
-Route::get('/dashboard-admin', function () {
-    
-    if (!Auth::check()){
-        return redirect('login');
-
-    }elseif(Auth::user()->role !== 'staff') {
-        return redirect('data-alat');
-    }
-
-    return app()->call('App\Http\Controllers\DashboardController@index');
-})->name('dasboard');
-
-
-Route::get('/dashboard-admin', function () {
-    
-    if (!Auth::check()){
-        return redirect('login');
-
-    }elseif(Auth::user()->role !== 'staff') {
-        return redirect('data-alat');
-    }
-
-    return app()->call('App\Http\Controllers\DashboardController@index');
-})->name('dasboard');
-
-Route::post('tambahalat.store', function () {
-    
-    if (!Auth::check()){
-        return redirect('login');
-
-    }elseif(Auth::user()->role !== 'staff') {
-        return redirect('data-alat');
-    }
-
-    return app()->call('App\Http\Controllers\TambahAlatController@store');
-})->name('tambahalat.store');
-
-
-Route::put('/pinjam/{id}', function ($id) {
-    if (!Auth::check()) {
-        return redirect('login');
-    } elseif (Auth::user()->role !== 'staff') {
-        return redirect('data-alat');
-    }
-
-    return app()->call('App\Http\Controllers\DataPeminjamController@updateKonfirmasi', ['id' => $id]);
-})->name('pinjam.update');
-
-
-
-Route::put('/data-alat/{id}', function ($id) {
-    
-    if (!Auth::check()){
-        return redirect('login');
-
-    }elseif(Auth::user()->role !== 'staff') {
-        return redirect('data-alat');
-    }
-
-    return app()->call('App\Http\Controllers\DataBarangController@updateKonfirmasi', ['id' => $id]);
-})->name('data-alat-update');
-
-
-Route::delete('/data-alat/delete/{id}', function ($id) {
-    
-    if (!Auth::check()){
-        return redirect('login');
-
-    }elseif(Auth::user()->role !== 'staff') {
-        return redirect('data-alat');
-    }
-
-    return app()->call('App\Http\Controllers\DataBarangController@delete', ['id' => $id]);
-})->name('data-alat.delete');
 // END OF ADMIN
 
 
 // MAHASISWA
-Route::get('ListPinjam', function () {
-    
-    if (!Auth::check()){
-        return redirect('login');
-
-    }elseif(Auth::user()->role !== 'mahasiswa') {
-        return redirect('DataPeminjam');
-    }
-
-    return app()->call('App\Http\Controllers\ListPinjamController@index');
-})->name('list-pinjam');
-
-
-Route::post('/simpan', function () {
-    
-    if (!Auth::check()){
-        return redirect('login');
-
-    }elseif(Auth::user()->role !== 'mahasiswa') {
-        return redirect('DataPeminjam');
-    }
-
-    return app()->call('App\Http\Controllers\pinjamController@store');
-})->name('simpan');
-
-Route::get('history-mahasiswa', function () {
-    
-    if (!Auth::check()){
-        return redirect('login');
-
-    }elseif(Auth::user()->role !== 'mahasiswa') {
-        return redirect('DataPeminjam');
-    }
-
-    return app()->call('App\Http\Controllers\pinjamController@index');
-})->name('history-mahasiswa');
-
-Route::get('/about-mahasiswa', function () {
-    
-    if (!Auth::check()){
-        return redirect('login');
-
-    }elseif(Auth::user()->role !== 'mahasiswa') {
-        return redirect('DataPeminjam');
-    }
-
-    return app()->call('App\Http\Controllers\AboutController@index');
-})->name('about-mahasiswa');
-
-
-Route::get('/dashboard-mahasiswa', function () {
-    
-    if (!Auth::check()){
-        return redirect('login');
-
-    }elseif(Auth::user()->role !== 'mahasiswa') {
-        return redirect('DataPeminjam');
-    }
-
-    return app()->call('App\Http\Controllers\DashboardMhsController@index');
-})->name('dashboard-mahasiswa');
-
-
-Route::delete('/pinjam/delete/{id}', function ($id) {
-    
-    if (!Auth::check()){
-        return redirect('login');
-
-    }elseif(Auth::user()->role !== 'mahasiswa') {
-        return redirect('DataPeminjam');
-    }
-
-    return app()->call('App\Http\Controllers\pinjamController@delete', ['id' => $id]);
-})->name('pinjam.delete');
-
+Route::middleware(['auth', 'cekrole:mahasiswa'])->group(function () {
+    Route::get('ListPinjam', 'App\Http\Controllers\ListPinjamController@index')->name('list-pinjam');
+    Route::post('/simpan', 'App\Http\Controllers\pinjamController@store')->name('simpan');
+    Route::get('history-mahasiswa', 'App\Http\Controllers\pinjamController@index')->name('history-mahasiswa');
+    Route::get('/about-mahasiswa', 'App\Http\Controllers\AboutController@index')->name('about-mahasiswa');
+    Route::get('/dashboard-mahasiswa', 'App\Http\Controllers\DashboardMhsController@index')->name('dashboard-mahasiswa');
+    Route::delete('/pinjam/delete/{id}', 'App\Http\Controllers\pinjamController@delete')->name('pinjam.delete');
+});
 // END OF MAHASISWA
-
-
-    
