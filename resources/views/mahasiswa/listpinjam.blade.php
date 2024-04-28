@@ -42,12 +42,12 @@
             <thead>
                 <tr>
                     <th class="md-col-4">No</th>
-                    <th>Nama Alat</th>
                     <th>Nama DOSEN</th>
                     <th>Ruangan</th>
                     <th>Mata Kuliah</th>
                     <th>Tanggal Pinjam</th>
                     <th>Waktu Peminjaman</th>
+                    <th>Nama dan Jumlah Alat</th>
                     <th>Ket</th>
 
                 </tr>
@@ -65,12 +65,42 @@
                         @if (isset($item['nim']) && $item['nim'] == intval(session('nim')) && $item['keterangan'] !== 'Selesai')
                             <tr>
                                 <td>{{ $counter }}</td>
-                                <td>{{ $item['nama_alat'] }}</td>
                                 <td>{{ $item['dosen'] }}</td>
                                 <td>{{ $item['ruang'] }}</td>
                                 <td>{{ $item['mata_kuliah'] }}</td>
                                 <td>{{ $item['tanggal_peminjaman'] }}</td>
                                 <td>{{ $item['waktu_peminjaman'] }}</td>
+                                <td>
+                                    <div>
+                                        {{ $item['nama_alat_1'] }},
+                                        {{ $item['jumlah_alat_1'] }}
+                                    </div>
+                                    @if ($item['nama_alat_2'] !== null && $item['jumlah_alat_2'] !== null)
+                                        <div>
+                                            {{ $item['nama_alat_2'] }},
+                                            {{ $item['jumlah_alat_2'] }}
+                                        </div>
+                                    @endif
+                                    @if ($item['nama_alat_3'] !== null && $item['jumlah_alat_3'] !== null)
+                                        <div>
+                                            {{ $item['nama_alat_3'] }},
+                                            {{ $item['jumlah_alat_3'] }}
+                                        </div>
+                                    @endif
+                                    @if ($item['nama_alat_4'] !== null && $item['jumlah_alat_4'] !== null)
+                                        <div>
+                                            {{ $item['nama_alat_4'] }},
+                                            {{ $item['jumlah_alat_4'] }}
+                                        </div>
+                                    @endif
+                                    @if ($item['nama_alat_5'] !== null && $item['jumlah_alat_5'] !== null)
+                                        <div>
+                                            {{ $item['nama_alat_5'] }},
+                                            {{ $item['jumlah_alat_5'] }}
+                                        </div>
+                                    @endif
+
+                                </td>
                                 <td
                                     style="background-color: {{ $item['keterangan'] === 'Diajukan' ? 'yellow' : ($item['keterangan'] === 'Dipinjamkan' ? 'lightgreen' : ($item['keterangan'] === 'Selesai' ? 'red' : '')) }}">
                                     {{ $item['keterangan'] }}

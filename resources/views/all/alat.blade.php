@@ -41,6 +41,15 @@
     </header>
     <!-- Begin Page Content -->
     <section class="table">
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+        <a class="btn btn-outline-dark" href="{{ route('cart') }}">
+            <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span
+                class="badge bg-danger">{{ count((array) session('cart')) }}</span>
+        </a>
         <h1>DAFTAR ALAT</h1>
         <table class="table table-striped" id="data-table">
             <thead>
@@ -48,10 +57,9 @@
                     <th class="col-md-1">No</th>
                     <th class="col-md-1">ID Alat</th>
                     <th class="col-md-4">Nama Alat</th>
-                    <th class="col-md-3">Jenis Alat</th>
+                    <th class="col-md-2">Jenis Alat</th>
                     <th class="col-md-1">Stok</th>
-                    <th class="col-md-2">Keterangan</th>
-                    <th class="col-md-2">Aksi</th>
+                    <th class="col-md-3">Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -66,14 +74,15 @@
                             <td>{{ $item['nama_alat'] }}</td>
                             <td>{{ $item['nama_jenis_alat'] }}</td>
                             <td class="stok">{{ $item['stok'] }}</td>
-                            <td>{{ $item['keterangan'] }}</td>
+
                             @auth
                                 @if (Auth::user()->role == 'mahasiswa')
                                     <td>
-                                        <a href="#">
-                                            <button class="btn_hapus" data-toggle="modal" data-target="#pinjamModal"
-                                                data-itemid="{{ $item['id'] }}">Pinjam</button>
-                                        </a>
+
+
+                                        <p class="btn-holder"><a href="{{ route('add.to.cart', ['id' => $item['id']]) }}"
+                                                class="btn btn-outline-danger">Add to cart</a> </p>
+
                                     </td>
                                 @elseif (Auth::user()->role == 'staff')
                                     <td>

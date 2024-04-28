@@ -7,6 +7,7 @@ use App\Http\Controllers\DataPeminjam;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\pinjamController;
 use App\Http\Controllers\PeminjamController;
@@ -73,6 +74,10 @@ Route::middleware(['auth', 'cekrole:staff'])->group(function () {
 Route::middleware(['auth', 'cekrole:mahasiswa'])->group(function () {
     Route::get('ListPinjam', 'App\Http\Controllers\ListPinjamController@index')->name('list-pinjam');
     Route::post('/simpan', 'App\Http\Controllers\pinjamController@store')->name('simpan');
+    Route::get('/cart/{id}', [CartController::class, 'addtoCart'])->name('add.to.cart');
+    Route::get('/cart', [CartController::class, 'dataalatCart'])->name('cart');
+    Route::delete('/delete-cart', [CartController::class, 'deleteCart'])->name('delete.cart');
+    Route::post('/update-cart', [CartController::class, 'updateCart'])->name('cart.update');
     Route::get('history-mahasiswa', 'App\Http\Controllers\pinjamController@index')->name('history-mahasiswa');
     Route::get('/about-mahasiswa', 'App\Http\Controllers\AboutController@index')->name('about-mahasiswa');
     Route::get('/dashboard-mahasiswa', 'App\Http\Controllers\DashboardMhsController@index')->name('dashboard-mahasiswa');

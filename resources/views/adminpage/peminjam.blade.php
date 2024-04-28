@@ -41,7 +41,6 @@
             <thead>
                 <tr>
                     <th class="">No</th>
-                    <th class="col-md-1">Nama Alat</th>
                     <th class="col-md-1">NIM</th>
                     <th class="col-md-2">Nama Peminjam</th>
                     <th class="col-md-1">Dosen</th>
@@ -49,6 +48,7 @@
                     <th class="col-md-2">Mata Kuliah</th>
                     <th class="col-md-2">Tanggal Pinjam</th>
                     <th class="col-md-1">Waktu Pinjam</th>
+                    <th class="col-md-1">Nama dan Jumlah Alat</th>
                     <th class="col-md-1">Keterangan</th>
                     <th class="col-md-1">Aksi</th>
                     <th class="col-md-1">Selesai</th>
@@ -67,7 +67,6 @@
                         @if (isset($item['nim']) && $item['nim'] != intval(session('nim')) && $item['keterangan'] !== 'Selesai')
                             <tr>
                                 <td>{{ $nomor++ }}</td>
-                                <td>{{ $item['nama_alat'] }}</td>
                                 <td>{{ $item['nim'] }}</td>
                                 <td>{{ $item['nama_peminjam'] }}</td>
                                 <td>{{ $item['dosen'] }}</td>
@@ -75,6 +74,36 @@
                                 <td>{{ $item['mata_kuliah'] }}</td>
                                 <td>{{ $item['tanggal_peminjaman'] }}</td>
                                 <td>{{ $item['waktu_peminjaman'] }}</td>
+                                <td>
+                                    <div>
+                                        {{ $item['nama_alat_1'] }},
+                                        {{ $item['jumlah_alat_1'] }}
+                                    </div>
+                                    @if ($item['nama_alat_2'] !== null && $item['jumlah_alat_2'] !== null)
+                                        <div>
+                                            {{ $item['nama_alat_2'] }},
+                                            {{ $item['jumlah_alat_2'] }}
+                                        </div>
+                                    @endif
+                                    @if ($item['nama_alat_3'] !== null && $item['jumlah_alat_3'] !== null)
+                                        <div>
+                                            {{ $item['nama_alat_3'] }},
+                                            {{ $item['jumlah_alat_3'] }}
+                                        </div>
+                                    @endif
+                                    @if ($item['nama_alat_4'] !== null && $item['jumlah_alat_4'] !== null)
+                                        <div>
+                                            {{ $item['nama_alat_4'] }},
+                                            {{ $item['jumlah_alat_4'] }}
+                                        </div>
+                                    @endif
+                                    @if ($item['nama_alat_5'] !== null && $item['jumlah_alat_5'] !== null)
+                                        <div>
+                                            {{ $item['nama_alat_5'] }},
+                                            {{ $item['jumlah_alat_5'] }}
+                                        </div>
+                                    @endif
+                                </td>
                                 <td
                                     style="background-color: {{ $item['keterangan'] === 'Diajukan' ? 'yellow' : ($item['keterangan'] === 'Dipinjamkan' ? 'lightgreen' : ($item['keterangan'] === 'Selesai' ? 'red' : '')) }}">
                                     {{ $item['keterangan'] }}
@@ -87,6 +116,47 @@
                                         <!-- Isi formulir dengan input yang sesuai untuk melakukan pembaruan data -->
                                         <!-- Contoh: -->
                                         <input hidden type="text" name="keterangan" value="Dipinjamkan">
+
+                                        <input hidden type="text" name="jumlah_alat_1"
+                                            value="{{ $item['jumlah_alat_1'] }}">
+
+
+                                        <input hidden type="text" name="id_alat_1" value="{{ $item['id_alat_1'] }}">
+
+
+                                        @if ($item['jumlah_alat_2'] !== null && $item['id_alat_2'] !== 0)
+                                            <input hidden type="text" name="jumlah_alat_2"
+                                                value="{{ $item['jumlah_alat_2'] }}">
+
+                                            <input hidden type="text" name="id_alat_2"
+                                                value="{{ $item['id_alat_2'] }}">
+                                        @endif
+
+                                        @if ($item['jumlah_alat_3'] !== null && $item['id_alat_2'] !== 0)
+                                            <input hidden type="text" name="jumlah_alat_3"
+                                                value="{{ $item['jumlah_alat_3'] }}">
+
+                                            <input hidden type="text" name="id_alat_3"
+                                                value="{{ $item['id_alat_3'] }}">
+                                        @endif
+
+                                        @if ($item['jumlah_alat_4'] !== null && $item['id_alat_2'] !== 0)
+                                            <input hidden type="text" name="jumlah_alat_4"
+                                                value="{{ $item['jumlah_alat_4'] }}">
+
+                                            <input hidden type="text" name="id_alat_4"
+                                                value="{{ $item['id_alat_4'] }}">
+                                        @endif
+
+                                        @if ($item['jumlah_alat_5'] !== null && $item['id_alat_2'] !== 0)
+                                            <input hidden type="text" name="jumlah_alat_5"
+                                                value="{{ $item['jumlah_alat_5'] }}">
+
+                                            <input hidden type="text" name="id_alat_5"
+                                                value="{{ $item['id_alat_5'] }}">
+                                        @endif
+
+
                                         <!-- Tambahkan input lainnya sesuai dengan kebutuhan -->
 
                                         <button id="submitButton{{ $item['id'] }}" type="button"
@@ -104,6 +174,46 @@
                                         <!-- Isi formulir dengan input yang sesuai untuk melakukan pembaruan data -->
                                         <!-- Contoh: -->
                                         <input hidden type="text" name="keterangan" value="Selesai">
+
+                                        <input hidden type="text" name="jumlah_alat_1"
+                                            value="{{ $item['jumlah_alat_1'] }}">
+
+
+                                        <input hidden type="text" name="id_alat_1" value="{{ $item['id_alat_1'] }}">
+
+
+                                        @if ($item['jumlah_alat_2'] !== null && $item['id_alat_2'] !== 0)
+                                            <input hidden type="text" name="jumlah_alat_2"
+                                                value="{{ $item['jumlah_alat_2'] }}">
+
+                                            <input hidden type="text" name="id_alat_2"
+                                                value="{{ $item['id_alat_2'] }}">
+                                        @endif
+
+                                        @if ($item['jumlah_alat_3'] !== null && $item['id_alat_2'] !== 0)
+                                            <input hidden type="text" name="jumlah_alat_3"
+                                                value="{{ $item['jumlah_alat_3'] }}">
+
+                                            <input hidden type="text" name="id_alat_3"
+                                                value="{{ $item['id_alat_3'] }}">
+                                        @endif
+
+                                        @if ($item['jumlah_alat_4'] !== null && $item['id_alat_2'] !== 0)
+                                            <input hidden type="text" name="jumlah_alat_4"
+                                                value="{{ $item['jumlah_alat_4'] }}">
+
+                                            <input hidden type="text" name="id_alat_4"
+                                                value="{{ $item['id_alat_4'] }}">
+                                        @endif
+
+                                        @if ($item['jumlah_alat_5'] !== null && $item['id_alat_2'] !== 0)
+                                            <input hidden type="text" name="jumlah_alat_5"
+                                                value="{{ $item['jumlah_alat_5'] }}">
+
+                                            <input hidden type="text" name="id_alat_5"
+                                                value="{{ $item['id_alat_5'] }}">
+                                        @endif
+
                                         <!-- Tambahkan input lainnya sesuai dengan kebutuhan -->
 
                                         <button type="button"

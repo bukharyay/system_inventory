@@ -16,8 +16,12 @@ class DataPeminjamAPI extends Controller
      */
     public function index()
     {
-        $data = pinjam::join('data_alat', 'pinjams.id_alat', '=', 'data_alat.id')
-                        ->select('pinjams.*','data_alat.nama_alat')
+        $data = pinjam::leftJoin('data_alat as alat1', 'pinjams.id_alat_1', '=', 'alat1.id')
+                        ->leftJoin('data_alat as alat2', 'pinjams.id_alat_2', '=', 'alat2.id')
+                        ->leftJoin('data_alat as alat3', 'pinjams.id_alat_3', '=', 'alat3.id')
+                        ->leftJoin('data_alat as alat4', 'pinjams.id_alat_4', '=', 'alat4.id')
+                        ->leftJoin('data_alat as alat5', 'pinjams.id_alat_5', '=', 'alat5.id')
+                        ->select('pinjams.*', 'alat1.nama_alat as nama_alat_1', 'alat2.nama_alat as nama_alat_2', 'alat3.nama_alat as nama_alat_3', 'alat4.nama_alat as nama_alat_4', 'alat5.nama_alat as nama_alat_5',)
                         ->get();
     
         if ($data->isEmpty()) {
@@ -32,74 +36,6 @@ class DataPeminjamAPI extends Controller
             'message' => 'Data Peminjaman berhasil diambil',
             'data' => $data
         ], 200);
-    }
-
-    public function getDatabyId($id)
-    {
-        $data = Peminjaman::find($id);
-    
-        if (!$data) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Data Peminjaman tidak ditemukan'
-            ], 404);
-        }
-    
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Data Peminjaman berhasil diambil',
-            'data' => $data
-        ], 200);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Request $request)
-    {
-        // Validasi input
-        $validator = Validator::make($request->all(), [
-            'id_user' => 'required',
-            'kode_alat_id' => 'required',
-            'tanggal_peminjaman' => '',
-            'tanggal_kembali' => '',
-            'status' => 'required',
-            'kondisi' => 'required'
-        ]);
-    
-        // Jika validasi gagal, kirimkan respons error
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Validasi gagal',
-                'errors' => $validator->errors()
-            ], 400);
-        }
-    
-        // Buat objek Peminjaman baru
-        $peminjaman = new Peminjaman();
-        $peminjaman->id_user = $request->id_user;
-        $peminjaman->kode_alat_id = $request->kode_alat_id;
-        $peminjaman->tanggal_peminjaman = $request->tanggal_peminjaman;
-        $peminjaman->tanggal_kembali = $request->tanggal_kembali;
-        $peminjaman->status = $request->status;
-        $peminjaman->kondisi = $request->kondisi;
-    
-        // Simpan objek Peminjaman ke database
-        if ($peminjaman->save()) {
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Data Peminjaman berhasil dibuat',
-                'data' => $peminjaman
-            ], 201);
-        } else {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Gagal menyimpan data Peminjaman'
-            ], 500);
-        }
     }
 
 
@@ -199,36 +135,4 @@ class DataPeminjamAPI extends Controller
 //     }
 // }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function delete($id)
-    {
-        // Temukan data Peminjaman berdasarkan ID
-        $peminjaman = Peminjaman::find($id);
-
-        // Jika data Peminjaman tidak ditemukan, kirimkan respons error
-        if (!$peminjaman) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Data Peminjaman tidak ditemukan'
-            ], 404);
-        }
-
-        // Hapus data Peminjaman
-        if ($peminjaman->delete()) {
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Data Peminjaman berhasil dihapus'
-            ], 200);
-        } else {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Gagal menghapus data Peminjaman'
-            ], 500);
-        }
-    }
 }

@@ -16,9 +16,7 @@ class pinjamAPI extends Controller
      */
     public function index()
     {
-        $data = pinjam::join('data_alat', 'pinjams.id_alat', '=', 'data_alat.id')
-                        ->select('pinjams.*','data_alat.nama_alat')
-                        ->get();
+        $data = pinjam::all();
     
         if ($data->isEmpty()) {
             return response()->json([

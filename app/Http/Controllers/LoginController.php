@@ -88,6 +88,7 @@ class LoginController extends Controller
     public function logout()
     {
         Auth::logout();
+        session()->flush();
         return redirect()->route('login');
     }
         
