@@ -36,6 +36,7 @@ class CartController extends Controller
                 $cart[$id] = [
                     "nama_alat" => $data_alat->nama_alat,
                     "id_alat" => $data_alat->id,
+                    "stok" => $data_alat->stok,
                     "quantity" => 1,
                 ];
             }

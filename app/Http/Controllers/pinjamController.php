@@ -72,8 +72,7 @@ class pinjamController extends Controller
             'dosen' => $request->dosen,
             'ruang' => $request->ruang,
             'mata_kuliah' => $request->mata_kuliah,
-            'tanggal_peminjaman' => $request->tanggal_peminjaman,
-            'waktu_peminjaman' => $request->waktu_peminjaman,
+            'tanggal_waktu_peminjaman' => $request->tanggal_waktu_peminjaman,
             'keterangan' => $request->keterangan,
         ]);
     

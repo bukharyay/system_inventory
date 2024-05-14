@@ -27,6 +27,7 @@
     <!-- DataTables -->
     <link rel="stylesheet" href="../assets/admin_lte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
 </head>
 
 <body>
@@ -51,6 +52,17 @@
                 class="badge bg-danger">{{ count((array) session('cart')) }}</span>
         </a>
         <h1>DAFTAR ALAT</h1>
+
+        <?php
+        // Periksa apakah session 'nim' adalah '43322118' dan $item['keterangan'] adalah 'Dipinjamkan'
+        if (session('nim') === '43322118' && $item['keterangan'] === 'Dipinjamkan') {
+            // Jika kedua kondisi terpenuhi, atur atribut disabled
+            $disabledAttribute = 'disabled';
+        } else {
+            // Jika kondisi tidak terpenuhi, biarkan atribut disabled kosong
+            $disabledAttribute = '';
+        }
+        ?>
         <table class="table table-striped" id="data-table">
             <thead>
                 <tr>
@@ -67,13 +79,27 @@
                     $nomor = 1;
                 @endphp
                 @foreach ($data as $item)
-                    @if (Auth::user()->role === 'staff' || (Auth::user()->role === 'mahasiswa' && $item['keterangan'] === 'Tersedia'))
+                    @if (Auth::user()->role === 'staff' || (Auth::user()->role === 'mahasiswa' && $item['keterangan_barang'] === 'Tersedia'))
+                        <?php
+                        // Periksa apakah session 'nim' adalah '43322118' dan $item['keterangan'] adalah 'Dipinjamkan'
+                        if (session('nim') === 43322118 && $item['keterangan'] === 'Dipinjamkan') {
+                            // Jika kedua kondisi terpenuhi, atur atribut disabled
+                            $disabledAttribute = 'disabled';
+                        } else {
+                            // Jika kondisi tidak terpenuhi, biarkan atribut disabled kosong
+                            $disabledAttribute = '';
+                        }
+                        ?>
+
                         <tr>
                             <td>{{ $nomor++ }}</td>
                             <td>{{ $item['id'] }}</td>
                             <td>{{ $item['nama_alat'] }}</td>
                             <td>{{ $item['nama_jenis_alat'] }}</td>
                             <td class="stok">{{ $item['stok'] }}</td>
+
+
+
 
                             @auth
                                 @if (Auth::user()->role == 'mahasiswa')

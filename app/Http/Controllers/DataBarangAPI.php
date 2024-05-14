@@ -14,7 +14,8 @@ class DataBarangAPI extends Controller
     public function index()
     {
         $data = data_alat::join('jenis_alat', 'data_alat.jenis_alat_id', '=', 'jenis_alat.id')
-        ->select('data_alat.*', 'jenis_alat.nama_jenis_alat')
+        ->leftJoin('pinjams', 'data_alat.id', '=', 'pinjams.id_alat_1')
+        ->select('data_alat.*', 'jenis_alat.nama_jenis_alat', 'pinjams.keterangan', 'pinjams.nim')
         ->get();
     
     if ($data->isEmpty()) {

@@ -34,8 +34,7 @@ class pinjam extends Model
         'dosen',
         'ruang',
         'mata_kuliah',
-        'tanggal_peminjaman',
-        'waktu_peminjaman',
+        'tanggal_waktu_peminjaman',
         'waktu_pengembalian',
         'keterangan',
     ];

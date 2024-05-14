@@ -4,10 +4,11 @@ use App\Models\HistoryDelete;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DataPeminjam;
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AboutController;
-use App\Http\Controllers\CartController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\pinjamController;
 use App\Http\Controllers\PeminjamController;
@@ -37,6 +38,7 @@ Route::get('login', [LoginController::class, 'login'])->name('login');
 Route::post('actionlogin', [LoginController::class,'action_login'])->name('actionlogin');
 Route::get('home', [HomeController::class, 'index'])->name('home')->middleware('auth');
 Route::get('actionlogout', [LoginController::class, 'actionlogout'])->name('actionlogout')->middleware('auth');
+Route::get('/download-pdf', [PdfController::class, 'downloadPdf'])->name('download.pdf');
 
 
 // ALL
@@ -62,6 +64,7 @@ Route::middleware(['auth', 'cekrole:staff'])->group(function () {
     Route::get('DataPeminjam', 'App\Http\Controllers\DataPeminjamController@index')->name('DataPeminjam');
     Route::get('HistoryPeminjam', 'App\Http\Controllers\HistoryDeleteController@index')->name('HistoryPeminjam');
     Route::get('/dashboard-admin', 'App\Http\Controllers\DashboardController@index')->name('dashboard');
+    Route::get('/pdf-peminjaman', 'App\Http\Controllers\PdfController@index')->name('pdf.peminjaman');
     Route::post('tambahalat.store', 'App\Http\Controllers\TambahAlatController@store')->name('tambahalat.store');
     Route::put('/pinjam/{id}', 'App\Http\Controllers\DataPeminjamController@updateKonfirmasi')->name('pinjam.update');
     Route::put('/data-alat/{id}', 'App\Http\Controllers\DataBarangController@updateKonfirmasi')->name('data-alat-update');

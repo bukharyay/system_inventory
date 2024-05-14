@@ -22,6 +22,7 @@ class DataPeminjamAPI extends Controller
                         ->leftJoin('data_alat as alat4', 'pinjams.id_alat_4', '=', 'alat4.id')
                         ->leftJoin('data_alat as alat5', 'pinjams.id_alat_5', '=', 'alat5.id')
                         ->select('pinjams.*', 'alat1.nama_alat as nama_alat_1', 'alat2.nama_alat as nama_alat_2', 'alat3.nama_alat as nama_alat_3', 'alat4.nama_alat as nama_alat_4', 'alat5.nama_alat as nama_alat_5',)
+                        ->orderBy('keterangan')
                         ->get();
     
         if ($data->isEmpty()) {

@@ -45,7 +45,6 @@
                     <th>Nama DOSEN</th>
                     <th>Ruangan</th>
                     <th>Mata Kuliah</th>
-                    <th>Tanggal Pinjam</th>
                     <th>Waktu Peminjaman</th>
                     <th>Nama dan Jumlah Alat</th>
                     <th>Ket</th>
@@ -68,8 +67,7 @@
                                 <td>{{ $item['dosen'] }}</td>
                                 <td>{{ $item['ruang'] }}</td>
                                 <td>{{ $item['mata_kuliah'] }}</td>
-                                <td>{{ $item['tanggal_peminjaman'] }}</td>
-                                <td>{{ $item['waktu_peminjaman'] }}</td>
+                                <td>{{ $item['tanggal_waktu_peminjaman'] }}</td>
                                 <td>
                                     <div>
                                         {{ $item['nama_alat_1'] }},

@@ -69,7 +69,7 @@
                             <td data-th="nama_alat">{{ $details['nama_alat'] }}</td>
                             <td data-th="quantity">
                                 <select name="quantity" data-product-id="{{ $id }}" class="update-cart"
-                                    @for ($i = 0; $i <= 10; $i++) <option value="{{ $i }}"
+                                    @for ($i = 0; $i <= $details['stok']; $i++) <option value="{{ $i }}"
                                             {{ $i == $details['quantity'] ? 'selected' : '' }}>{{ $i }}
                                         </option> @endfor
                                     </select>
@@ -320,18 +320,13 @@
 
                         <div class="row">
                             <div class="col">
-                                <label for="tanggal_peminjaman" class="form-label">TANGGAL PEMINJAM</label>
-                                <input type="date" class="form-control" name="tanggal_peminjaman" readonly
-                                    id="tanggalpinjam" placeholder="Masukkan TANGGAL PEMINJAM anda">
-                            </div>
-                            <div class="col">
-                                <label for="waktu_peminjaman" class="form-label">WAKTU PEMINJAM</label>
-                                <input type="time" class="form-control" name="waktu_peminjaman" readonly
-                                    id="waktupinjam" placeholder="Masukkan WAKTU PEMINJAM anda">
+                                <label for="tanggal_waktu_peminjaman" class="form-label">TANGGAL DAN WAKTU
+                                    PEMINJAM</label>
+                                <input type="datetime-local" class="form-control" name="tanggal_waktu_peminjaman"
+                                    readonly id="tanggalwaktupinjam"
+                                    placeholder="Masukkan TANGGAL DAN WAKTU PEMINJAM anda">
                             </div>
                         </div>
-
-
 
 
 
@@ -414,31 +409,24 @@
     <script>
         $(document).ready(function() {
             $('#pinjamModal').on('show.bs.modal', function() {
+                // Mendapatkan tanggal dan waktu saat ini
                 var today = new Date();
                 var day = String(today.getDate()).padStart(2, '0');
                 var month = String(today.getMonth() + 1).padStart(2, '0');
                 var year = today.getFullYear();
                 var formattedDate = year + '-' + month + '-' + day;
-                $('#tanggalpinjam').val(formattedDate);
+
+                // Mendapatkan waktu saat ini
+                var jam = ('0' + today.getHours()).slice(-2);
+                var menit = ('0' + today.getMinutes()).slice(-2);
+                var waktuDefault = jam + ':' + menit;
+
+                // Mengatur nilai default pada input tanggal dan waktu
+                $('#tanggalwaktupinjam').val(formattedDate + 'T' + waktuDefault);
             });
         });
     </script>
 
-    <script>
-        // Mendapatkan elemen input waktu
-        var waktuPeminjamanInput = document.getElementById('waktupinjam');
-
-        // Mendapatkan waktu nyata saat ini
-        var waktuSekarang = new Date();
-
-        // Mengubah format waktu menjadi HH:MM
-        var jam = ('0' + waktuSekarang.getHours()).slice(-2);
-        var menit = ('0' + waktuSekarang.getMinutes()).slice(-2);
-        var waktuDefault = jam + ':' + menit;
-
-        // Mengatur nilai default pada input waktu
-        waktuPeminjamanInput.value = waktuDefault;
-    </script>
 
     <script>
         $(document).ready(function() {
