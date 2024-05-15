@@ -41,7 +41,17 @@
             <label for="stok" class="form-label">Stok</label>
             <input name="stok" type="text" class="form-control" id="stok" placeholder="Masukan jumlah stok">
             <input type="text" name="keterangan" value="Tersedia" hidden id="">
-            <input type="submit" value="simpan">
+            <input type="submit" value="Simpan"
+                style="
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;">
+
         </form>
     </section>
     <hr>

@@ -70,7 +70,7 @@ header {
 .disabled {
     opacity: 0.5;
     /* Add any other styles to visually indicate the disabled state */
-  }
+}
 
 .form-peminjaman {
     margin: 100px auto 0;
@@ -461,4 +461,152 @@ header {
 .card-text {
     font-size: 1rem;
     /* Optional: Adjust font size for the card text */
+}
+
+.cart-empty {
+    display: inline-flex;
+    /* Menggunakan inline-flex untuk merapikan tata letak */
+    align-items: center;
+    /* Menyelaraskan ikon dan teks secara vertikal */
+    border: 2px solid #ccc;
+    /* Tambahkan border dan sesuaikan ketebalan */
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 5px;
+    /* Mengurangi margin bawah */
+}
+
+.cart-empty i {
+    margin-right: 10px;
+    /* Sesuaikan jarak antara ikon dan teks */
+}
+
+.cart-empty .text {
+    font-weight: bold;
+    /* Tebalkan teks */
+}
+
+.select-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.select-wrapper select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 8px 30px 8px 10px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+
+/* dropdown jumlah */
+
+.select-wrapper select::-ms-expand {
+    display: none;
+}
+
+.select-wrapper::after {
+    content: '\25BC';
+    font-size: 12px;
+    color: #666;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+}
+
+
+/* Style the dropdown menu */
+
+.select-wrapper select:hover {
+    border-color: #aaa;
+}
+
+
+/* Style the dropdown menu items */
+
+.select-wrapper select option {
+    background-color: #fff;
+    color: #333;
+    font-weight: normal;
+}
+
+
+/* 
+modal hapus chart */
+
+
+/* Tambahkan hover effect untuk tombol hapus */
+
+.delete-product:hover {
+    background-color: #dc3545;
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+
+/* navbar css */
+
+.profile-container {
+    position: relative;
+    display: inline-block;
+    margin-right: 20px;
+    /* Sesuaikan margin sesuai kebutuhan */
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.profile-container:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown-menu li {
+    font-size: 16px;
+    /* Sedikit lebih besar */
+    margin-bottom: 5px;
+    /* Sesuaikan margin antara item */
+}
+
+.dropdown-menu a {
+    display: block;
+    text-decoration: none;
+    color: #333;
+    padding: 5px 10px;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f5f5f5;
+}
+
+.dropdown-menu .divider {
+    border-top: 1px solid #ccc;
+    margin: 5px 0;
+    padding: 0;
+}
+
+a:hover {
+    transform: scale(1.05);
+    /* Perbesar 5% saat dihover */
 }

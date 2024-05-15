@@ -30,3 +30,45 @@
     transform: scale(1.1);
     background-color: blue;
 }
+
+.btn-disable {
+    display: flex;
+    /* Flexbox untuk menyusun ikon dan teks secara horizontal */
+    align-items: center;
+    /* Pusatkan ikon dan teks secara vertikal */
+    background-color: #dc3545;
+    /* Warna latar belakang merah */
+    color: white;
+    /* Warna teks putih */
+    border: none;
+    /* Hilangkan border default */
+    padding: 10px 20px;
+    /* Padding untuk membuat tombol lebih besar */
+    font-size: 16px;
+    /* Ukuran font */
+    font-weight: bold;
+    /* Tebalkan teks */
+    border-radius: 5px;
+    /* Sudut melengkung */
+    cursor: pointer;
+    /* Ubah kursor menjadi pointer saat dihover */
+    text-decoration: none;
+    /* Hilangkan garis bawah pada teks */
+    transition: background-color 0.3s ease;
+    /* Animasi transisi saat dihover */
+}
+
+.btn-disable i {
+    margin-right: 8px;
+    /* Jarak antara ikon dan teks */
+}
+
+.btn-disable:hover {
+    background-color: #c82333;
+    /* Warna latar belakang saat dihover */
+}
+
+.btn-disable:hover {
+    transform: scale(1.05);
+    /* Perbesar 5% saat dihover */
+}

@@ -40,7 +40,7 @@
     </li>
 </ul>
 <div class="profile-container" id="profileContainer">
-    <img class="profile" src="../assets/img/option.png" alt="" id="profileImage">
+    <img class="profile" src="../assets/img/menu.png" alt="" id="profileImage">
     <div class="dropdown-menu" id="dropdownMenu">
         <li><a>Level: {{ Auth::user()->role }}</a></li>
         <li role="separator" class="divider"></li>

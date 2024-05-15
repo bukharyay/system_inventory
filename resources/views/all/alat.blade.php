@@ -12,7 +12,7 @@
     <title>Property</title>
 
     <!-- Custom fonts for this template-->
-    <link href="../assets/admin_css/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../assets/admin_css/vendor/fontawesome-free/csdata-alats/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -51,7 +51,7 @@
             <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span
                 class="badge bg-danger">{{ count((array) session('cart')) }}</span>
         </a>
-        <h1>DAFTAR ALAT</h1>
+        <h1 style="font-size: 3em; font-weight: bold;">DAFTAR ALAT</h1>
 
         <?php
         // Periksa apakah session 'nim' adalah '43322118' dan $item['keterangan'] adalah 'Dipinjamkan'
@@ -121,11 +121,14 @@
                                             <input hidden type="text" name="keterangan" value="Tidak tersedia">
                                             <!-- Tambahkan input lainnya sesuai dengan kebutuhan -->
 
-                                            <button type="button"
-                                                style="text-decoration: none; border: none; background: none;"
-                                                onclick="showConfirmationModalUpdate({{ $item['id'] }})">
-                                                <i class="fa fa-ban" aria-hidden="true"></i>
+                                            <button type="button" class="btn-disable"
+                                                onclick="showConfirmationModalUpdate({{ $item['id'] }})"
+                                                style="transition: transform 0.2s;">
+                                                <i class="fa fa-ban" aria-hidden="true" style="margin-right: 5px;"></i>
+                                                Nonaktifkan
                                             </button>
+
+
                                         </form>
                                     </td>
                                 @endif
@@ -152,12 +155,12 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Apakah Anda yakin ingin memperbarui data ini ?</p>
+                    <p>Apakah Anda yakin ingin Menonaktifkan data ini ?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary"
                         onclick="hideConfirmationModalUpdate()">Batal</button>
-                    <button type="button" class="btn btn-primary" onclick="updateItemUpdate()">Perbarui</button>
+                    <button type="button" class="btn btn-primary" onclick="updateItemUpdate()">Nonaktifkan</button>
                 </div>
             </div>
         </div>

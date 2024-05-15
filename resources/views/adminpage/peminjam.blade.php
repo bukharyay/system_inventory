@@ -21,6 +21,9 @@
     <link rel="preconnect " href="https://fonts.gstatic.com " crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap " rel="stylesheet ">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     {{-- data tables --}}
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -36,8 +39,18 @@
 
     </header>
     <section class="table">
-        <h1>Data Peminjaman</h1>
-        <a href="/download-pdf">Unduh PDF</a>
+        <h1 style="font-size: 3em; font-weight: bold;">Data Peminjaman</h1>
+
+
+        <a href="/download-pdf"
+            style="display: inline-flex; align-items: center; padding: 10px; background-color: #007bff; color: white; text-decoration: none; border: none; border-radius: 5px;
+               transition: transform 0.2s;">
+            <i class="fas fa-download" style="margin-right: 5px;"></i>
+            Unduh PDF
+        </a>
+
+
+
         <table class="table table-striped" id="data-table">
             <thead>
                 <tr>
@@ -116,9 +129,33 @@
                                 }
                                 ?>
                                 <td
-                                    style="background-color: {{ $item['keterangan'] === 'Diajukan' ? 'yellow' : ($item['keterangan'] === 'Dipinjamkan' ? 'lightgreen' : ($item['keterangan'] === 'Selesai' ? 'red' : '')) }}">
+                                    style="
+                         background-color: 
+                             {{ $item['keterangan'] === 'Diajukan'
+                                 ? '#ffc107'
+                                 : ($item['keterangan'] === 'Dipinjamkan'
+                                     ? '#007bff'
+                                     : ($item['keterangan'] === 'Selesai'
+                                         ? '#28a745'
+                                         : '')) }};
+                         font-weight: bold; 
+                         display: flex; 
+                         align-items: center; 
+                         justify-content: center; 
+                         border: 2px solid #ccc; 
+                         border-radius: 10px; 
+                         padding: 10px;">
+                                    @if ($item['keterangan'] === 'Diajukan')
+                                        <i class="fas fa-paper-plane" style="margin-right: 5px;"></i>
+                                    @elseif ($item['keterangan'] === 'Dipinjamkan')
+                                        <i class="fas fa-handshake" style="margin-right: 5px;"></i>
+                                    @elseif ($item['keterangan'] === 'Selesai')
+                                        <i class="fas fa-check" style="margin-right: 5px;"></i>
+                                    @endif
                                     {{ $item['keterangan'] }}
                                 </td>
+
+
                                 <td>
                                     @if ($item['keterangan'] === 'Diajukan')
                                         <form id="updateForm{{ $item['id'] }}"
@@ -231,10 +268,11 @@
                                             @endif
 
                                             <button id="submitButton{{ $item['id'] }}" type="button"
-                                                class="btn btn-secondary" style="text-decoration: none;"
+                                                class="btn btn-primary" style="text-decoration: none;"
                                                 onclick="showConfirmationModalSelesai({{ $item['id'] }})">
                                                 <span style="text-decoration: none;"><?php echo $spanText; ?></span>
                                             </button>
+
                                         </form>
                                     @endif
                                 </td>

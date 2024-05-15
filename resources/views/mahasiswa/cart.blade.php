@@ -47,7 +47,7 @@
         @endauth
     </header>
     <section class="table">
-        <h1>DAFTAR PINJAMAN</h1>
+        <h1 style="font-size: 3em; font-weight: bold;">DAFTAR PINJAMAN</h1>
         <table class="table table-striped" id="data-table">
             <thead>
                 <tr>
@@ -68,19 +68,35 @@
                             <td>{{ $nomor++ }}</td>
                             <td data-th="nama_alat">{{ $details['nama_alat'] }}</td>
                             <td data-th="quantity">
-                                <select name="quantity" data-product-id="{{ $id }}" class="update-cart"
-                                    @for ($i = 0; $i <= $details['stok']; $i++) <option value="{{ $i }}"
-                                            {{ $i == $details['quantity'] ? 'selected' : '' }}>{{ $i }}
-                                        </option> @endfor
+                                <div class="select-wrapper">
+                                    <select name="quantity" data-product-id="{{ $id }}" class="update-cart">
+                                        @for ($i = 0; $i <= $details['stok']; $i++)
+                                            <option value="{{ $i }}"
+                                                {{ $i == $details['quantity'] ? 'selected' : '' }}>{{ $i }}
+                                            </option>
+                                        @endfor
                                     </select>
+                                </div>
                             </td>
+
+
                             <td class="actions">
-                                <a class="btn btn-outline-danger btn-sm delete-product"><i class="fa fa-trash"></i></a>
+                                <a class="btn btn-outline-danger btn-sm delete-product">
+                                    <i class="fa fa-trash"></i>
+                                    Hapus
+                                </a>
                             </td>
+
                         </tr>
                     @endforeach
                 @else
-                    <p>Keranjang kosong</p>
+                    <div class="cart-empty">
+                        <!-- Ikon Keranjang -->
+                        <i class="fas fa-shopping-cart"></i>
+                        <!-- Teks "Keranjang kosong" -->
+                        <span class="text">Keranjang kosong</span>
+                    </div>
+
                 @endif
 
             </tbody>
@@ -384,7 +400,7 @@
 
             var ele = $(this);
 
-            if (confirm("Do you really want to delete?")) {
+            if (confirm("Apakah Anda yakin ingin menghapus?")) {
                 $.ajax({
                     url: '{{ route('delete.cart') }}',
                     method: "DELETE",
@@ -393,7 +409,12 @@
                         id: ele.parents("tr").attr("rowId")
                     },
                     success: function(response) {
-                        window.location.reload();
+                        // Tambahkan efek visual saat menghapus
+                        ele.parents('tr').fadeOut().remove();
+                        // Tambahkan delay sebelum reload halaman
+                        setTimeout(function() {
+                            window.location.reload();
+                        }, 1000);
                     }
                 });
             }
