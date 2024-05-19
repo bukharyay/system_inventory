@@ -88,4 +88,10 @@ Route::middleware(['auth', 'cekrole:mahasiswa'])->group(function () {
 });
 // END OF MAHASISWA
 
+// MAHASISWA
+Route::middleware(['auth', 'cekrole:mahasiswa'])->group(function () {
+  
+});
+// END OF MAHASISWA
+
 // END OF DOSEN
