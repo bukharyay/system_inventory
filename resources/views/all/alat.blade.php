@@ -37,6 +37,8 @@
                 @include('layouts.navbar')
             @elseif (Auth::user()->role == 'mahasiswa')
                 @include('layouts.navbarmhs')
+            @else 
+                @include('layouts.navbarmhs')
             @endif
         @endauth
     </header>
@@ -79,7 +81,7 @@
                     $nomor = 1;
                 @endphp
                 @foreach ($data as $item)
-                    @if (Auth::user()->role === 'staff' || (Auth::user()->role === 'mahasiswa' && $item['keterangan_barang'] === 'Tersedia'))
+                    @if (Auth::user()->role === 'staff' || (Auth::user()->role === 'mahasiswa' && $item['keterangan_barang'] === 'Tersedia') || (Auth::user()->role === 'dosen' && $item['keterangan_barang'] === 'Tersedia'))
                         <?php
                         // Periksa apakah session 'nim' adalah '43322118' dan $item['keterangan'] adalah 'Dipinjamkan'
                         if (session('nim') === 43322118 && $item['keterangan'] === 'Dipinjamkan') {
@@ -102,7 +104,7 @@
 
 
                             @auth
-                                @if (Auth::user()->role == 'mahasiswa')
+                                @if (Auth::user()->role == 'mahasiswa' || Auth::user()->role == 'dosen')
                                     <td>
 
 
