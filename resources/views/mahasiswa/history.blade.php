@@ -65,12 +65,11 @@
                         @if (isset($item['nim']) && $item['nim'] == intval(session('nim')) && $item['keterangan'] === 'Selesai')
                             <tr>
                                 <td>{{ $counter }}</td>
-                                <td>{{ $item['nama_alat'] }}</td>
+                                <td>{{ $item['nama_alat_1'] }}</td>
                                 <td>{{ $item['dosen'] }}</td>
                                 <td>{{ $item['ruang'] }}</td>
                                 <td>{{ $item['mata_kuliah'] }}</td>
-                                <td>{{ $item['tanggal_peminjaman'] }}</td>
-                                <td>{{ $item['waktu_peminjaman'] }}</td>
+                                <td>{{ $item['tanggal_waktu_peminjaman'] }}</td>
                                 <td
                                     style="background-color: {{ $item['keterangan'] === 'Diajukan' ? 'yellow' : ($item['keterangan'] === 'Dipinjamkan' ? 'lightgreen' : ($item['keterangan'] === 'Selesai' ? 'red' : '')) }}">
                                     {{ $item['keterangan'] }}
