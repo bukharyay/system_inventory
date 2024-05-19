@@ -89,8 +89,12 @@ Route::middleware(['auth', 'cekrole:mahasiswa'])->group(function () {
 // END OF MAHASISWA
 
 // MAHASISWA
-Route::middleware(['auth', 'cekrole:mahasiswa'])->group(function () {
-  
+Route::middleware(['auth', 'cekrole:dosen'])->group(function () {
+    Route::get('ListPinjam', 'App\Http\Controllers\ListPinjamController@index')->name('list-pinjam');
+    Route::post('/simpan', 'App\Http\Controllers\pinjamController@store')->name('simpan');
+    Route::get('/cart/{id}', [CartController::class, 'addtoCart'])->name('add.to.cart');
+    Route::get('/cart', [CartController::class, 'dataalatCart'])->name('cart');
+    Route::delete('/delete-cart', [CartController::class, 'deleteCart'])->name('delete.cart');
 });
 // END OF MAHASISWA
 
