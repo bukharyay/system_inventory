@@ -58,6 +58,9 @@ class LoginController extends Controller
             } elseif ($user->role === 'mahasiswa') {
                 return redirect('data-alat');
             }
+            elseif ($user->role === 'dosen') {
+                return redirect('data-alat');
+            }
         } else {
             return redirect()->route('login')->with('error', 'Username atau Password salah!');
         }
