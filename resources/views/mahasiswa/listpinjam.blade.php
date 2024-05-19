@@ -43,7 +43,13 @@
             <thead>
                 <tr>
                     <th class="md-col-4">No</th>
-                    <th>Nama DOSEN</th>
+                    @if (auth()->check() && auth()->user()->role == 'mahasiswa')
+                        <th>Nama DOSEN</th>
+                    @endif
+
+                    @if (auth()->check() && auth()->user()->role == 'dosen')
+                        <th>Nama Kelas</th>
+                    @endif
                     <th>Ruangan</th>
                     <th>Mata Kuliah</th>
                     <th>Waktu Peminjaman</th>
@@ -65,7 +71,12 @@
                         @if (isset($item['nim']) && $item['nim'] == intval(session('nim')) && $item['keterangan'] !== 'Selesai')
                             <tr>
                                 <td>{{ $counter }}</td>
-                                <td>{{ $item['dosen'] }}</td>
+                                @if (auth()->check() && auth()->user()->role == 'mahasiswa')
+                                    <td>{{ $item['dosen'] }}</td>
+                                @endif
+                                @if (auth()->check() && auth()->user()->role == 'dosen')
+                                    <td>{{ $item['kelas'] }}</td>
+                                @endif
                                 <td>{{ $item['ruang'] }}</td>
                                 <td>{{ $item['mata_kuliah'] }}</td>
                                 <td>{{ $item['tanggal_waktu_peminjaman'] }}</td>

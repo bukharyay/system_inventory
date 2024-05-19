@@ -32,6 +32,7 @@ class pinjam extends Model
         'jumlah_alat_5',
         'id_alat_5',
         'dosen',
+        'kelas',
         'ruang',
         'mata_kuliah',
         'tanggal_waktu_peminjaman',

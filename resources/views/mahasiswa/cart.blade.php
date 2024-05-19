@@ -314,13 +314,24 @@
                             </div>
                         @endif
 
+                        <input type="text" class="form-control" name="dosen" id="dosen"
+                            placeholder="Masukkan DOSEN anda" value="-" hidden>
 
                         <div class="row">
-                            <div class="col">
-                                <label for="dosen" class="form-label">DOSEN</label>
-                                <input type="text" class="form-control" name="dosen" id="dosen"
-                                    placeholder="Masukkan DOSEN anda">
-                            </div>
+                            @if (auth()->check() && auth()->user()->role == 'mahasiswa')
+                                <div class="col">
+                                    <label for="dosen" class="form-label">DOSEN</label>
+                                    <input type="text" class="form-control" name="dosen" id="dosen"
+                                        placeholder="Masukkan DOSEN anda">
+                                </div>
+                            @endif
+                            @if (auth()->check() && auth()->user()->role == 'dosen')
+                                <div class="col">
+                                    <label for="kelas" class="form-label">kelas</label>
+                                    <input type="text" class="form-control" name="kelas" id="kelas"
+                                        placeholder="Masukkan kelas anda">
+                                </div>
+                            @endif
                             <div class="col">
                                 <label for="mata_kuliah" class="form-label">MATA KULIAH</label>
                                 <input type="text" class="form-control" name="mata_kuliah" id="matakuliah"
