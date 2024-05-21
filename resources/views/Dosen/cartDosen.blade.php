@@ -128,7 +128,7 @@
                 <div class="modal-body">
                     <!-- Isi form peminjaman di sini -->
 
-                    <form action="{{ route('simpan') }}" method="POST" class="form-peminjaman">
+                    <form action="{{ route('simpan-dosen') }}" method="POST" class="form-peminjaman">
                         @csrf
                         <h1>Masukkan Data Peminjaman</h1>
 

@@ -189,73 +189,7 @@
     </div>
 
 
-    {{-- modal --}}
-    <div class="modal fade" id="pinjamModal" tabindex="-1" role="dialog" aria-labelledby="pinjamModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="pinjamModalLabel">Form Peminjaman</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <!-- Isi form peminjaman di sini -->
 
-                    <form action="{{ route('simpan') }}" method="POST" class="form-peminjaman">
-                        @csrf
-                        <h1>Masukkan Data Peminjaman</h1>
-
-                        <label for="nim" class="form-label">NIM</label>
-                        <input type="text" class="form-control" readonly value="{{ session('nim') }}"
-                            name="nim" id="nim" placeholder="Masukkan NIM anda">
-
-                        <label for="nama_peminjam" class="form-label">NAMA</label>
-                        <input type="text" class="form-control" readonly name="nama_peminjam" id="nama_peminjam"
-                            value="" placeholder="Masukkan NAMA anda">
-
-                        <label for="id_alat" class="form-label">ID Alat</label>
-                        <input type="text" class="form-control" readonly name="id_alat" id="id_alat"
-                            placeholder="Masukkan ID Alat Anda" value="">
-
-
-                        <label for="dosen" class="form-label">DOSEN</label>
-                        <input type="text" class="form-control" name="dosen" id="dosen"
-                            placeholder="Masukkan DOSEN anda">
-
-                        <label for="ruang" class="form-label">RUANG</label>
-                        <input type="text" class="form-control" name="ruang" id="ruang"
-                            placeholder="Masukkan RUANG KULIAH anda">
-
-                        <label for="mata_kuliah" class="form-label">MATA KULIAH</label>
-                        <input type="text" class="form-control" name="mata_kuliah" id="matakuliah"
-                            placeholder="Masukkan MATA KULIAH anda">
-
-                        <label for="tanggal_peminjaman" class="form-label">TANGGAL PEMINJAM</label>
-                        <input type="date" class="form-control" name="tanggal_peminjaman" readonly
-                            id="tanggalpinjam" placeholder="Masukkan TANGGAL PEMINJAM anda">
-
-                        <label for="waktu_peminjaman" class="form-label">WAKTU PEMINJAM</label>
-                        <input type="time" class="form-control" name="waktu_peminjaman" readonly id="waktupinjam"
-                            placeholder="Masukkan WAKTU PEMINJAM anda">
-
-                        <input hidden type="text" class="form-control" name="keterangan" value="Diajukan"
-                            placeholder="Masukkan WAKTU PEMINJAM anda">
-
-                        <button class="btn btn-primary" type="submit">Pinjam Alat</button>
-
-                    </form>
-
-                    {{-- end form --}}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    {{-- end modal --}}
 
     </div>
     <!-- End of Content Wrapper -->

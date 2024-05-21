@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 
-class pinjamController extends Controller
+class pinjamControllerMHS extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -82,7 +82,7 @@ class pinjamController extends Controller
             'jumlah_alat_5' => $request->jumlah_alat_5,
             'id_alat_5' => $request->id_alat_5,
             'dosen' => $request->dosen,
-            'kelas' => $request->kelas,
+            'kelas' => "-",
             'ruang' => $request->ruang,
             'mata_kuliah' => $request->mata_kuliah,
             'tanggal_waktu_peminjaman' => $request->tanggal_waktu_peminjaman,
