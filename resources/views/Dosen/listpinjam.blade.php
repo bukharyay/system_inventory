@@ -15,6 +15,7 @@
     <link rel="preconnect " href="https://fonts.gstatic.com " crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap " rel="stylesheet ">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -27,10 +28,10 @@
 
 <body>
     <header>
-        @include('layouts.navbarmhs')
+        @include('layouts.navbardsn')
     </header>
     <section class="table">
-        <h1>HISTORY PEMINJAMAN</h1>
+        <h1 style="font-size: 3em; font-weight: bold;">HISTORY PEMINJAMAN</h1>
         <li>
             @if (session('nim'))
                 <p style="font-weight: bold;" id="nama_peminjam_placeholder">Loading...</p>
@@ -42,12 +43,18 @@
             <thead>
                 <tr>
                     <th class="md-col-4">No</th>
-                    <th>Nama Alat</th>
-                    <th>Nama DOSEN</th>
+                    @if (auth()->check() && auth()->user()->role == 'mahasiswa')
+                        <th>Nama DOSEN</th>
+                    @endif
+
+                    @if (auth()->check() && auth()->user()->role == 'dosen')
+                        <th>Nama Kelas</th>
+                    @endif
                     <th>Ruangan</th>
                     <th>Mata Kuliah</th>
-                    <th>Tanggal Pinjam</th>
                     <th>Waktu Peminjaman</th>
+                    <th>Nama dan Jumlah Alat</th>
+                    <th>Ket</th>
 
                 </tr>
             </thead>
@@ -61,18 +68,76 @@
                         $counter = 1;
                     @endphp
                     @foreach ($data['data'] as $item)
-                        @if (isset($item['nim']) && $item['nim'] == intval(session('nim')) && $item['keterangan'] === 'Selesai')
+                        @if (isset($item['nim']) && $item['nim'] == intval(session('nim')) && $item['keterangan'] !== 'Selesai')
                             <tr>
                                 <td>{{ $counter }}</td>
-                                <td>{{ $item['nama_alat_1'] }}</td>
-                                <td>{{ $item['dosen'] }}</td>
+                                @if (auth()->check() && auth()->user()->role == 'mahasiswa')
+                                    <td>{{ $item['dosen'] }}</td>
+                                @endif
+                                @if (auth()->check() && auth()->user()->role == 'dosen')
+                                    <td>{{ $item['kelas'] }}</td>
+                                @endif
                                 <td>{{ $item['ruang'] }}</td>
                                 <td>{{ $item['mata_kuliah'] }}</td>
                                 <td>{{ $item['tanggal_waktu_peminjaman'] }}</td>
+                                <td>
+                                    <div>
+                                        {{ $item['nama_alat_1'] }},
+                                        {{ $item['jumlah_alat_1'] }}
+                                    </div>
+                                    @if ($item['nama_alat_2'] !== null && $item['jumlah_alat_2'] !== null)
+                                        <div>
+                                            {{ $item['nama_alat_2'] }},
+                                            {{ $item['jumlah_alat_2'] }}
+                                        </div>
+                                    @endif
+                                    @if ($item['nama_alat_3'] !== null && $item['jumlah_alat_3'] !== null)
+                                        <div>
+                                            {{ $item['nama_alat_3'] }},
+                                            {{ $item['jumlah_alat_3'] }}
+                                        </div>
+                                    @endif
+                                    @if ($item['nama_alat_4'] !== null && $item['jumlah_alat_4'] !== null)
+                                        <div>
+                                            {{ $item['nama_alat_4'] }},
+                                            {{ $item['jumlah_alat_4'] }}
+                                        </div>
+                                    @endif
+                                    @if ($item['nama_alat_5'] !== null && $item['jumlah_alat_5'] !== null)
+                                        <div>
+                                            {{ $item['nama_alat_5'] }},
+                                            {{ $item['jumlah_alat_5'] }}
+                                        </div>
+                                    @endif
+
+                                </td>
                                 <td
-                                    style="background-color: {{ $item['keterangan'] === 'Diajukan' ? 'yellow' : ($item['keterangan'] === 'Dipinjamkan' ? 'lightgreen' : ($item['keterangan'] === 'Selesai' ? 'red' : '')) }}">
+                                    style="
+                                background-color: 
+                                    {{ $item['keterangan'] === 'Diajukan'
+                                        ? 'yellow'
+                                        : ($item['keterangan'] === 'Dipinjamkan'
+                                            ? '#007bff'
+                                            : ($item['keterangan'] === 'Selesai'
+                                                ? '#28a745'
+                                                : '')) }};
+                                font-weight: bold; 
+                                display: flex; 
+                                align-items: center; 
+                                justify-content: center; 
+                                border: 2px solid #ccc; 
+                                border-radius: 10px; 
+                                padding: 10px;">
+                                    @if ($item['keterangan'] === 'Diajukan')
+                                        <i class="fas fa-paper-plane" style="margin-right: 5px;"></i>
+                                    @elseif ($item['keterangan'] === 'Dipinjamkan')
+                                        <i class="fas fa-handshake" style="margin-right: 5px;"></i>
+                                    @elseif ($item['keterangan'] === 'Selesai')
+                                        <i class="fas fa-check" style="margin-right: 5px;"></i>
+                                    @endif
                                     {{ $item['keterangan'] }}
                                 </td>
+
                             </tr>
                             @php
                                 $counter++;

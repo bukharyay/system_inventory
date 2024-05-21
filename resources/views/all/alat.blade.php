@@ -37,8 +37,8 @@
                 @include('layouts.navbar')
             @elseif (Auth::user()->role == 'mahasiswa')
                 @include('layouts.navbarmhs')
-            @else 
-                @include('layouts.navbarmhs')
+            @else
+                @include('layouts.navbardsn')
             @endif
         @endauth
     </header>
@@ -49,10 +49,19 @@
                 {{ session('success') }}
             </div>
         @endif
-        <a class="btn btn-outline-dark" href="{{ route('cart') }}">
-            <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span
-                class="badge bg-danger">{{ count((array) session('cart')) }}</span>
-        </a>
+
+        @if (Auth::user()->role == 'dosen')
+            <a class="btn btn-outline-dark" href="{{ route('cartDosen') }}">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span
+                    class="badge bg-danger">{{ count((array) session('cart')) }}</span>
+            </a>
+        @elseif (Auth::user()->role == 'mahasiswa')
+            <a class="btn btn-outline-dark" href="{{ route('cart') }}">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span
+                    class="badge bg-danger">{{ count((array) session('cart')) }}</span>
+            </a>
+        @endif
+
         <h1 style="font-size: 3em; font-weight: bold;">DAFTAR ALAT</h1>
 
         <?php
@@ -81,7 +90,9 @@
                     $nomor = 1;
                 @endphp
                 @foreach ($data as $item)
-                    @if (Auth::user()->role === 'staff' || (Auth::user()->role === 'mahasiswa' && $item['keterangan_barang'] === 'Tersedia') || (Auth::user()->role === 'dosen' && $item['keterangan_barang'] === 'Tersedia'))
+                    @if (Auth::user()->role === 'staff' ||
+                            (Auth::user()->role === 'mahasiswa' && $item['keterangan_barang'] === 'Tersedia') ||
+                            (Auth::user()->role === 'dosen' && $item['keterangan_barang'] === 'Tersedia'))
                         <?php
                         // Periksa apakah session 'nim' adalah '43322118' dan $item['keterangan'] adalah 'Dipinjamkan'
                         if (session('nim') === 43322118 && $item['keterangan'] === 'Dipinjamkan') {
@@ -104,12 +115,21 @@
 
 
                             @auth
-                                @if (Auth::user()->role == 'mahasiswa' || Auth::user()->role == 'dosen')
+                                @if (Auth::user()->role == 'mahasiswa')
                                     <td>
 
 
                                         <p class="btn-holder"><a href="{{ route('add.to.cart', ['id' => $item['id']]) }}"
                                                 class="btn btn-outline-danger">Add to cart</a> </p>
+
+                                    </td>
+                                @elseif (Auth::user()->role == 'dosen')
+                                    <td>
+
+
+                                        <p class="btn-holder"><a
+                                                href="{{ route('add.to.cart.dosen', ['id' => $item['id']]) }}"
+                                                class="btn btn-outline-danger">Add to cart !</a> </p>
 
                                     </td>
                                 @elseif (Auth::user()->role == 'staff')

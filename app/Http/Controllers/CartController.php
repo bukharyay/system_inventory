@@ -23,7 +23,36 @@ class CartController extends Controller
         return view('mahasiswa.cart');
     }
 
+    public function dataalatCartDosen()
+    {
+        return view('dosen.cartDosen');
+    }
+
     public function addtoCart(Request $request, $id)
+    {
+        $data_alat = data_alat::findOrFail($id);
+        $cart = session()->get('cart', []);
+    
+        // Cek apakah jumlah item dalam keranjang kurang dari 5
+        if(count($cart) < 5) {
+            if(isset($cart[$id])) {
+                $cart[$id]['quantity']++;
+            } else {
+                $cart[$id] = [
+                    "nama_alat" => $data_alat->nama_alat,
+                    "id_alat" => $data_alat->id,
+                    "stok" => $data_alat->stok,
+                    "quantity" => 1,
+                ];
+            }
+            session()->put('cart', $cart);
+            return redirect()->back()->with('success', 'Alat has been added to cart!');
+        } else {
+            return redirect()->back()->with('error', 'Sorry, you can only add up to 5 items in the cart.');
+        }
+    }
+
+    public function addtoCartDosen(Request $request, $id)
     {
         $data_alat = data_alat::findOrFail($id);
         $cart = session()->get('cart', []);

@@ -27,6 +27,18 @@ class pinjamController extends Controller
         return view('mahasiswa.history', ['data'=>$data]);
     }
 
+    public function indexDosen()
+    {
+        $client = new Client();
+        $url = "http://127.0.0.1:8000/api/pinjam";
+
+        $response = $client->request('GET',$url);
+        $content = $response->getBody()->getContents();
+        $data = json_decode($content, true);
+        // dd($data);
+        return view('dosen.history', ['data'=>$data]);
+    }
+
     // public function history(){
     //     $data = pinjam::all();
     //     return view ('mahasiswa.history', ['data' => $data]);

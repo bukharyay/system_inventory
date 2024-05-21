@@ -90,11 +90,12 @@ Route::middleware(['auth', 'cekrole:mahasiswa'])->group(function () {
 
 // MAHASISWA
 Route::middleware(['auth', 'cekrole:dosen'])->group(function () {
-    Route::get('ListPinjam', 'App\Http\Controllers\ListPinjamController@index')->name('list-pinjam');
+    Route::get('ListPinjamDosen', 'App\Http\Controllers\ListPinjamController@indexDosen')->name('list-pinjam-dosen');
     Route::post('/simpan', 'App\Http\Controllers\pinjamController@store')->name('simpan');
-    Route::get('/cart/{id}', [CartController::class, 'addtoCart'])->name('add.to.cart');
-    Route::get('/cart', [CartController::class, 'dataalatCart'])->name('cart');
+    Route::get('/cart-dosen/{id}', [CartController::class, 'addtoCartDosen'])->name('add.to.cart.dosen');
+    Route::get('/cartDosen', [CartController::class, 'dataalatCartDosen'])->name('cartDosen');
     Route::delete('/delete-cart', [CartController::class, 'deleteCart'])->name('delete.cart');
+    Route::get('history-dosen', 'App\Http\Controllers\pinjamController@indexDosen')->name('history-dosen');
 });
 // END OF MAHASISWA
 
