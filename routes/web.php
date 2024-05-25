@@ -88,13 +88,14 @@ Route::middleware(['auth', 'cekrole:mahasiswa'])->group(function () {
 });
 // END OF MAHASISWA
 
-// MAHASISWA
+// DOSEN
 Route::middleware(['auth', 'cekrole:dosen'])->group(function () {
     Route::get('ListPinjamDosen', 'App\Http\Controllers\ListPinjamController@indexDosen')->name('list-pinjam-dosen');
     Route::post('/simpan-dosen', 'App\Http\Controllers\pinjamController@storeDosen')->name('simpan-dosen');
     Route::get('/cart-dosen/{id}', [CartController::class, 'addtoCartDosen'])->name('add.to.cart.dosen');
+    Route::post('/update-cart-dosen', [CartController::class, 'updateCartDosen'])->name('cart.update.dosen');
     Route::get('/cartDosen', [CartController::class, 'dataalatCartDosen'])->name('cartDosen');
-    Route::delete('/delete-cart', [CartController::class, 'deleteCart'])->name('delete.cart');
+    Route::delete('/delete-cart-dosen', [CartController::class, 'deleteCartDosen'])->name('delete.cart.dosen');
     Route::get('history-dosen', 'App\Http\Controllers\pinjamController@indexDosen')->name('history-dosen');
 });
 // END OF MAHASISWA

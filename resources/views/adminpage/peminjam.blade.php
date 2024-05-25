@@ -120,7 +120,7 @@
                                 
                                 // Menggunakan struktur percabangan if-else untuk menentukan teks yang akan ditampilkan.
                                 if ($item['keterangan'] === 'Diajukan') {
-                                    $spanText = 'Pinjam';
+                                    $spanText = 'Setujui';
                                 } elseif ($item['keterangan'] === 'Dipinjamkan') {
                                     $spanText = 'Selesai';
                                 } else {
@@ -128,32 +128,22 @@
                                     $spanText = '-';
                                 }
                                 ?>
-                                <td
-                                    style="
-                         background-color: 
-                             {{ $item['keterangan'] === 'Diajukan'
-                                 ? '#ffc107'
-                                 : ($item['keterangan'] === 'Dipinjamkan'
-                                     ? '#007bff'
-                                     : ($item['keterangan'] === 'Selesai'
-                                         ? '#28a745'
-                                         : '')) }};
-                         font-weight: bold; 
-                         display: flex; 
-                         align-items: center; 
-                         justify-content: center; 
-                         border: 2px solid #ccc; 
-                         border-radius: 10px; 
-                         padding: 10px;">
+                                <td>
                                     @if ($item['keterangan'] === 'Diajukan')
-                                        <i class="fas fa-paper-plane" style="margin-right: 5px;"></i>
+                                        <span class="badge badge-primary">
+                                            <i class="fas fa-paper-plane" style="margin-right: 5px;"></i> Diajukan
+                                        </span>
                                     @elseif ($item['keterangan'] === 'Dipinjamkan')
-                                        <i class="fas fa-handshake" style="margin-right: 5px;"></i>
+                                        <span class="badge badge-warning">
+                                            <i class="fas fa-handshake" style="margin-right: 5px;"></i> Dipinjamkan
+                                        </span>
                                     @elseif ($item['keterangan'] === 'Selesai')
-                                        <i class="fas fa-check" style="margin-right: 5px;"></i>
+                                        <span class="badge badge-success">
+                                            <i class="fas fa-check" style="margin-right: 5px;"></i> Selesai
+                                        </span>
                                     @endif
-                                    {{ $item['keterangan'] }}
                                 </td>
+
 
 
                                 <td>
@@ -211,7 +201,7 @@
                                             <!-- Tambahkan input lainnya sesuai dengan kebutuhan -->
 
                                             <button id="submitButton{{ $item['id'] }}" type="button"
-                                                class="btn btn-secondary"
+                                                class="btn btn-success"
                                                 onclick="showConfirmationModal({{ $item['id'] }})" <span
                                                 style="text-decoration: none;"><?php echo $spanText; ?></span>
                                             </button>

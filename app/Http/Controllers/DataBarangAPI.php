@@ -16,7 +16,9 @@ class DataBarangAPI extends Controller
         $data = data_alat::join('jenis_alat', 'data_alat.jenis_alat_id', '=', 'jenis_alat.id')
         ->leftJoin('pinjams', 'data_alat.id', '=', 'pinjams.id_alat_1')
         ->select('data_alat.*', 'jenis_alat.nama_jenis_alat', 'pinjams.keterangan', 'pinjams.nim')
+        ->orderByRaw("CASE WHEN pinjams.keterangan = 'Diajukan' THEN 0 ELSE 1 END")
         ->get();
+    
     
     if ($data->isEmpty()) {
         return response()->json([

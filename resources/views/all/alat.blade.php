@@ -64,21 +64,12 @@
 
         <h1 style="font-size: 3em; font-weight: bold;">DAFTAR ALAT</h1>
 
-        <?php
-        // Periksa apakah session 'nim' adalah '43322118' dan $item['keterangan'] adalah 'Dipinjamkan'
-        if (session('nim') === '43322118' && $item['keterangan'] === 'Dipinjamkan') {
-            // Jika kedua kondisi terpenuhi, atur atribut disabled
-            $disabledAttribute = 'disabled';
-        } else {
-            // Jika kondisi tidak terpenuhi, biarkan atribut disabled kosong
-            $disabledAttribute = '';
-        }
-        ?>
         <table class="table table-striped" id="data-table">
             <thead>
                 <tr>
                     <th class="col-md-1">No</th>
                     <th class="col-md-1">ID Alat</th>
+                    <th class="col-md-1">Gambar</th>
                     <th class="col-md-4">Nama Alat</th>
                     <th class="col-md-2">Jenis Alat</th>
                     <th class="col-md-1">Stok</th>
@@ -88,74 +79,90 @@
             <tbody>
                 @php
                     $nomor = 1;
+                    $displayedItems = [];
+                    $cek = 'Tidak Tersedia';
                 @endphp
                 @foreach ($data as $item)
-                    @if (Auth::user()->role === 'staff' ||
-                            (Auth::user()->role === 'mahasiswa' && $item['keterangan_barang'] === 'Tersedia') ||
-                            (Auth::user()->role === 'dosen' && $item['keterangan_barang'] === 'Tersedia'))
-                        <?php
-                        // Periksa apakah session 'nim' adalah '43322118' dan $item['keterangan'] adalah 'Dipinjamkan'
-                        if (session('nim') === 43322118 && $item['keterangan'] === 'Dipinjamkan') {
-                            // Jika kedua kondisi terpenuhi, atur atribut disabled
-                            $disabledAttribute = 'disabled';
-                        } else {
-                            // Jika kondisi tidak terpenuhi, biarkan atribut disabled kosong
-                            $disabledAttribute = '';
-                        }
-                        ?>
+                    @if (!in_array($item['nama_alat'], $displayedItems))
+                        @if (Auth::user()->role === 'staff' ||
+                                (Auth::user()->role === 'mahasiswa' && $item['keterangan_barang'] === 'Tersedia') ||
+                                (Auth::user()->role === 'dosen' && $item['keterangan_barang'] === 'Tersedia'))
+                            <?php
+                            
+                            if ($item['nim'] === session('nim') && $item['keterangan'] === 'Diajukan') {
+                                $cek = 'Tersedia';
+                            }
+                            if ($item['keterangan_barang'] === $cek) {
+                                $disabledAttribute = 'disabled';
+                            } else {
+                                $disabledAttribute = '';
+                            }
+                            
+                            $displayedItems[] = $item['nama_alat'];
+                            ?>
 
-                        <tr>
-                            <td>{{ $nomor++ }}</td>
-                            <td>{{ $item['id'] }}</td>
-                            <td>{{ $item['nama_alat'] }}</td>
-                            <td>{{ $item['nama_jenis_alat'] }}</td>
-                            <td class="stok">{{ $item['stok'] }}</td>
+                            <tr>
+                                <td>{{ $nomor++ }}</td>
+                                <td>{{ $item['id'] }}</td>
+                                <td><img src="{{ $item['img'] }}" alt=""></td>
+                                <td>{{ $item['nama_alat'] }}</td>
+                                <td>{{ $item['nama_jenis_alat'] }}</td>
+                                <td class="stok">{{ $item['stok'] }}</td>
 
-
-
-
-                            @auth
-                                @if (Auth::user()->role == 'mahasiswa')
+                                @auth
+                                    @if (Auth::user()->role == 'mahasiswa')
+                                        <td>
+                                            <p class="btn-holder">
+                                                <a href="{{ route('add.to.cart', ['id' => $item['id']]) }}"
+                                                    class="btn btn-outline-primary {{ $disabledAttribute }}">
+                                                    <i class="fas fa-shopping-cart"></i> Add to cart
+                                                </a>
+                                            </p>
+                                        </td>
+                                        {{-- @elseif (Auth::user()->role == 'mahasiswa' && $item['keterangan'] === 'Diajukan' && $item['nim'] === session('nim'))
                                     <td>
-
-
-                                        <p class="btn-holder"><a href="{{ route('add.to.cart', ['id' => $item['id']]) }}"
-                                                class="btn btn-outline-danger">Add to cart</a> </p>
-
+                                        Tidak bisa pinjam
                                     </td>
-                                @elseif (Auth::user()->role == 'dosen')
+                                @elseif (Auth::user()->role == 'dosen' && $item['keterangan'] === 'Diajukan' && $item['nim'] === session('nim'))
                                     <td>
+                                        Tidak bisa pinjam
+                                        {{ $disabledAttribute }}
+                                    </td> --}}
+                                    @elseif (Auth::user()->role == 'dosen')
+                                        <td>
+                                            <p class="btn-holder">
+                                                <a href="{{ route('add.to.cart.dosen', ['id' => $item['id']]) }}"
+                                                    class="btn btn-outline-primary {{ $disabledAttribute }}">
+                                                    <i class="fas fa-shopping-cart"></i> Add to cart !
+                                                </a>
+                                            </p>
+                                        </td>
+                                    @elseif (Auth::user()->role == 'staff')
+                                        <td>
+                                            <form id="updateFormUpdate{{ $item['id'] }}"
+                                                action="{{ route('data-alat-update', ['id' => $item['id']]) }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <!-- Isi formulir dengan input yang sesuai untuk melakukan pembaruan data -->
+                                                <!-- Contoh: -->
+                                                <input hidden type="text" name="keterangan" value="Tidak tersedia">
+                                                <!-- Tambahkan input lainnya sesuai dengan kebutuhan -->
+
+                                                <button type="button" class="btn-disable"
+                                                    onclick="showConfirmationModalUpdate({{ $item['id'] }})"
+                                                    style="transition: transform 0.2s;">
+                                                    <i class="fa fa-ban" aria-hidden="true" style="margin-right: 5px;"></i>
+                                                    Nonaktifkan
+                                                </button>
 
 
-                                        <p class="btn-holder"><a
-                                                href="{{ route('add.to.cart.dosen', ['id' => $item['id']]) }}"
-                                                class="btn btn-outline-danger">Add to cart !</a> </p>
-
-                                    </td>
-                                @elseif (Auth::user()->role == 'staff')
-                                    <td>
-                                        <form id="updateFormUpdate{{ $item['id'] }}"
-                                            action="{{ route('data-alat-update', ['id' => $item['id']]) }}" method="POST">
-                                            @csrf
-                                            @method('PUT')
-                                            <!-- Isi formulir dengan input yang sesuai untuk melakukan pembaruan data -->
-                                            <!-- Contoh: -->
-                                            <input hidden type="text" name="keterangan" value="Tidak tersedia">
-                                            <!-- Tambahkan input lainnya sesuai dengan kebutuhan -->
-
-                                            <button type="button" class="btn-disable"
-                                                onclick="showConfirmationModalUpdate({{ $item['id'] }})"
-                                                style="transition: transform 0.2s;">
-                                                <i class="fa fa-ban" aria-hidden="true" style="margin-right: 5px;"></i>
-                                                Nonaktifkan
-                                            </button>
-
-
-                                        </form>
-                                    </td>
-                                @endif
-                            @endauth
-                        </tr>
+                                            </form>
+                                        </td>
+                                    @endif
+                                @endauth
+                            </tr>
+                        @endif
                     @endif
                 @endforeach
             </tbody>

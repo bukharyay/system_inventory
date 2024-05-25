@@ -54,7 +54,7 @@
                     @if ($item['keterangan'] === 'Selesai')
                         <tr>
                             <td>{{ $nomor++ }}</td>
-                            <td>{{ $item['nama_alat'] }}</td>
+                            <td>{{ $item['nama_alat_1'] }}</td>
                             <td>{{ $item['nim'] }}</td>
                             <td>{{ $item['nama_peminjam'] }}</td>
                             <td>{{ $item['dosen'] }}</td>

@@ -105,9 +105,9 @@
                     <td colspan="5" class="text-right">
                         <a href="{{ url('/data-alat') }}" class="btn btn-primary"><i class="fa fa-angle-left"></i>
                             Lihat Barang</a>
-                        <a href="#">
-                            <button class="btn_hapus" data-toggle="modal" data-target="#pinjamModal">Pinjam</button>
-                        </a>
+                        <button class="btn btn-success" data-toggle="modal" data-target="#pinjamModal">
+                            <i class="fas fa-book"></i> Pinjam
+                        </button>
                     </td>
                 </tr>
             </tfoot>
@@ -391,7 +391,7 @@
             var productId = ele.data("product-id");
             var selectedQuantity = ele.find("option:selected").val();
             $.ajax({
-                url: '{{ route('cart.update') }}',
+                url: '{{ route('cart.update.dosen') }}',
                 method: "post",
                 data: {
                     _token: '{{ csrf_token() }}',
@@ -413,7 +413,7 @@
 
             if (confirm("Apakah Anda yakin ingin menghapus?")) {
                 $.ajax({
-                    url: '{{ route('delete.cart') }}',
+                    url: '{{ route('delete.cart.dosen') }}',
                     method: "DELETE",
                     data: {
                         _token: '{{ csrf_token() }}',

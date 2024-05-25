@@ -89,7 +89,36 @@ class CartController extends Controller
         }
     }
 
+    public function deleteCartDosen(Request $request)
+    {
+        if($request->id) {
+            $cart = session()->get('cart');
+            if(isset($cart[$request->id])) {
+                unset($cart[$request->id]);
+                session()->put('cart', $cart);
+            }
+            session()->flash('success', 'Book successfully deleted.');
+        }
+    }
+
     public function updateCart(Request $request)
+    {
+        $productId = $request->input('id');
+        $selectedQuantity = $request->input('quantity');
+    
+        // Lakukan logika untuk mengubah quantity berdasarkan productId
+        // Contoh:
+        $cart = session()->get('cart', []);
+        if (isset($cart[$productId])) {
+            $cart[$productId]['quantity'] = $selectedQuantity;
+        }
+        session()->put('cart', $cart);
+    
+        // Berikan respon sesuai kebutuhan Anda
+        return response()->json(['success' => true]);
+    }
+
+    public function updateCartDosen(Request $request)
     {
         $productId = $request->input('id');
         $selectedQuantity = $request->input('quantity');

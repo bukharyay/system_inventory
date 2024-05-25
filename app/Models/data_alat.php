@@ -11,7 +11,7 @@ class data_alat extends Model
 
     protected $table = 'data_alat';
 
-    protected $fillable = ['id','nama_alat','jenis_alat_id','stok', 'keterangan_barang'];
+    protected $fillable = ['id','img','nama_alat','jenis_alat_id','stok', 'keterangan_barang'];
 
     public function peminjaman(){
         return $this->hasMany("App\Models\Peminjaman", "kode_alat");

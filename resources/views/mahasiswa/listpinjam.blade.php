@@ -10,6 +10,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
+    <!-- CSS Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- JavaScript Bootstrap -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     <link rel="stylesheet" href="../assets/css/pinjam.css">
     <link rel=" preconnect " href="https://fonts.googleapis.com ">
     <link rel="preconnect " href="https://fonts.gstatic.com " crossorigin>
@@ -111,32 +117,22 @@
                                     @endif
 
                                 </td>
-                                <td
-                                    style="
-                                background-color: 
-                                    {{ $item['keterangan'] === 'Diajukan'
-                                        ? 'yellow'
-                                        : ($item['keterangan'] === 'Dipinjamkan'
-                                            ? '#007bff'
-                                            : ($item['keterangan'] === 'Selesai'
-                                                ? '#28a745'
-                                                : '')) }};
-                                font-weight: bold; 
-                                display: flex; 
-                                align-items: center; 
-                                justify-content: center; 
-                                border: 2px solid #ccc; 
-                                border-radius: 10px; 
-                                padding: 10px;">
+                                <td>
                                     @if ($item['keterangan'] === 'Diajukan')
-                                        <i class="fas fa-paper-plane" style="margin-right: 5px;"></i>
+                                        <span class="badge badge-primary">
+                                            <i class="fas fa-paper-plane" style="margin-right: 5px;"></i> Diajukan
+                                        </span>
                                     @elseif ($item['keterangan'] === 'Dipinjamkan')
-                                        <i class="fas fa-handshake" style="margin-right: 5px;"></i>
+                                        <span class="badge badge-warning">
+                                            <i class="fas fa-handshake" style="margin-right: 5px;"></i> Dipinjamkan
+                                        </span>
                                     @elseif ($item['keterangan'] === 'Selesai')
-                                        <i class="fas fa-check" style="margin-right: 5px;"></i>
+                                        <span class="badge badge-success">
+                                            <i class="fas fa-check" style="margin-right: 5px;"></i> Selesai
+                                        </span>
                                     @endif
-                                    {{ $item['keterangan'] }}
                                 </td>
+
 
                             </tr>
                             @php

@@ -105,9 +105,9 @@
                     <td colspan="5" class="text-right">
                         <a href="{{ url('/data-alat') }}" class="btn btn-primary"><i class="fa fa-angle-left"></i>
                             Lihat Barang</a>
-                        <a href="#">
-                            <button class="btn_hapus" data-toggle="modal" data-target="#pinjamModal">Pinjam</button>
-                        </a>
+                        <button class="btn btn-success" data-toggle="modal" data-target="#pinjamModal">
+                            <i class="fas fa-book"></i> Pinjam
+                        </button>
                     </td>
                 </tr>
             </tfoot>
