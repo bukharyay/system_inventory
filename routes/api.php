@@ -23,6 +23,7 @@ use App\Http\Controllers\DataBarangAPI;
 use App\Http\Controllers\DataPeminjamAPI;
 use App\Http\Controllers\HistoryDeleteApi;
 use App\Http\Controllers\pinjamAPI;
+use App\Http\Controllers\TambahAlatAPI;
 use App\Http\Controllers\UserAPI;
 
 // ...
@@ -39,9 +40,11 @@ Route::delete('/peminjaman/delete/{id}', [DataPeminjamAPI::class, 'delete']);
 
 Route::get('pinjam', [pinjamAPI::class, 'index']);
 
-Route::get('historydelete', [HistoryDeleteApi::class, 'index']);
+// Route::get('historydelete', [HistoryDeleteApi::class, 'index']);
 
 Route::get('data_alat', [DataBarangAPI::class, 'index']);
+
+Route::get('jenis_alat', [TambahAlatAPI::class, 'index']);
 
 Route::get('info-login-nim/getData={id}', [UserAPI::class, 'getUserByNim']);
 
@@ -51,7 +54,7 @@ Route::get('pinjam/{id}', [pinjamAPI::class, 'getDatabyId']);
 
 Route::delete('/pinjam/delete/{id}', [pinjamAPI::class, 'delete']);
 
-Route::delete('/historyDelete/{id}', [HistoryDeleteApi::class, 'delete']);
+// Route::delete('/historyDelete/{id}', [HistoryDeleteApi::class, 'delete']);
 
 // Route::delete('/history-delete/delete/{id}', [HistoryDeleteApi::class, 'delete']);
 

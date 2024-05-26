@@ -31,27 +31,31 @@
     <!-- Form section -->
     <section class="form-verifikasi">
         <h1>Masukkan Barang Pinjaman anda</h1>
-        <form method="POST" action="{{ route('tambahalat.store') }}"">
+        <form method="POST" action="{{ route('tambahalat.store') }}" enctype="multipart/form-data">
             @csrf
-            <label for="nama_alat" class="form-label">Nama Alat</label>
-            <input name="nama_alat" type="text" class="form-control" id="nim" placeholder="Masukan Nama Alat">
-            <label for="jenis_alat_id" class="form-label">Jenis Alat id</label>
-            <input name="jenis_alat_id" type="text" class="form-control" id="nim"
-                placeholder="Masukan id jenis alat">
-            <label for="stok" class="form-label">Stok</label>
-            <input name="stok" type="text" class="form-control" id="stok" placeholder="Masukan jumlah stok">
-            <input type="text" name="keterangan" value="Tersedia" hidden id="">
-            <input type="submit" value="Simpan"
-                style="
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;">
-
+            <div class="form-group">
+                <label for="nama_alat" class="form-label">Nama Alat</label>
+                <input name="nama_alat" type="text" class="form-control" id="nim"
+                    placeholder="Masukan Nama Alat">
+            </div>
+            <div class="form-group">
+                <label for="jenis_alat_id" class="form-label">Jenis Alat</label>
+                <select name="jenis_alat_id" class="form-control" id="jenis_alat_id">
+                    <option value="1" selected>Case</option>
+                    <option value="2">Perkabelan</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="stok" class="form-label">Stok</label>
+                <input name="stok" type="text" class="form-control" id="stok"
+                    placeholder="Masukan jumlah stok">
+            </div>
+            <div class="form-group">
+                <label for="image" class="form-label">Pilih Gambar</label>
+                <input type="file" class="form-control-file" id="image" name="img">
+            </div>
+            <input type="text" name="keterangan_barang" value="Tersedia" hidden>
+            <button type="submit" class="btn btn-primary">Simpan</button>
         </form>
     </section>
     <hr>

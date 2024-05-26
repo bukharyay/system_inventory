@@ -19,6 +19,7 @@ use App\Http\Controllers\DashboardMhsController;
 use App\Http\Controllers\DataPeminjamController;
 use App\Http\Controllers\HistoryDeleteController;
 use App\Http\Controllers\HistoryPeminjamController;
+use App\Http\Controllers\uploadImage;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,7 +61,7 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // ADMIN
 Route::middleware(['auth', 'cekrole:staff'])->group(function () {
-    Route::get('tambahalat', 'App\Http\Controllers\TambahAlatController@create');
+    Route::get('tambahalat', 'App\Http\Controllers\TambahAlatController@create')->name('tambahalat');
     Route::get('DataPeminjam', 'App\Http\Controllers\DataPeminjamController@index')->name('DataPeminjam');
     Route::get('HistoryPeminjam', 'App\Http\Controllers\HistoryDeleteController@index')->name('HistoryPeminjam');
     Route::get('/dashboard-admin', 'App\Http\Controllers\DashboardController@index')->name('dashboard');
@@ -69,6 +70,7 @@ Route::middleware(['auth', 'cekrole:staff'])->group(function () {
     Route::put('/pinjam/{id}', 'App\Http\Controllers\DataPeminjamController@updateKonfirmasi')->name('pinjam.update');
     Route::put('/data-alat/{id}', 'App\Http\Controllers\DataBarangController@updateKonfirmasi')->name('data-alat-update');
     Route::delete('/data-alat/delete/{id}', 'App\Http\Controllers\DataBarangController@delete')->name('data-alat.delete');
+    Route::post('/upload-image', [uploadImage::class, 'uploadImage'])->name('upload-image');
 });
 // END OF ADMIN
 

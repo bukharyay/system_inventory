@@ -16,8 +16,19 @@ class DataBarangAPI extends Controller
         $data = data_alat::join('jenis_alat', 'data_alat.jenis_alat_id', '=', 'jenis_alat.id')
         ->leftJoin('pinjams', 'data_alat.id', '=', 'pinjams.id_alat_1')
         ->select('data_alat.*', 'jenis_alat.nama_jenis_alat', 'pinjams.keterangan', 'pinjams.nim')
-        ->orderByRaw("CASE WHEN pinjams.keterangan = 'Diajukan' THEN 0 ELSE 1 END")
+        ->orderByRaw("
+            CASE 
+                WHEN pinjams.keterangan = 'Diajukan' THEN 0 
+                ELSE 1 
+            END,
+            CASE 
+                WHEN data_alat.stok = 0 THEN 1 
+                ELSE 0 
+            END,
+            data_alat.nama_alat ASC
+        ")
         ->get();
+    
     
     
     if ($data->isEmpty()) {
