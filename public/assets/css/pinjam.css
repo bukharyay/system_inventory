@@ -116,6 +116,21 @@ header {
     transform: scale(1.1);
 }
 
+.btn-success {
+    background-color: #2ba84a;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-success:hover {
+    background-color: #2ba84a;
+    transform: scale(1.1);
+}
+
 .about {
     margin: 150px auto 0;
     /* Atur margin-top untuk memberikan ruang antara header dan form-verifikasi */
