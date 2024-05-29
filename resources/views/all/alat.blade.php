@@ -82,24 +82,29 @@
                     $displayedItems = [];
                     $cek = 'Tidak Tersedia';
                 @endphp
-                @foreach ($data as $item)
+                @foreach ($dataAlat as $item)
                     @if (!in_array($item['nama_alat'], $displayedItems))
                         @if (Auth::user()->role === 'staff' ||
                                 (Auth::user()->role === 'mahasiswa' && $item['keterangan_barang'] === 'Tersedia') ||
                                 (Auth::user()->role === 'dosen' && $item['keterangan_barang'] === 'Tersedia'))
-                            <?php
-                            
-                            if ($item['nim'] === session('nim') && $item['keterangan'] === 'Diajukan') {
-                                $cek = 'Tersedia';
-                            }
-                            if ($item['keterangan_barang'] === $cek) {
-                                $disabledAttribute = 'disabled';
-                            } else {
-                                $disabledAttribute = '';
-                            }
-                            
-                            $displayedItems[] = $item['nama_alat'];
-                            ?>
+                            @php
+                                // Check $dataPinjam for current item
+                                $cek = 'Tidak Tersedia';
+                                foreach ($dataPinjam as $pinjamItem) {
+                                    if (
+                                        $pinjamItem['nim'] === session('nim') &&
+                                        $pinjamItem['keterangan'] === 'Diajukan'
+                                    ) {
+                                        $cek = 'Tersedia';
+                                    }
+                                }
+
+                                // Set disabled attribute based on $cek
+                                $disabledAttribute = $item['keterangan_barang'] === $cek ? 'disabled' : '';
+
+                                // Add to displayedItems to avoid duplicates
+                                $displayedItems[] = $item['nama_alat'];
+                            @endphp
 
                             <tr>
                                 <td>{{ $nomor++ }}</td>
@@ -119,15 +124,6 @@
                                                 </a>
                                             </p>
                                         </td>
-                                        {{-- @elseif (Auth::user()->role == 'mahasiswa' && $item['keterangan'] === 'Diajukan' && $item['nim'] === session('nim'))
-                                    <td>
-                                        Tidak bisa pinjam
-                                    </td>
-                                @elseif (Auth::user()->role == 'dosen' && $item['keterangan'] === 'Diajukan' && $item['nim'] === session('nim'))
-                                    <td>
-                                        Tidak bisa pinjam
-                                        {{ $disabledAttribute }}
-                                    </td> --}}
                                     @elseif (Auth::user()->role == 'dosen')
                                         <td>
                                             <p class="btn-holder">
@@ -144,19 +140,13 @@
                                                 method="POST">
                                                 @csrf
                                                 @method('PUT')
-                                                <!-- Isi formulir dengan input yang sesuai untuk melakukan pembaruan data -->
-                                                <!-- Contoh: -->
                                                 <input hidden type="text" name="keterangan" value="Tidak tersedia">
-                                                <!-- Tambahkan input lainnya sesuai dengan kebutuhan -->
-
                                                 <button type="button" class="btn-disable"
                                                     onclick="showConfirmationModalUpdate({{ $item['id'] }})"
                                                     style="transition: transform 0.2s;">
                                                     <i class="fa fa-ban" aria-hidden="true" style="margin-right: 5px;"></i>
                                                     Nonaktifkan
                                                 </button>
-
-
                                             </form>
                                         </td>
                                     @endif

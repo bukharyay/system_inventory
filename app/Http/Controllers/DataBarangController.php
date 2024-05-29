@@ -17,14 +17,28 @@ class DataBarangController extends Controller
     public function index()
     {
         $client = new Client();
-        $url = "http://127.0.0.1:8000/api/data_alat";
-
-        $response = $client->request('GET',$url);
-        $content = $response->getBody()->getContents();
-        $contentArray = json_decode($content, true);
-        $data = $contentArray['data'];
-        return view('all.alat', ['data'=>$data]);
+        $url1 = "http://127.0.0.1:8000/api/data_alat";
+        $url2 = "http://127.0.0.1:8000/api/pinjam";
+    
+        // Request data from first API
+        $response1 = $client->request('GET', $url1);
+        $content1 = $response1->getBody()->getContents();
+        $contentArray1 = json_decode($content1, true);
+        $dataAlat = $contentArray1['data'];
+    
+        // Request data from second API
+        $response2 = $client->request('GET', $url2);
+        $content2 = $response2->getBody()->getContents();
+        $contentArray2 = json_decode($content2, true);
+        $dataPinjam = $contentArray2['data'];
+    
+        // Send both datasets to the view
+        return view('all.alat', [
+            'dataAlat' => $dataAlat,
+            'dataPinjam' => $dataPinjam
+        ]);
     }
+    
     /**
      * Display the specified resource.
      *
