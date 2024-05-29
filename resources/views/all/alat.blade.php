@@ -119,7 +119,7 @@
                                         <td>
                                             <p class="btn-holder">
                                                 <a href="{{ route('add.to.cart', ['id' => $item['id']]) }}"
-                                                    class="btn btn-outline-primary {{ $disabledAttribute }}">
+                                                    class="btn btn-outline-primary {{ $pinjamItem['nim'] === session('nim') && $pinjamItem['keterangan'] === 'Diajukan' ? 'text-danger' : '' }} {{ $disabledAttribute }}">
                                                     <i class="fas fa-shopping-cart"></i> Add to cart
                                                 </a>
                                             </p>
@@ -128,8 +128,8 @@
                                         <td>
                                             <p class="btn-holder">
                                                 <a href="{{ route('add.to.cart.dosen', ['id' => $item['id']]) }}"
-                                                    class="btn btn-outline-primary {{ $disabledAttribute }}">
-                                                    <i class="fas fa-shopping-cart"></i> Add to cart !
+                                                    class="btn btn-outline-primary {{ $pinjamItem['nim'] === session('nim') && $pinjamItem['keterangan'] === 'Diajukan' ? 'text-danger' : '' }} {{ $disabledAttribute }}">
+                                                    <i class="fas fa-shopping-cart"></i> Add to cart
                                                 </a>
                                             </p>
                                         </td>
