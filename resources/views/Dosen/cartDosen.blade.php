@@ -327,7 +327,7 @@
                             @endif
                             @if (auth()->check() && auth()->user()->role == 'dosen')
                                 <div class="col">
-                                    <label for="kelas" class="form-label">kelas</label>
+                                    <label for="kelas" class="form-label">KELAS</label>
                                     <input type="text" class="form-control" name="kelas" id="kelas"
                                         placeholder="Masukkan kelas anda">
                                 </div>
