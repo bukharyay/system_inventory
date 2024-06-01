@@ -32,6 +32,8 @@ Route::get('peminjaman', [DataPeminjamAPI::class, 'index']);
 
 Route::get('peminjaman/getData={nim}', [DataPeminjamAPI::class, 'getDatabyId']);
 
+Route::get('data-alat/getData={id}', [DataBarangAPI::class, 'getDatabyId']);
+
 Route::post('/peminjaman/create', [DataPeminjamAPI::class, 'create']);
 
 Route::put('/peminjaman/update/{id}', [DataPeminjamAPI::class, 'update']);

@@ -66,6 +66,8 @@ class DataBarangController extends Controller
         }
     }
 
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -118,7 +120,39 @@ class DataBarangController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Validate the request data
+        $request->validate([
+            'nama_alat' => 'required|string|max:255',
+            'stok' => 'required',
+            'modalJenisAlat' => 'required|string|max:255',
+            'modalKeteranganBarang' => 'required|string|max:255',
+            'img' => 'required|image|max:2048'
+        ]);
+
+        // Find the item by ID
+        $item = data_alat::find($id);
+        if (!$item) {
+            return redirect()->back()->with('error', 'Data not found');
+        }
+
+        $image = $request->file('img');
+
+        // Buat nama unik untuk file gambar
+        $imageName = time() . '.' . $request->img->extension();
+        $request->img->storeAs('images', $imageName, 'local');
+        // Pindahkan file gambar ke folder public/img
+        $image->move(public_path('images'), $imageName);
+
+        // Update the item with new data
+        $item->nama_alat = $request->input('nama_alat');
+        $item->stok = $request->input('stok');
+        $item->jenis_alat_id = $request->input('modalJenisAlat');
+        $item->keterangan_barang = $request->input('modalKeteranganBarang');
+        $item->img = "images/$imageName";
+        $item->save();
+
+        // Redirect back with a success message
+        return redirect()->route('data-alat')->with('success', 'Data updated successfully');
     }
 
     /**

@@ -20,7 +20,7 @@
     <!-- Custom styles for this template-->
     <link href="../assets/admin_css/css/sb-admin-2.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/table.css">
-
+    <link rel="stylesheet" href="/font-awesome-4.7.0/css/font-awesome.min.css">
     <!-- pertabelan -->
     <!-- Font Awesome -->
     <link rel="stylesheet" href="../assets/admin_lte/plugins/fontawesome-free/css/all.min.css">
@@ -135,18 +135,17 @@
                                         </td>
                                     @elseif (Auth::user()->role == 'staff')
                                         <td>
-                                            <form id="updateFormUpdate{{ $item['id'] }}"
-                                                action="{{ route('data-alat-update', ['id' => $item['id']]) }}"
-                                                method="POST">
+                                            <form id="updateFormUpdate{{ $item['id'] }}" method="POST">
                                                 @csrf
                                                 @method('PUT')
                                                 <input hidden type="text" name="keterangan" value="Tidak tersedia">
-                                                <button type="button" class="btn-disable"
-                                                    onclick="showConfirmationModalUpdate({{ $item['id'] }})"
+                                                <button type="button" class="btn-primary"
+                                                    onclick="showConfirmationModalUpdate({{ $item['id'] }}, '{{ $item['nama_alat'] }}', '{{ $item['stok'] }}', '{{ $item['jenis_alat_id'] }}', '{{ $item['keterangan_barang'] }}')"
                                                     style="transition: transform 0.2s;">
-                                                    <i class="fa fa-ban" aria-hidden="true" style="margin-right: 5px;"></i>
-                                                    Nonaktifkan
+                                                    <i class="fa fa-edit" aria-hidden="true"></i>
+                                                    Edit
                                                 </button>
+
                                             </form>
                                         </td>
                                     @endif
@@ -173,19 +172,44 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <p>Apakah Anda yakin ingin Menonaktifkan data ini ?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary"
-                        onclick="hideConfirmationModalUpdate()">Batal</button>
-                    <button type="button" class="btn btn-primary" onclick="updateItemUpdate()">Nonaktifkan</button>
-                </div>
+                <form id="modalFormUpdate" action="{{ route('update-data-alat', ['id' => $item['id']]) }}"
+                    enctype="multipart/form-data" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <div class="modal-body">
+                        <label for="modalIdAlat" class="form-label">ID Alat</label>
+                        <input type="text" class="form-control" id="modalIdAlat" name="id" disabled>
+
+                        <label for="modalNamaAlat" class="form-label">Nama Alat</label>
+                        <input name="nama_alat" type="text" class="form-control" id="modalNamaAlat">
+
+                        <label for="modalStok" class="form-label">Stok</label>
+                        <input name="stok" type="number" class="form-control" id="modalStok">
+
+                        <label for="modalJenisAlat" class="form-label">Jenis Alat</label>
+                        <select name="modalJenisAlat" class="form-control" id="modalJenisAlat">
+                            <option value="1" selected>Case</option>
+                            <option value="2">Perkabelan</option>
+                        </select>
+
+                        <label for="modalKeteranganBarang" class="form-label">Ket Barang</label>
+                        <select name="modalKeteranganBarang" class="form-control" id="modalKeteranganBarang">
+                            <option value="Tersedia" selected>Tersedia</option>
+                            <option value="Tidak Tersedia">Tidak Tersedia</option>
+                        </select>
+
+                        <label for="image" class="form-label">Pilih Gambar</label>
+                        <input type="file" class="form-control-file" id="image" name="img">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                            onclick="hideConfirmationModalUpdate()">Batal</button>
+                        <button type="submit" class="btn btn-primary">Edit</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-
-
 
 
     </div>
@@ -239,9 +263,24 @@
     <script>
         var updateItemId;
 
-        function showConfirmationModalUpdate(itemId) {
-            updateItemId = itemId;
-            $('#confirmationModalUpdate').modal('show');
+        function showConfirmationModalUpdate(itemId, itemNamaAlat, itemStok, itemJenisAlatId, itemKeteranganBarang) {
+            fetch(`http://127.0.0.1:8000/api/data-alat/getData=${itemId}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Populate the modal fields with the fetched data
+                    document.getElementById('modalIdAlat').value = itemId;
+                    document.getElementById('modalNamaAlat').value = itemNamaAlat;
+                    document.getElementById('modalStok').value = itemStok;
+                    document.getElementById('modalJenisAlat').value = itemJenisAlatId;
+                    document.getElementById('modalKeteranganBarang').value = itemKeteranganBarang;
+
+                    // Set the form action to the correct update URL
+                    document.getElementById('modalFormUpdate').action = `/data-alat-update/${itemId}`;
+
+                    // Show the modal
+                    $('#confirmationModalUpdate').modal('show');
+                })
+                .catch(error => console.error('Error fetching item data:', error));
         }
 
         function hideConfirmationModalUpdate() {

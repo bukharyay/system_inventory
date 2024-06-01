@@ -67,6 +67,7 @@ Route::middleware(['auth', 'cekrole:staff'])->group(function () {
     Route::get('/dashboard-admin', 'App\Http\Controllers\DashboardController@index')->name('dashboard');
     Route::get('/pdf-peminjaman', 'App\Http\Controllers\PdfController@index')->name('pdf.peminjaman');
     Route::post('tambahalat.store', 'App\Http\Controllers\TambahAlatController@store')->name('tambahalat.store');
+    Route::put('/data-alat-update/{id}', 'App\Http\Controllers\DataBarangController@update')->name('update-data-alat');
     Route::put('/pinjam/{id}', 'App\Http\Controllers\DataPeminjamController@updateKonfirmasi')->name('pinjam.update');
     Route::put('/data-alat/{id}', 'App\Http\Controllers\DataBarangController@updateKonfirmasi')->name('data-alat-update');
     Route::delete('/data-alat/delete/{id}', 'App\Http\Controllers\DataBarangController@delete')->name('data-alat.delete');

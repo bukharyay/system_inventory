@@ -48,6 +48,23 @@ class DataBarangAPI extends Controller
         ], 200);
     }
 
+    public function getDatabyId($id)
+    {
+        $data = data_alat::where('id', $id)->first();
+
+        if ($data) {
+            return response()->json([
+                'status' => 'success',
+                'data' => $data
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Data not found'
+            ], 404);
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      *

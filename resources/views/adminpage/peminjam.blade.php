@@ -321,56 +321,6 @@
         </div>
     </div>
 
-    {{-- <script>
-        function confirmDelete2() {
-            if (confirm('Apakah Anda yakin ingin menyimpan dan menghapus data?')) {
-                deleteData();
-
-            } else {
-                return false;
-            }
-        }
-
-        function deleteData() {
-            try {
-                var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-                var deleteUrl = '';
-
-                @if (isset($item['id']))
-                    deleteUrl = '{{ route('deleteHistory', ['id' => $item['id']]) }}';
-                @endif
-
-                if (deleteUrl === '') {
-                    console.error('Item tidak terdefinisi.');
-                    return;
-                }
-
-                fetch(deleteUrl, {
-                        method: 'DELETE',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': csrfToken
-                        }
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Gagal menghapus data');
-                        }
-
-                        window.location.reload();
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    });
-            } catch (error) {
-                console.error(error.message);
-            }
-        }
-    </script> --}}
-
-
-
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
