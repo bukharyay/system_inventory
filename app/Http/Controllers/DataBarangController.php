@@ -119,22 +119,23 @@ class DataBarangController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        // Validate the request data
-        $request->validate([
-            'nama_alat' => 'required|string|max:255',
-            'stok' => 'required',
-            'modalJenisAlat' => 'required|string|max:255',
-            'modalKeteranganBarang' => 'required|string|max:255',
-            'img' => 'required|image|max:2048'
-        ]);
+{
+    // Validate the request data
+    $request->validate([
+        'nama_alat' => 'required|string|max:255',
+        'stok' => 'required',
+        'modalJenisAlat' => 'required|string|max:255',
+        'modalKeteranganBarang' => 'required|string|max:255',
+        'img' => 'nullable|image|max:2048' // Gambar sekarang opsional
+    ]);
 
-        // Find the item by ID
-        $item = data_alat::find($id);
-        if (!$item) {
-            return redirect()->back()->with('error', 'Data not found');
-        }
+    // Find the item by ID
+    $item = data_alat::find($id);
+    if (!$item) {
+        return redirect()->back()->with('error', 'Data not found');
+    }
 
+    if ($request->hasFile('img')) {
         $image = $request->file('img');
 
         // Buat nama unik untuk file gambar
@@ -143,17 +144,21 @@ class DataBarangController extends Controller
         // Pindahkan file gambar ke folder public/img
         $image->move(public_path('images'), $imageName);
 
-        // Update the item with new data
-        $item->nama_alat = $request->input('nama_alat');
-        $item->stok = $request->input('stok');
-        $item->jenis_alat_id = $request->input('modalJenisAlat');
-        $item->keterangan_barang = $request->input('modalKeteranganBarang');
+        // Update the item with new image data
         $item->img = "images/$imageName";
-        $item->save();
-
-        // Redirect back with a success message
-        return redirect()->route('data-alat')->with('success', 'Data updated successfully');
     }
+
+    // Update the item with other data
+    $item->nama_alat = $request->input('nama_alat');
+    $item->stok = $request->input('stok');
+    $item->jenis_alat_id = $request->input('modalJenisAlat');
+    $item->keterangan_barang = $request->input('modalKeteranganBarang');
+    $item->save();
+
+    // Redirect back with a success message
+    return redirect()->route('data-alat')->with('success', 'Data updated successfully');
+}
+
 
     /**
      * Remove the specified resource from storage.

@@ -14,30 +14,52 @@ class DataPeminjamAPI extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = pinjam::leftJoin('data_alat as alat1', 'pinjams.id_alat_1', '=', 'alat1.id')
-                        ->leftJoin('data_alat as alat2', 'pinjams.id_alat_2', '=', 'alat2.id')
-                        ->leftJoin('data_alat as alat3', 'pinjams.id_alat_3', '=', 'alat3.id')
-                        ->leftJoin('data_alat as alat4', 'pinjams.id_alat_4', '=', 'alat4.id')
-                        ->leftJoin('data_alat as alat5', 'pinjams.id_alat_5', '=', 'alat5.id')
-                        ->select('pinjams.*', 'alat1.nama_alat as nama_alat_1', 'alat2.nama_alat as nama_alat_2', 'alat3.nama_alat as nama_alat_3', 'alat4.nama_alat as nama_alat_4', 'alat5.nama_alat as nama_alat_5',)
-                        ->orderBy('keterangan')
-                        ->get();
+        // Ambil parameter start_date dan end_date dari request
+        $start_date = $request->query('start_date');
+        $end_date = $request->query('end_date');
     
+        // Query untuk mendapatkan data peminjaman dan data alat
+        $query = Pinjam::leftJoin('data_alat as alat1', 'pinjams.id_alat_1', '=', 'alat1.id')
+            ->leftJoin('data_alat as alat2', 'pinjams.id_alat_2', '=', 'alat2.id')
+            ->leftJoin('data_alat as alat3', 'pinjams.id_alat_3', '=', 'alat3.id')
+            ->leftJoin('data_alat as alat4', 'pinjams.id_alat_4', '=', 'alat4.id')
+            ->leftJoin('data_alat as alat5', 'pinjams.id_alat_5', '=', 'alat5.id')
+            ->select(
+                'pinjams.*',
+                'alat1.nama_alat as nama_alat_1',
+                'alat2.nama_alat as nama_alat_2',
+                'alat3.nama_alat as nama_alat_3',
+                'alat4.nama_alat as nama_alat_4',
+                'alat5.nama_alat as nama_alat_5'
+            )
+            ->orderBy('keterangan');
+    
+        // Filter data berdasarkan rentang waktu jika parameter tersedia
+        if ($start_date && $end_date) {
+            $query->whereBetween('pinjams.tanggal_waktu_peminjaman', [$start_date, $end_date]);
+        }
+    
+        // Dapatkan data yang sudah difilter
+        $data = $query->get();
+    
+        // Cek apakah ada data yang ditemukan
         if ($data->isEmpty()) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Data Peminjaman tidak ditemukan'
+                'message' => 'Data Peminjaman tidak ditemukan untuk rentang waktu yang dipilih'
             ]);
         }
     
+        // Jika data ditemukan, kembalikan sebagai respons JSON
         return response()->json([
             'status' => 'success',
-            'message' => 'Data Peminjaman berhasil diambil',
+            'message' => 'Data Peminjaman berhasil diambil untuk rentang waktu yang dipilih',
             'data' => $data
         ], 200);
     }
+    
 
 
 

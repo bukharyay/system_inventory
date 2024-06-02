@@ -31,6 +31,22 @@
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     {{--  --}}
     <title>PEMINJAMAN MAHASISWA</title>
+    <style>
+        .form-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group input {
+            padding: 5px;
+        }
+    </style>
 </head>
 
 <body>
@@ -41,15 +57,26 @@
     <section class="table">
         <h1 style="font-size: 3em; font-weight: bold;">Data Peminjaman</h1>
 
+        <form id="timeRangeForm" class="form-container">
+            @csrf
+            <div class="form-group">
+                <input type="date" id="start_date" name="start_date" required>
+            </div>
+            <div>--</div>
+            <div class="form-group">
+                <input type="date" id="end_date" name="end_date" required>
+            </div>
+            <div class="form-group">
+                <button
+                    style="display: inline-flex; align-items: center; padding: 10px; background-color: #007bff; color: white; text-decoration: none; border: none; border-radius: 5px;
+            transition: transform 0.2s;"
+                    type="submit">
+                    <i class="fas fa-download"></i>
 
-        <a href="/download-pdf"
-            style="display: inline-flex; align-items: center; padding: 10px; background-color: #007bff; color: white; text-decoration: none; border: none; border-radius: 5px;
-               transition: transform 0.2s;">
-            <i class="fas fa-download" style="margin-right: 5px;"></i>
-            Unduh PDF
-        </a>
+                </button>
+            </div>
 
-
+        </form>
 
         <table class="table table-striped" id="data-table">
             <thead>
@@ -320,6 +347,15 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('timeRangeForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const startDate = document.getElementById('start_date').value;
+            const endDate = document.getElementById('end_date').value;
+            window.location.href = `/download-pdf?start_date=${startDate}&end_date=${endDate}`;
+        });
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">

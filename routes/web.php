@@ -61,6 +61,9 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // ADMIN
 Route::middleware(['auth', 'cekrole:staff'])->group(function () {
+    Route::get('/select-time', function () {
+        return view('select_time');
+    });
     Route::get('tambahalat', 'App\Http\Controllers\TambahAlatController@create')->name('tambahalat');
     Route::get('DataPeminjam', 'App\Http\Controllers\DataPeminjamController@index')->name('DataPeminjam');
     Route::get('HistoryPeminjam', 'App\Http\Controllers\HistoryDeleteController@index')->name('HistoryPeminjam');
