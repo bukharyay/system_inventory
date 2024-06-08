@@ -27,7 +27,24 @@
     <!-- DataTables -->
     <link rel="stylesheet" href="../assets/admin_lte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <style>
+        form {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
 
+        form button {
+            margin-right: 5px;
+            /* Memberikan jarak 5px di kanan setiap tombol */
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            /* Memperbesar tombol saat dihover */
+        }
+    </style>
 </head>
 
 <body>
@@ -52,12 +69,12 @@
 
         @if (Auth::user()->role == 'dosen')
             <a class="btn btn-outline-dark" href="{{ route('cartDosen') }}">
-                <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i> Keranjang <span
                     class="badge bg-danger">{{ count((array) session('cart')) }}</span>
             </a>
         @elseif (Auth::user()->role == 'mahasiswa')
             <a class="btn btn-outline-dark" href="{{ route('cart') }}">
-                <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i> Keranjang <span
                     class="badge bg-danger">{{ count((array) session('cart')) }}</span>
             </a>
         @endif
@@ -74,7 +91,7 @@
                     <th class="col-md-2">Jenis Alat</th>
                     <th class="col-md-1">Stok</th>
                     <th class="col-md-3">Aksi</th>
-                </tr>
+
             </thead>
             <tbody>
                 @php
@@ -120,7 +137,7 @@
                                             <p class="btn-holder">
                                                 <a href="{{ route('add.to.cart', ['id' => $item['id']]) }}"
                                                     class="btn btn-outline-primary {{ $pinjamItem['nim'] === session('nim') && $pinjamItem['keterangan'] === 'Diajukan' ? 'text-danger' : '' }} {{ $disabledAttribute }}">
-                                                    <i class="fas fa-shopping-cart"></i> Add to cart
+                                                    <i class="fas fa-shopping-cart"></i> Masukkan ke Keranjang
                                                 </a>
                                             </p>
                                         </td>
@@ -129,7 +146,7 @@
                                             <p class="btn-holder">
                                                 <a href="{{ route('add.to.cart.dosen', ['id' => $item['id']]) }}"
                                                     class="btn btn-outline-primary {{ $pinjamItem['nim'] === session('nim') && $pinjamItem['keterangan'] === 'Diajukan' ? 'text-danger' : '' }} {{ $disabledAttribute }}">
-                                                    <i class="fas fa-shopping-cart"></i> Add to cart
+                                                    <i class="fas fa-shopping-cart"></i> Masukkan ke Keranjang
                                                 </a>
                                             </p>
                                         </td>
@@ -139,12 +156,22 @@
                                                 @csrf
                                                 @method('PUT')
                                                 <input hidden type="text" name="keterangan" value="Tidak tersedia">
-                                                <button type="button" class="btn-primary"
+                                                <button type="button" class="btn btn-primary"
                                                     onclick="showConfirmationModalUpdate({{ $item['id'] }}, '{{ $item['nama_alat'] }}', '{{ $item['stok'] }}', '{{ $item['jenis_alat_id'] }}', '{{ $item['keterangan_barang'] }}')"
                                                     style="transition: transform 0.2s;">
                                                     <i class="fa fa-edit" aria-hidden="true"></i>
-                                                    Edit
+                                                    {{-- Edit --}}
+                                                    <button class="btn btn-success">
+                                                        <i class="fas fa-check-circle"></i>
+                                                        {{-- Aktifkan --}}
+                                                    </button>
+                                                    <button class="btn btn-danger">
+                                                        <i class="fas fa-trash-alt"></i>
+                                                        {{-- Hapus --}}
+                                                    </button>
                                                 </button>
+
+
 
                                             </form>
                                         </td>

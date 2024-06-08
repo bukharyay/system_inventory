@@ -51,7 +51,9 @@
             @endif
         </li>
         <li><a>Level: {{ Auth::user()->role }}</a></li>
+        <li> <a href=""> Ubah Sandi</a></li>
         <li role="separator" class="divider"></li>
+
         <li><a href="{{ route('logout') }}"><i class="fa fa-power-off"></i> Log Out</a></li>
     </div>
 </div>

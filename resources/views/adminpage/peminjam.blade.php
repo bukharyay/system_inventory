@@ -55,251 +55,276 @@
 
     </header>
     <section class="table">
-        <h1 style="font-size: 3em; font-weight: bold;">Data Peminjaman</h1>
-
-        <form id="timeRangeForm" class="form-container">
-            @csrf
-            <div class="form-group">
-                <input type="date" id="start_date" name="start_date" required>
+        <div class="container mt-5">
+            <h1 style="font-size: 3em; font-weight: bold;">Data Peminjaman</h1>
+            {{-- statistik --}}
+            <div class="stats-container">
+                <div class="stat-box selesai">
+                    <i class="fas fa-check-circle stat-icon"></i>
+                    <div>
+                        <div class="stat-title">Selesai</div>
+                        <div class="stat-count">150</div>
+                    </div>
+                </div>
+                <div class="stat-box diajukan">
+                    <i class="fas fa-hourglass-start stat-icon"></i>
+                    <div>
+                        <div class="stat-title">Diajukan</div>
+                        <div class="stat-count">75</div>
+                    </div>
+                </div>
+                <div class="stat-box dipinjamkan">
+                    <i class="fas fa-hand-holding-usd stat-icon"></i>
+                    <div>
+                        <div class="stat-title">Dipinjamkan</div>
+                        <div class="stat-count">45</div>
+                    </div>
+                </div>
             </div>
-            <div>--</div>
-            <div class="form-group">
-                <input type="date" id="end_date" name="end_date" required>
-            </div>
-            <div class="form-group">
-                <button
-                    style="display: inline-flex; align-items: center; padding: 10px; background-color: #007bff; color: white; text-decoration: none; border: none; border-radius: 5px;
+            {{-- end of statistik --}}
+            <form id="timeRangeForm" class="form-container">
+                @csrf
+                <div class="form-group">
+                    <input type="date" id="start_date" name="start_date" required>
+                </div>
+                <div>--</div>
+                <div class="form-group">
+                    <input type="date" id="end_date" name="end_date" required>
+                </div>
+                <div class="form-group">
+                    <button
+                        style="display: inline-flex; align-items: center; padding: 10px; background-color: #007bff; color: white; text-decoration: none; border: none; border-radius: 5px;
             transition: transform 0.2s;"
-                    type="submit">
-                    <i class="fas fa-download"></i>
+                        type="submit">
+                        <i class="fas fa-download"></i>
 
-                </button>
-            </div>
+                    </button>
+                </div>
 
-        </form>
+            </form>
 
-        <table class="table table-striped" id="data-table">
-            <thead>
-                <tr>
-                    <th class="">No</th>
-                    <th class="col-md-1">NIM</th>
-                    <th class="col-md-2">Nama Peminjam</th>
-                    <th class="col-md-1">Dosen</th>
-                    <th class="col-md-1">Ruang</th>
-                    <th class="col-md-2">Mata Kuliah</th>
-                    <th class="col-md-2">Waktu Pinjam</th>
-                    <th class="col-md-1">Nama dan Jumlah Alat</th>
-                    <th class="col-md-1">Keterangan</th>
-                    <th class="col-md-1">Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @if (isset($data['status']) && $data['status'] === 'error')
-                    <tr class="text-center">
-                        <td colspan="12">{{ $data['message'] }}</td>
+            <table class="table table-striped" id="data-table">
+                <thead>
+                    <tr>
+                        <th class="">No</th>
+                        <th class="col-md-1">NIM</th>
+                        <th class="col-md-2">Nama Peminjam</th>
+                        <th class="col-md-1">Dosen</th>
+                        <th class="col-md-1">Ruang</th>
+                        <th class="col-md-2">Mata Kuliah</th>
+                        <th class="col-md-2">Waktu Pinjam</th>
+                        <th class="col-md-1">Nama dan Jumlah Alat</th>
+                        <th class="col-md-1">Keterangan</th>
+                        <th class="col-md-1">Aksi</th>
                     </tr>
-                @else
-                    @php
-                        $nomor = 1;
-                    @endphp
-                    @foreach ($data['data'] as $item)
-                        @if (isset($item['nim']) && $item['nim'] != intval(session('nim')))
-                            <tr>
-                                <td>{{ $nomor++ }}</td>
-                                <td>{{ $item['nim'] }}</td>
-                                <td>{{ $item['nama_peminjam'] }}</td>
-                                <td>{{ $item['dosen'] }}</td>
-                                <td>{{ $item['ruang'] }}</td>
-                                <td>{{ $item['mata_kuliah'] }}</td>
-                                <td>{{ $item['tanggal_waktu_peminjaman'] }}</td>
-                                <td>
-                                    <div>
-                                        {{ $item['nama_alat_1'] }},
-                                        {{ $item['jumlah_alat_1'] }}
-                                    </div>
-                                    @if ($item['nama_alat_2'] !== null && $item['jumlah_alat_2'] !== null)
+                </thead>
+                <tbody>
+                    @if (isset($data['status']) && $data['status'] === 'error')
+                        <tr class="text-center">
+                            <td colspan="12">{{ $data['message'] }}</td>
+                        </tr>
+                    @else
+                        @php
+                            $nomor = 1;
+                        @endphp
+                        @foreach ($data['data'] as $item)
+                            @if (isset($item['nim']) && $item['nim'] != intval(session('nim')))
+                                <tr>
+                                    <td>{{ $nomor++ }}</td>
+                                    <td>{{ $item['nim'] }}</td>
+                                    <td>{{ $item['nama_peminjam'] }}</td>
+                                    <td>{{ $item['dosen'] }}</td>
+                                    <td>{{ $item['ruang'] }}</td>
+                                    <td>{{ $item['mata_kuliah'] }}</td>
+                                    <td>{{ $item['tanggal_waktu_peminjaman'] }}</td>
+                                    <td>
                                         <div>
-                                            {{ $item['nama_alat_2'] }},
-                                            {{ $item['jumlah_alat_2'] }}
+                                            {{ $item['nama_alat_1'] }},
+                                            {{ $item['jumlah_alat_1'] }}
                                         </div>
-                                    @endif
-                                    @if ($item['nama_alat_3'] !== null && $item['jumlah_alat_3'] !== null)
-                                        <div>
-                                            {{ $item['nama_alat_3'] }},
-                                            {{ $item['jumlah_alat_3'] }}
-                                        </div>
-                                    @endif
-                                    @if ($item['nama_alat_4'] !== null && $item['jumlah_alat_4'] !== null)
-                                        <div>
-                                            {{ $item['nama_alat_4'] }},
-                                            {{ $item['jumlah_alat_4'] }}
-                                        </div>
-                                    @endif
-                                    @if ($item['nama_alat_5'] !== null && $item['jumlah_alat_5'] !== null)
-                                        <div>
-                                            {{ $item['nama_alat_5'] }},
-                                            {{ $item['jumlah_alat_5'] }}
-                                        </div>
-                                    @endif
-                                </td>
-                                <?php
-                                // Misalkan $item adalah array yang berisi data Anda, dan $item['keterangan'] adalah keterangan yang menentukan teks yang akan ditampilkan.
-                                
-                                // Menggunakan struktur percabangan if-else untuk menentukan teks yang akan ditampilkan.
-                                if ($item['keterangan'] === 'Diajukan') {
-                                    $spanText = 'Setujui';
-                                } elseif ($item['keterangan'] === 'Dipinjamkan') {
-                                    $spanText = 'Selesai';
-                                } else {
-                                    // Jika kondisi lainnya, teks akan tetap 'Pinjam'.
-                                    $spanText = '-';
-                                }
-                                ?>
-                                <td>
-                                    @if ($item['keterangan'] === 'Diajukan')
-                                        <span class="badge badge-primary">
-                                            <i class="fas fa-paper-plane" style="margin-right: 5px;"></i> Diajukan
-                                        </span>
-                                    @elseif ($item['keterangan'] === 'Dipinjamkan')
-                                        <span class="badge badge-warning">
-                                            <i class="fas fa-handshake" style="margin-right: 5px;"></i> Dipinjamkan
-                                        </span>
-                                    @elseif ($item['keterangan'] === 'Selesai')
-                                        <span class="badge badge-success">
-                                            <i class="fas fa-check" style="margin-right: 5px;"></i> Selesai
-                                        </span>
-                                    @endif
-                                </td>
+                                        @if ($item['nama_alat_2'] !== null && $item['jumlah_alat_2'] !== null)
+                                            <div>
+                                                {{ $item['nama_alat_2'] }},
+                                                {{ $item['jumlah_alat_2'] }}
+                                            </div>
+                                        @endif
+                                        @if ($item['nama_alat_3'] !== null && $item['jumlah_alat_3'] !== null)
+                                            <div>
+                                                {{ $item['nama_alat_3'] }},
+                                                {{ $item['jumlah_alat_3'] }}
+                                            </div>
+                                        @endif
+                                        @if ($item['nama_alat_4'] !== null && $item['jumlah_alat_4'] !== null)
+                                            <div>
+                                                {{ $item['nama_alat_4'] }},
+                                                {{ $item['jumlah_alat_4'] }}
+                                            </div>
+                                        @endif
+                                        @if ($item['nama_alat_5'] !== null && $item['jumlah_alat_5'] !== null)
+                                            <div>
+                                                {{ $item['nama_alat_5'] }},
+                                                {{ $item['jumlah_alat_5'] }}
+                                            </div>
+                                        @endif
+                                    </td>
+                                    <?php
+                                    // Misalkan $item adalah array yang berisi data Anda, dan $item['keterangan'] adalah keterangan yang menentukan teks yang akan ditampilkan.
+                                    
+                                    // Menggunakan struktur percabangan if-else untuk menentukan teks yang akan ditampilkan.
+                                    if ($item['keterangan'] === 'Diajukan') {
+                                        $spanText = 'Setujui';
+                                    } elseif ($item['keterangan'] === 'Dipinjamkan') {
+                                        $spanText = 'Selesai';
+                                    } else {
+                                        // Jika kondisi lainnya, teks akan tetap 'Pinjam'.
+                                        $spanText = '-';
+                                    }
+                                    ?>
+                                    <td>
+                                        @if ($item['keterangan'] === 'Diajukan')
+                                            <span class="badge badge-primary">
+                                                <i class="fas fa-paper-plane" style="margin-right: 5px;"></i> Diajukan
+                                            </span>
+                                        @elseif ($item['keterangan'] === 'Dipinjamkan')
+                                            <span class="badge badge-warning">
+                                                <i class="fas fa-handshake" style="margin-right: 5px;"></i> Dipinjamkan
+                                            </span>
+                                        @elseif ($item['keterangan'] === 'Selesai')
+                                            <span class="badge badge-success">
+                                                <i class="fas fa-check" style="margin-right: 5px;"></i> Selesai
+                                            </span>
+                                        @endif
+                                    </td>
 
 
 
-                                <td>
-                                    @if ($item['keterangan'] === 'Diajukan')
-                                        <form id="updateForm{{ $item['id'] }}"
-                                            action="{{ route('pinjam.update', ['id' => $item['id']]) }}"
-                                            method="POST">
-                                            @csrf
-                                            @method('PUT')
-                                            <!-- Isi formulir dengan input yang sesuai untuk melakukan pembaruan data -->
-                                            <!-- Contoh: -->
-                                            <input hidden type="text" name="keterangan" value="Dipinjamkan">
+                                    <td>
+                                        @if ($item['keterangan'] === 'Diajukan')
+                                            <form id="updateForm{{ $item['id'] }}"
+                                                action="{{ route('pinjam.update', ['id' => $item['id']]) }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <!-- Isi formulir dengan input yang sesuai untuk melakukan pembaruan data -->
+                                                <!-- Contoh: -->
+                                                <input hidden type="text" name="keterangan" value="Dipinjamkan">
 
-                                            <input hidden type="text" name="jumlah_alat_1"
-                                                value="{{ $item['jumlah_alat_1'] }}">
-
-
-                                            <input hidden type="text" name="id_alat_1"
-                                                value="{{ $item['id_alat_1'] }}">
+                                                <input hidden type="text" name="jumlah_alat_1"
+                                                    value="{{ $item['jumlah_alat_1'] }}">
 
 
-                                            @if ($item['jumlah_alat_2'] !== null && $item['id_alat_2'] !== 0)
-                                                <input hidden type="text" name="jumlah_alat_2"
-                                                    value="{{ $item['jumlah_alat_2'] }}">
-
-                                                <input hidden type="text" name="id_alat_2"
-                                                    value="{{ $item['id_alat_2'] }}">
-                                            @endif
-
-                                            @if ($item['jumlah_alat_3'] !== null && $item['id_alat_2'] !== 0)
-                                                <input hidden type="text" name="jumlah_alat_3"
-                                                    value="{{ $item['jumlah_alat_3'] }}">
-
-                                                <input hidden type="text" name="id_alat_3"
-                                                    value="{{ $item['id_alat_3'] }}">
-                                            @endif
-
-                                            @if ($item['jumlah_alat_4'] !== null && $item['id_alat_2'] !== 0)
-                                                <input hidden type="text" name="jumlah_alat_4"
-                                                    value="{{ $item['jumlah_alat_4'] }}">
-
-                                                <input hidden type="text" name="id_alat_4"
-                                                    value="{{ $item['id_alat_4'] }}">
-                                            @endif
-
-                                            @if ($item['jumlah_alat_5'] !== null && $item['id_alat_2'] !== 0)
-                                                <input hidden type="text" name="jumlah_alat_5"
-                                                    value="{{ $item['jumlah_alat_5'] }}">
-
-                                                <input hidden type="text" name="id_alat_5"
-                                                    value="{{ $item['id_alat_5'] }}">
-                                            @endif
+                                                <input hidden type="text" name="id_alat_1"
+                                                    value="{{ $item['id_alat_1'] }}">
 
 
-                                            <!-- Tambahkan input lainnya sesuai dengan kebutuhan -->
+                                                @if ($item['jumlah_alat_2'] !== null && $item['id_alat_2'] !== 0)
+                                                    <input hidden type="text" name="jumlah_alat_2"
+                                                        value="{{ $item['jumlah_alat_2'] }}">
 
-                                            <button id="submitButton{{ $item['id'] }}" type="button"
-                                                class="btn btn-success"
-                                                onclick="showConfirmationModal({{ $item['id'] }})" <span
-                                                style="text-decoration: none;"><?php echo $spanText; ?></span>
-                                            </button>
+                                                    <input hidden type="text" name="id_alat_2"
+                                                        value="{{ $item['id_alat_2'] }}">
+                                                @endif
 
-                                        </form>
-                                    @elseif ($item['keterangan'] === 'Dipinjamkan')
-                                        <form id="updateFormSelesai{{ $item['id'] }}"
-                                            action="{{ route('pinjam.update', ['id' => $item['id']]) }}"
-                                            method="POST">
-                                            @csrf
-                                            @method('PUT')
-                                            <!-- Isi formulir dengan input yang sesuai untuk melakukan pembaruan data -->
-                                            <!-- Contoh: -->
-                                            <input hidden type="text" name="keterangan" value="Selesai">
+                                                @if ($item['jumlah_alat_3'] !== null && $item['id_alat_2'] !== 0)
+                                                    <input hidden type="text" name="jumlah_alat_3"
+                                                        value="{{ $item['jumlah_alat_3'] }}">
 
-                                            <input hidden type="text" name="jumlah_alat_1"
-                                                value="{{ $item['jumlah_alat_1'] }}">
+                                                    <input hidden type="text" name="id_alat_3"
+                                                        value="{{ $item['id_alat_3'] }}">
+                                                @endif
+
+                                                @if ($item['jumlah_alat_4'] !== null && $item['id_alat_2'] !== 0)
+                                                    <input hidden type="text" name="jumlah_alat_4"
+                                                        value="{{ $item['jumlah_alat_4'] }}">
+
+                                                    <input hidden type="text" name="id_alat_4"
+                                                        value="{{ $item['id_alat_4'] }}">
+                                                @endif
+
+                                                @if ($item['jumlah_alat_5'] !== null && $item['id_alat_2'] !== 0)
+                                                    <input hidden type="text" name="jumlah_alat_5"
+                                                        value="{{ $item['jumlah_alat_5'] }}">
+
+                                                    <input hidden type="text" name="id_alat_5"
+                                                        value="{{ $item['id_alat_5'] }}">
+                                                @endif
 
 
-                                            <input hidden type="text" name="id_alat_1"
-                                                value="{{ $item['id_alat_1'] }}">
+                                                <!-- Tambahkan input lainnya sesuai dengan kebutuhan -->
+
+                                                <button id="submitButton{{ $item['id'] }}" type="button"
+                                                    class="btn btn-success"
+                                                    onclick="showConfirmationModal({{ $item['id'] }})" <span
+                                                    style="text-decoration: none;"><?php echo $spanText; ?></span>
+                                                </button>
+
+                                            </form>
+                                        @elseif ($item['keterangan'] === 'Dipinjamkan')
+                                            <form id="updateFormSelesai{{ $item['id'] }}"
+                                                action="{{ route('pinjam.update', ['id' => $item['id']]) }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <!-- Isi formulir dengan input yang sesuai untuk melakukan pembaruan data -->
+                                                <!-- Contoh: -->
+                                                <input hidden type="text" name="keterangan" value="Selesai">
+
+                                                <input hidden type="text" name="jumlah_alat_1"
+                                                    value="{{ $item['jumlah_alat_1'] }}">
 
 
-                                            @if ($item['jumlah_alat_2'] !== null && $item['id_alat_2'] !== 0)
-                                                <input hidden type="text" name="jumlah_alat_2"
-                                                    value="{{ $item['jumlah_alat_2'] }}">
+                                                <input hidden type="text" name="id_alat_1"
+                                                    value="{{ $item['id_alat_1'] }}">
 
-                                                <input hidden type="text" name="id_alat_2"
-                                                    value="{{ $item['id_alat_2'] }}">
-                                            @endif
 
-                                            @if ($item['jumlah_alat_3'] !== null && $item['id_alat_2'] !== 0)
-                                                <input hidden type="text" name="jumlah_alat_3"
-                                                    value="{{ $item['jumlah_alat_3'] }}">
+                                                @if ($item['jumlah_alat_2'] !== null && $item['id_alat_2'] !== 0)
+                                                    <input hidden type="text" name="jumlah_alat_2"
+                                                        value="{{ $item['jumlah_alat_2'] }}">
 
-                                                <input hidden type="text" name="id_alat_3"
-                                                    value="{{ $item['id_alat_3'] }}">
-                                            @endif
+                                                    <input hidden type="text" name="id_alat_2"
+                                                        value="{{ $item['id_alat_2'] }}">
+                                                @endif
 
-                                            @if ($item['jumlah_alat_4'] !== null && $item['id_alat_2'] !== 0)
-                                                <input hidden type="text" name="jumlah_alat_4"
-                                                    value="{{ $item['jumlah_alat_4'] }}">
+                                                @if ($item['jumlah_alat_3'] !== null && $item['id_alat_2'] !== 0)
+                                                    <input hidden type="text" name="jumlah_alat_3"
+                                                        value="{{ $item['jumlah_alat_3'] }}">
 
-                                                <input hidden type="text" name="id_alat_4"
-                                                    value="{{ $item['id_alat_4'] }}">
-                                            @endif
+                                                    <input hidden type="text" name="id_alat_3"
+                                                        value="{{ $item['id_alat_3'] }}">
+                                                @endif
 
-                                            @if ($item['jumlah_alat_5'] !== null && $item['id_alat_2'] !== 0)
-                                                <input hidden type="text" name="jumlah_alat_5"
-                                                    value="{{ $item['jumlah_alat_5'] }}">
+                                                @if ($item['jumlah_alat_4'] !== null && $item['id_alat_2'] !== 0)
+                                                    <input hidden type="text" name="jumlah_alat_4"
+                                                        value="{{ $item['jumlah_alat_4'] }}">
 
-                                                <input hidden type="text" name="id_alat_5"
-                                                    value="{{ $item['id_alat_5'] }}">
-                                            @endif
+                                                    <input hidden type="text" name="id_alat_4"
+                                                        value="{{ $item['id_alat_4'] }}">
+                                                @endif
 
-                                            <button id="submitButton{{ $item['id'] }}" type="button"
-                                                class="btn btn-primary" style="text-decoration: none;"
-                                                onclick="showConfirmationModalSelesai({{ $item['id'] }})">
-                                                <span style="text-decoration: none;"><?php echo $spanText; ?></span>
-                                            </button>
+                                                @if ($item['jumlah_alat_5'] !== null && $item['id_alat_2'] !== 0)
+                                                    <input hidden type="text" name="jumlah_alat_5"
+                                                        value="{{ $item['jumlah_alat_5'] }}">
 
-                                        </form>
-                                    @endif
-                                </td>
-                            </tr>
-                        @endif
-                    @endforeach
-                @endif
+                                                    <input hidden type="text" name="id_alat_5"
+                                                        value="{{ $item['id_alat_5'] }}">
+                                                @endif
 
-            </tbody>
-        </table>
+                                                <button id="submitButton{{ $item['id'] }}" type="button"
+                                                    class="btn btn-primary" style="text-decoration: none;"
+                                                    onclick="showConfirmationModalSelesai({{ $item['id'] }})">
+                                                    <span style="text-decoration: none;"><?php echo $spanText; ?></span>
+                                                </button>
+
+                                            </form>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endif
+                        @endforeach
+                    @endif
+
+                </tbody>
+            </table>
 
     </section>
     <!-- Modal Konfirmasi Pembaruan -->

@@ -625,3 +625,63 @@ a:hover {
     transform: scale(1.05);
     /* Perbesar 5% saat dihover */
 }
+
+
+/* statitik start */
+
+.stats-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.stat-box {
+    background-color: white;
+    width: 25%;
+    min-width: 200px;
+    margin: 10px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s;
+}
+
+.stat-box:hover {
+    transform: scale(1.05);
+}
+
+.stat-icon {
+    font-size: 2em;
+    margin-right: 10px;
+}
+
+.stat-title {
+    font-size: 1em;
+    font-weight: bold;
+    margin: 0;
+}
+
+.stat-count {
+    font-size: 1.5em;
+    margin-left: auto;
+}
+
+.stat-box.selesai {
+    background-color: #28a745;
+    /* Green */
+    color: white;
+}
+
+.stat-box.diajukan {
+    background-color: #007bff;
+    /* Blue */
+    color: white;
+}
+
+.stat-box.dipinjamkan {
+    background-color: #ffc107;
+    /* Yellow */
+    color: black;
+}
