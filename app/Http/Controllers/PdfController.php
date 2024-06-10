@@ -42,7 +42,7 @@ public function downloadPdf(Request $request)
         $start_date = $request->query('start_date');
         $end_date = $request->query('end_date');
 
-        $url = "http://127.0.0.1:8000/api/peminjaman?start_date={$start_date}&end_date={$end_date}";
+        $url = "http://127.0.0.1:8000/api/pinjam?start_date={$start_date}&end_date={$end_date}";
 
         $response = $client->request('GET', $url, [
             'query' => [

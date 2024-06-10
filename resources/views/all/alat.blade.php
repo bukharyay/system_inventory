@@ -89,6 +89,7 @@
                     <th class="col-md-1">Gambar</th>
                     <th class="col-md-4">Nama Alat</th>
                     <th class="col-md-2">Jenis Alat</th>
+                    <th class="col-md-3">Ketersediaan Barang</th>
                     <th class="col-md-1">Stok</th>
                     <th class="col-md-3">Aksi</th>
 
@@ -129,6 +130,7 @@
                                 <td><img src="{{ $item['img'] }}" alt=""></td>
                                 <td>{{ $item['nama_alat'] }}</td>
                                 <td>{{ $item['nama_jenis_alat'] }}</td>
+                                <td>{{ $item['keterangan_barang'] }}</td>
                                 <td class="stok">{{ $item['stok'] }}</td>
 
                                 @auth
@@ -161,18 +163,7 @@
                                                     style="transition: transform 0.2s;">
                                                     <i class="fa fa-edit" aria-hidden="true"></i>
                                                     {{-- Edit --}}
-                                                    <button class="btn btn-success">
-                                                        <i class="fas fa-check-circle"></i>
-                                                        {{-- Aktifkan --}}
-                                                    </button>
-                                                    <button class="btn btn-danger">
-                                                        <i class="fas fa-trash-alt"></i>
-                                                        {{-- Hapus --}}
-                                                    </button>
                                                 </button>
-
-
-
                                             </form>
                                         </td>
                                     @endif

@@ -12,13 +12,23 @@ class DataPeminjamController extends Controller
     public function index()
     {
         $client = new Client();
-        $url = "http://127.0.0.1:8000/api/peminjaman";
+        $url = "http://127.0.0.1:8000/api/pinjam";
 
         $response = $client->request('GET',$url);
         $content = $response->getBody()->getContents();
         $data = json_decode($content, true);
+
+            // Extract counts from the response data
+        $countSelesai = $data['count_selesai'] ?? 0;
+        $countDiajukan = $data['count_diajukan'] ?? 0;
+        $countDipinjamkan = $data['count_dipinjamkan'] ?? 0;
         // dd($data);
-        return view('adminpage.peminjam', ['data'=>$data]);
+            return view('adminpage.peminjam', [
+        'data' => $data,
+        'countSelesai' => $countSelesai,
+        'countDiajukan' => $countDiajukan,
+        'countDipinjamkan' => $countDipinjamkan,
+        ]);
     }
 
 

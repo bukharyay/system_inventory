@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DateTime;
 use App\Models\pinjam;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -17,6 +18,9 @@ class pinjamAPI extends Controller
     public function index()
     {
         $data = pinjam::all();
+        $countSelesai = pinjam::where('keterangan', 'Selesai')->count();
+        $countDipinjamkan = pinjam::where('keterangan', 'Dipinjamkan')->count();
+        $countDiajukan = pinjam::where('keterangan', 'Diajukan')->count();
     
         if ($data->isEmpty()) {
             return response()->json([
@@ -25,12 +29,28 @@ class pinjamAPI extends Controller
             ]);
         }
     
+        // Sort the data by 'keterangan'
+        $sortedData = $data->sortBy('keterangan')->values()->all();
+    
+        // Format dates in the sorted data
+        $formattedData = collect($sortedData)->map(function ($item) {
+            $item->tanggal_waktu_peminjaman = (new DateTime($item->tanggal_waktu_peminjaman))->format('d-m-y H:i');
+            return $item;
+        });
+    
         return response()->json([
             'status' => 'success',
             'message' => 'Data pinjam berhasil diambil',
-            'data' => $data
+            'data' => $formattedData,
+            'count_selesai' => $countSelesai,
+            'count_diajukan' => $countDiajukan,
+            'count_dipinjamkan' => $countDipinjamkan
         ]);
     }
+    
+    
+    
+    
 
     public function getDatabyId($id)
     {

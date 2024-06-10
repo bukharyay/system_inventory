@@ -63,21 +63,21 @@
                     <i class="fas fa-check-circle stat-icon"></i>
                     <div>
                         <div class="stat-title">Selesai</div>
-                        <div class="stat-count">150</div>
+                        <div class="stat-count">{{ $countSelesai }}</div>
                     </div>
                 </div>
                 <div class="stat-box diajukan">
                     <i class="fas fa-hourglass-start stat-icon"></i>
                     <div>
                         <div class="stat-title">Diajukan</div>
-                        <div class="stat-count">75</div>
+                        <div class="stat-count">{{ $countDiajukan }}</div>
                     </div>
                 </div>
                 <div class="stat-box dipinjamkan">
                     <i class="fas fa-hand-holding-usd stat-icon"></i>
                     <div>
                         <div class="stat-title">Dipinjamkan</div>
-                        <div class="stat-count">45</div>
+                        <div class="stat-count">{{ $countDipinjamkan }}</div>
                     </div>
                 </div>
             </div>

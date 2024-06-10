@@ -11,11 +11,6 @@
 <ul class="navlist">
 
     <li class="nav-item">
-        <a class="nav-link" href="http://127.0.0.1:8001/dashboard-admin">
-            <i class="fas fa-fw fa-home"></i>
-            <span>Home</span></a>
-    </li>
-    <li class="nav-item">
         <a class="nav-link" href="http://127.0.0.1:8001/DataPeminjam">
             <i class="fas fa-fw fa-user"></i>
             <span>Daftar Peminjam</span></a>
