@@ -47,7 +47,7 @@
         @endauth
     </header>
     <section class="table">
-        <h1 style="font-size: 3em; font-weight: bold;">DAFTAR PINJAMAN</h1>
+        <h1 style="font-size: 3em; font-weight: bold;">KERANJANG PINJAMAN</h1>
         <table class="table table-striped" id="data-table">
             <thead>
                 <tr>

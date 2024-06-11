@@ -42,7 +42,7 @@ public function downloadPdf(Request $request)
         $start_date = $request->query('start_date');
         $end_date = $request->query('end_date');
 
-        $url = "http://127.0.0.1:8000/api/pinjam?start_date={$start_date}&end_date={$end_date}";
+        $url = "http://127.0.0.1:8000/api/peminjaman?start_date={$start_date}&end_date={$end_date}";
 
         $response = $client->request('GET', $url, [
             'query' => [
@@ -60,13 +60,24 @@ public function downloadPdf(Request $request)
             echo "<script>alert('{$data['message']}');</script>";
             // Berhenti eksekusi lebih lanjut
             $client = new Client();
-            $url = "http://127.0.0.1:8000/api/peminjaman";
-    
+            $url = "http://127.0.0.1:8000/api/pinjam";
+
             $response = $client->request('GET',$url);
             $content = $response->getBody()->getContents();
             $data = json_decode($content, true);
+
+            $countSelesai = $data['count_selesai'] ?? 0;
+            $countDiajukan = $data['count_diajukan'] ?? 0;
+            $countDipinjamkan = $data['count_dipinjamkan'] ?? 0;
+    
+
             // dd($data);
-            return view('adminpage.peminjam', ['data'=>$data]);
+            return view('adminpage.peminjam', [
+                'data' => $data,
+                'countSelesai' => $countSelesai,
+                'countDiajukan' => $countDiajukan,
+                'countDipinjamkan' => $countDipinjamkan,
+                ]);
         }
 
         $date = date('Y-m-d'); // Mengambil tanggal saat ini

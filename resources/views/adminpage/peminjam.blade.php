@@ -136,7 +136,7 @@
                                     <td>{{ $item['dosen'] }}</td>
                                     <td>{{ $item['ruang'] }}</td>
                                     <td>{{ $item['mata_kuliah'] }}</td>
-                                    <td>{{ $item['tanggal_waktu_peminjaman'] }}</td>
+                                    <td>{{ $item['formatted_tanggal_waktu_peminjaman'] }}</td>
                                     <td>
                                         <div>
                                             {{ $item['nama_alat_1'] }},
@@ -376,11 +376,31 @@
     <script>
         document.getElementById('timeRangeForm').addEventListener('submit', function(event) {
             event.preventDefault();
-            const startDate = document.getElementById('start_date').value;
-            const endDate = document.getElementById('end_date').value;
-            window.location.href = `/download-pdf?start_date=${startDate}&end_date=${endDate}`;
+
+            const startDateInput = document.getElementById('start_date').value;
+            const endDateInput = document.getElementById('end_date').value;
+
+            const formatDateTime = (dateTimeStr) => {
+                const options = {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: false
+                };
+                const date = new Date(dateTimeStr);
+                const formattedDate = date.toLocaleString('en-GB', options).replace(',', '');
+                return formattedDate;
+            };
+
+            const formattedStartDate = formatDateTime(startDateInput);
+            const formattedEndDate = formatDateTime(endDateInput);
+
+            window.location.href = `/download-pdf?start_date=${formattedStartDate}&end_date=${formattedEndDate}`;
         });
     </script>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">

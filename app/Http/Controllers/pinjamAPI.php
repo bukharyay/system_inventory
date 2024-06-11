@@ -34,7 +34,7 @@ class pinjamAPI extends Controller
     
         // Format dates in the sorted data
         $formattedData = collect($sortedData)->map(function ($item) {
-            $item->tanggal_waktu_peminjaman = (new DateTime($item->tanggal_waktu_peminjaman))->format('d-m-y H:i');
+            $item->formatted_tanggal_waktu_peminjaman = (new DateTime($item->tanggal_waktu_peminjaman))->format('d-m-y H:i');
             return $item;
         });
     
@@ -47,6 +47,7 @@ class pinjamAPI extends Controller
             'count_dipinjamkan' => $countDipinjamkan
         ]);
     }
+    
     
     
     
