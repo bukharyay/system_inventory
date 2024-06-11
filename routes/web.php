@@ -74,7 +74,7 @@ Route::middleware(['auth', 'cekrole:staff'])->group(function () {
     Route::put('/pinjam/{id}', 'App\Http\Controllers\DataPeminjamController@updateKonfirmasi')->name('pinjam.update');
     Route::put('/data-alat/{id}', 'App\Http\Controllers\DataBarangController@updateKonfirmasi')->name('data-alat-update');
     Route::delete('/data-alat/delete/{id}', 'App\Http\Controllers\DataBarangController@delete')->name('data-alat.delete');
-    Route::post('/upload-image', [uploadImage::class, 'uploadImage'])->name('upload-image');
+    // Route::post('/upload-image', [uploadImage::class, 'uploadImage'])->name('upload-image');
 });
 // END OF ADMIN
 
@@ -82,6 +82,8 @@ Route::middleware(['auth', 'cekrole:staff'])->group(function () {
 // MAHASISWA
 Route::middleware(['auth', 'cekrole:mahasiswa'])->group(function () {
     Route::get('ListPinjam', 'App\Http\Controllers\ListPinjamController@index')->name('list-pinjam');
+    Route::put('/ubahsandiupdate', 'App\Http\Controllers\ubahsandiController@updatePassword')->name('ubah-sandi-update');
+    Route::get('/ubahsandi', 'App\Http\Controllers\ubahsandiController@index')->name('ubah-sandi');
     Route::post('/simpan', 'App\Http\Controllers\pinjamControllerMHS@store')->name('simpan');
     Route::get('/cart/{id}', [CartController::class, 'addtoCart'])->name('add.to.cart');
     Route::get('/cart', [CartController::class, 'dataalatCart'])->name('cart');
